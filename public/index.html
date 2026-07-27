@@ -79,15 +79,20 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .lb{width:12px;height:7px;border-radius:2px}
 
 /* 노선도 스크롤 영역 */
-.map-scroll{overflow-x:auto;padding:8px 0 4px;-webkit-overflow-scrolling:touch}
-.map-wrap{position:relative;padding:10px 20px 12px;min-width:1040px}
+.map-scroll{overflow-x:hidden;padding:8px 0 4px;-webkit-overflow-scrolling:touch}
+.map-wrap{position:relative;padding:10px 20px 12px;width:100%}
+@media (max-width:640px){
+  /* 화면이 너무 좁아 역 이름이 겹칠 때만 스크롤 허용 */
+  .map-scroll{overflow-x:auto}
+  .map-wrap{min-width:900px}
+}
 .track-up{position:absolute;left:30px;right:30px;height:4px;background:var(--up);top:66px;border-radius:2px;z-index:0}
 .track-down{position:absolute;left:30px;right:30px;height:4px;background:var(--down);top:118px;border-radius:2px;z-index:0}
 .track-lbl-up{position:absolute;left:4px;top:63px;font-size:8px;color:var(--up);font-weight:700}
 .track-lbl-dn{position:absolute;left:4px;top:115px;font-size:8px;color:var(--down);font-weight:700}
 .stations-row{display:flex;justify-content:space-between;position:relative;z-index:1}
-.stn{display:flex;flex-direction:column;align-items:center;width:26px;cursor:pointer}
-.stn-name{font-size:7.5px;color:var(--txt3);text-align:center;line-height:1.2;height:26px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:3px;word-break:keep-all}
+.stn{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:0;cursor:pointer}
+.stn-name{font-size:7.5px;color:var(--txt3);text-align:center;line-height:1.2;height:26px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:3px;word-break:keep-all;overflow:hidden;white-space:nowrap;text-overflow:clip}
 .stn-name.express{color:var(--txt2)}
 .stn-circle{width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--up);margin:0 auto;transition:transform .2s}
 .stn.express .stn-circle{background:var(--up);border-color:var(--up)}
@@ -711,40 +716,7 @@ function renderGapPage() {
   }
 }
 
-// ══════════════════════════════════════════════
-//  도착정보 렌더 (주요역)
-// ══════════════════════════════════════════════
-function renderArrival() {
-  const KEY_STNS=[0,4,6,12,14,16,19,22,24,29];
-  const grid=document.getElementById('arrivalGrid');
-  grid.innerHTML=KEY_STNS.map(si=>{
-    const s=STATIONS[si];
-    const arrivals=[];
-    simTrains.forEach(t=>{
-      const isUp=t.dir==='up';
-      let dist;
-      if(isUp){dist=si-t.pos;if(dist<0)dist+=N;}
-      else{dist=t.pos-si;if(dist<0)dist+=N;}
-      if(dist>0&&dist<5){
-        const sec=Math.round(dist/t.speed*.8);
-        arrivals.push({dir:isUp?'→상행':'←하행',sec,num:t.num,express:t.express});
-      }
-    });
-    arrivals.sort((a,b)=>a.sec-b.sec);
-    const items=arrivals.slice(0,3).map(a=>{
-      const cls=a.sec<60?'soon':a.sec<180?'med':'ok';
-      return `<div class="a-item">
-        <span class="a-dir">${a.dir}</span>
-        <span class="a-time ${cls}">${secToStr(a.sec)}</span>
-      </div>`;
-    }).join('')||`<div class="a-item"><span class="a-dir" style="color:var(--txt3)">접근 없음</span></div>`;
-    return `<div class="a-card">
-      <div class="a-card-head">
-        <div class="a-card-name">${s.n}</div>
-        ${s.e?'<span class="exp-badge">급행</span>':''}
-      </div>${items}</div>`;
-  }).join('');
-}
+
 
 // ══════════════════════════════════════════════
 //  PDF 매뉴얼 시스템
