@@ -39,12 +39,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .page{position:absolute;inset:0;overflow-y:auto;display:none;-webkit-overflow-scrolling:touch}
 .page.active{display:block}
 
-/* ════════════════════════════════
-   PAGE 1 — 실시간 노선도
-════════════════════════════════ */
+/* PAGE 1 — 실시간 노선도 */
 #mapPage{background:var(--bg)}
-
-/* 상단 요약 카드 */
 .summary-strip{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px 14px 0}
 .s-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius-sm);padding:8px 10px;text-align:center}
 .s-val{font-size:17px;font-weight:700;color:var(--gold)}
@@ -53,7 +49,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .s-val.blue{color:var(--down)}
 .s-label{font-size:9px;color:var(--txt3);margin-top:2px}
 
-/* 내 열차 간격 패널 */
 .gap-panel{margin:10px 14px 0;background:var(--bg2);border:1px solid var(--gold-dim);border-radius:var(--radius);padding:12px 14px}
 .gap-panel-title{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .gap-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
@@ -73,12 +68,10 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .gap-me-stn{font-size:10px;color:var(--gold)}
 .gap-arrow{color:var(--txt3);font-size:14px;text-align:center}
 
-/* 범례 */
 .legend{display:flex;gap:10px;padding:8px 14px 0;flex-wrap:wrap}
 .li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--txt2)}
 .lb{width:12px;height:7px;border-radius:2px}
 
-/* 노선도 스크롤 영역 */
 .map-scroll{overflow-x:auto;padding:8px 0 4px;-webkit-overflow-scrolling:touch}
 .map-wrap{position:relative;padding:10px 20px 12px;min-width:1040px}
 .track-up{position:absolute;left:30px;right:30px;height:4px;background:var(--up);top:66px;border-radius:2px;z-index:0}
@@ -91,20 +84,20 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .stn-name.express{color:var(--txt2)}
 .stn-circle{width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--up);margin:0 auto;transition:transform .2s}
 .stn.express .stn-circle{background:var(--up);border-color:var(--up)}
-.stn-circle.my-train-stn{border-color:var(--gold);box-shadow:0 0 6px var(--gold);background:var(--gold)}
 .stn-bottom{height:34px}
 
-/* 열차 마커 */
+/* 열차 마커 및 하이라이트 */
 .train-marker{position:absolute;z-index:10;cursor:pointer;transition:left .8s cubic-bezier(.4,0,.2,1)}
-.train-body{width:22px;height:12px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000;position:relative}
+.train-body{width:24px;height:14px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:#000;position:relative}
 .train-body.up{background:var(--up)}
 .train-body.down{background:var(--down);color:#fff}
 .train-body.express-t{background:var(--red)!important;color:#fff!important}
-.train-body.my{box-shadow:0 0 8px 3px rgba(255,220,0,.7);border:1.5px solid #fff}
-.train-num{font-size:7px;color:var(--txt3);text-align:center;line-height:1;margin-top:1px}
-.train-num.my{color:var(--gold);font-weight:700}
+.train-body.my{box-shadow:0 0 10px 4px rgba(255,220,0,.9);border:2px solid #ffffff;animation:myPulse 1.2s infinite alternate}
+@keyframes myPulse { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
 
-/* 도착정보 탭 */
+.train-num{font-size:7px;color:var(--txt3);text-align:center;line-height:1;margin-top:1px}
+.train-num.my{color:var(--gold);font-weight:800;font-size:9px}
+
 .section-head{padding:10px 14px 4px;font-size:11px;color:var(--txt3);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .arrival-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px 14px 14px}
 .a-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius-sm);padding:10px}
@@ -119,9 +112,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .a-time.med{color:var(--orange)}
 .a-time.ok{color:var(--green)}
 
-/* ════════════════════════════════
-   PAGE 2 — 간격 상세
-════════════════════════════════ */
+/* PAGE 2 — 간격 상세 */
 #gapPage{background:var(--bg);padding:14px}
 .gap-detail-title{font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px}
 .gap-train-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius);padding:12px 14px;margin-bottom:10px}
@@ -138,9 +129,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .gap-warn-bar{background:rgba(240,78,78,.15);border:1px solid rgba(240,78,78,.4);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:12px;color:var(--red);display:none;align-items:center;gap:6px}
 .gap-warn-bar.show{display:flex}
 
-/* ════════════════════════════════
-   PAGE 3 — PDF 매뉴얼
-════════════════════════════════ */
+/* PAGE 3 — PDF 매뉴얼 */
 #pdfPage{background:var(--bg);display:flex;flex-direction:column}
 .pdf-toolbar{background:var(--bg2);border-bottom:1px solid var(--bg4);padding:10px 14px;flex-shrink:0}
 .pdf-search-wrap{display:flex;gap:8px;margin-bottom:8px}
@@ -154,7 +143,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .pdf-ftab.active{background:var(--gold-bg);border-color:var(--gold);color:var(--gold)}
 .pdf-add-btn{background:var(--bg3);border:1px dashed var(--bg4);border-radius:20px;padding:4px 10px;font-size:10px;color:var(--txt3);cursor:pointer;white-space:nowrap;flex-shrink:0}
 
-/* 검색 결과 */
 .pdf-results{flex:1;overflow-y:auto;padding:10px 14px;-webkit-overflow-scrolling:touch}
 .result-count{font-size:11px;color:var(--txt3);margin-bottom:8px}
 .result-card{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:pointer;transition:border-color .2s}
@@ -169,7 +157,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .pdf-empty-title{font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:6px}
 .pdf-empty-desc{font-size:12px;line-height:1.6}
 
-/* PDF 뷰어 */
 .pdf-viewer-wrap{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;display:none}
 .pdf-viewer-wrap.show{display:flex}
 .pdf-viewer-header{background:var(--bg2);border-bottom:1px solid var(--bg4);padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
@@ -182,24 +169,16 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .pdf-nav-btn{background:var(--bg3);border:1px solid var(--bg4);color:var(--txt);border-radius:var(--radius-sm);padding:7px 16px;font-size:12px;cursor:pointer}
 .pdf-nav-btn:disabled{opacity:.3;cursor:default}
 
-/* 로딩 */
 .loading-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:200;display:none}
 .loading-overlay.show{display:flex}
 .loading-box{background:var(--bg2);border:1px solid var(--bg4);border-radius:var(--radius);padding:20px 28px;text-align:center}
 .spinner{width:28px;height:28px;border:3px solid var(--bg4);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* 바텀 네비 */
-#bottomNav{background:var(--bg2);border-top:1px solid var(--bg4);display:flex;padding-bottom:var(--safe-bottom);flex-shrink:0}
-
-/* 스크롤바 */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
-
-/* 업로드 버튼 */
 #pdfUpload{display:none}
-
 .no-results{padding:20px;text-align:center;color:var(--txt3);font-size:13px}
 </style>
 </head>
@@ -240,13 +219,13 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
   <!-- 페이지 영역 -->
   <div id="pages">
 
-    <!-- ── PAGE 1: 실시간 노선도 ── -->
+    <!-- PAGE 1: 실시간 노선도 -->
     <div class="page active" id="mapPage">
 
       <!-- 요약 카드 -->
       <div class="summary-strip">
         <div class="s-card">
-          <div class="s-val" id="sumTrains">18</div>
+          <div class="s-val" id="sumTrains">0</div>
           <div class="s-label">운행 열차</div>
         </div>
         <div class="s-card">
@@ -311,14 +290,14 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
       <div class="arrival-grid" id="arrivalGrid"></div>
     </div>
 
-    <!-- ── PAGE 2: 간격 상세 ── -->
+    <!-- PAGE 2: 간격 상세 -->
     <div class="page" id="gapPage">
       <div class="gap-detail-title">전체 열차 간격 현황</div>
       <div class="gap-warn-bar" id="gapWarnBar">⚠️ <span id="gapWarnMsg"></span></div>
       <div id="gapList"></div>
     </div>
 
-    <!-- ── PAGE 3: PDF 매뉴얼 ── -->
+    <!-- PAGE 3: PDF 매뉴얼 -->
     <div class="page" id="pdfPage" style="display:none;flex-direction:column">
       <div class="pdf-toolbar">
         <div class="pdf-search-wrap">
@@ -341,11 +320,11 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
       </div>
     </div>
 
-  </div><!-- /pages -->
+  </div>
 
-</div><!-- /app -->
+</div>
 
-<!-- PDF 뷰어 (풀스크린 오버레이) -->
+<!-- PDF 뷰어 -->
 <div class="pdf-viewer-wrap" id="pdfViewer">
   <div class="pdf-viewer-header">
     <button class="pdf-viewer-back" onclick="closePdfViewer()">← 닫기</button>
@@ -370,9 +349,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 <input type="file" id="pdfUpload" accept=".pdf" multiple onchange="handlePdfUpload(event)"/>
 
 <script>
-// ══════════════════════════════════════════════
-//  9호선 역 데이터
-// ══════════════════════════════════════════════
+// 9호선 역 데이터
 const STATIONS = [
   {n:'개화',c:'9001',e:true},{n:'김포공항',c:'9002',e:true},{n:'공항시장',c:'9003',e:false},
   {n:'신방화',c:'9004',e:false},{n:'마곡나루',c:'9005',e:true},{n:'양천향교',c:'9006',e:false},
@@ -389,18 +366,14 @@ const STATIONS = [
   {n:'둔촌오륜',c:'9037',e:false},{n:'중앙보훈병원',c:'9038',e:true}
 ];
 
-// ══════════════════════════════════════════════
-//  시뮬레이션 상태
-// ══════════════════════════════════════════════
-let MY_TRAIN_ID = 'U1'; // 내 열차 ID (실시간 모드에서는 직접 입력한 열차번호로 대체됨)
-let MY_TRAIN_MANUAL = localStorage.getItem('myTrainNo') || ''; // 사용자가 직접 입력한 현재 열차번호
+let MY_TRAIN_ID = null; 
+let MY_TRAIN_MANUAL = localStorage.getItem('myTrainNo') || ''; 
 let simTrains = [];
 let simTimer = null;
 const N = STATIONS.length;
 
-// 지금 몰고 있는 열차번호를 직접 입력 (시간표 계산 없이, 입력한 번호를 그대로 추적)
 function promptTrainNo() {
-  const v = window.prompt('지금 몰고 있는 열차번호를 입력하세요 (예: 9116)\n실시간 안내판/전두부 표시등에 보이는 번호 그대로 입력하면 가장 정확합니다.', MY_TRAIN_MANUAL);
+  const v = window.prompt('지금 몰고 있는 열차번호를 입력하세요 (예: 9116)', MY_TRAIN_MANUAL);
   if (v === null) return;
   MY_TRAIN_MANUAL = v.trim();
   localStorage.setItem('myTrainNo', MY_TRAIN_MANUAL);
@@ -409,44 +382,34 @@ function promptTrainNo() {
   updateGapPanel();
 }
 
-// MY_TRAIN_ID를 현재 상태에 맞게 갱신 + 상단 뱃지 텍스트 갱신
 function updateMyTrainId() {
   const badge = document.getElementById('myTrainBadge');
   const statusEl = document.getElementById('myTrainStatus');
 
-  if (!apiMode) {
-    MY_TRAIN_ID = 'U1'; // 시뮬레이션 모드에서는 가상 열차로 표시
-    if (badge) badge.textContent = MY_TRAIN_MANUAL ? `내 열차 ${MY_TRAIN_MANUAL}` : '내 열차 설정';
-    if (statusEl) statusEl.textContent = '시뮬레이션 모드 — 실시간 연동 대기 중';
-    return;
-  }
-
   if (MY_TRAIN_MANUAL) {
-    MY_TRAIN_ID = MY_TRAIN_MANUAL;
-    const found = simTrains.some(t => t.id === MY_TRAIN_ID);
+    MY_TRAIN_ID = String(MY_TRAIN_MANUAL).trim();
+    const found = simTrains.some(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
     if (badge) badge.textContent = `내 열차 ${MY_TRAIN_MANUAL}`;
     if (statusEl) {
       statusEl.textContent = found
         ? '실시간 위치 추적 중 ✓'
-        : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음 (입고/교번대기 중일 수 있음)`;
+        : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음 (입고/대기 중일 수 있음)`;
     }
   } else {
-    MY_TRAIN_ID = null;
+    MY_TRAIN_ID = apiMode ? null : 'U1';
     if (badge) badge.textContent = '내 열차 설정';
-    if (statusEl) statusEl.textContent = '"내 열차 설정"을 탭해서 지금 몰고 있는 열차번호를 입력하세요';
+    if (statusEl) statusEl.textContent = '"내 열차 설정"을 눌러 열차번호를 입력하세요';
   }
 }
 
 function initSim() {
   simTrains = [];
-  // 상행 9대
   [0,4,8,12,16,20,24,28,33].forEach((pos,i) => {
     simTrains.push({
       id:'U'+(i+1), dir:'up', pos:pos+Math.random()*.5,
       express:i%3===0, num:`90${10+i}`, speed:i%3===0?.065:.038
     });
   });
-  // 하행 9대
   [2,6,10,14,18,22,26,30,35].forEach((pos,i) => {
     simTrains.push({
       id:'D'+(i+1), dir:'down', pos:pos+Math.random()*.5,
@@ -471,9 +434,6 @@ function stepSim() {
   document.getElementById('lastUpd').textContent='갱신: '+new Date().toLocaleTimeString('ko-KR');
 }
 
-// ══════════════════════════════════════════════
-//  노선도 렌더
-// ══════════════════════════════════════════════
 function renderStations() {
   document.getElementById('stationsRow').innerHTML = STATIONS.map((s,i)=>`
     <div class="stn ${s.e?'express':''}" id="stn_${i}">
@@ -502,75 +462,62 @@ function renderMap() {
     const x=getStationX(idxF)+(getStationX(idxC)-getStationX(idxF))*frac;
     const isUp=t.dir==='up';
     const topPx=isUp?58:110;
-    const isMy=t.id===MY_TRAIN_ID;
-    const curStn=STATIONS[Math.round(t.pos)]||STATIONS[idxF];
+    
+    // 내 열차 인지 조건 검사 (문자열 호환)
+    const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+    
     const div=document.createElement('div');
     div.className='train-marker';
     div.style.left=(x-11)+'px';
     div.style.top=topPx+'px';
     div.innerHTML=`
       <div class="train-body ${isUp?'up':'down'} ${t.express?'express-t':''} ${isMy?'my':''}">${isUp?'▶':'◀'}</div>
-      <div class="train-num ${isMy?'my':''}">${isMy?'🚇':t.num}</div>`;
+      <div class="train-num ${isMy?'my':''}">${isMy?'🚇'+t.num:t.num}</div>`;
     markers.appendChild(div);
   });
 }
 
-// ══════════════════════════════════════════════
-//  간격 계산
-// ══════════════════════════════════════════════
+// 개편된 전/후방 간격 산출 함수
 function calcGaps(myTrain) {
   const myPos = myTrain.pos;
   const myDir = myTrain.dir;
-  const sameDir = simTrains.filter(t=>t.id!==MY_TRAIN_ID && t.dir===myDir);
+  const sameDir = simTrains.filter(t => String(t.id).trim() !== String(myTrain.id).trim() && t.dir === myDir);
 
-  let frontTrain=null, frontDist=Infinity;
-  let rearTrain=null, rearDist=Infinity;
+  let realFront = null, realFrontD = Infinity;
+  let realRear = null, realRearD = Infinity;
 
-  sameDir.forEach(t=>{
-    let d;
-    if(myDir==='up'){
-      // 상행: 위치가 큰 쪽이 전방(선행)
-      d=t.pos-myPos;
-      if(d<0) d+=N;
-      if(d<frontDist){frontDist=d;frontTrain=t;}
-      // 후방
-      const dr=myPos-t.pos;
-      const dr2=dr<0?dr+N:dr;
-      if(dr2<rearDist){rearDist=dr2;rearTrain=t;}
+  sameDir.forEach(t => {
+    let dFront, dRear;
+    if (myDir === 'up') {
+      // 상행: 인덱스가 큰 쪽이 전방
+      dFront = t.pos - myPos;
+      if (dFront <= 0) dFront += N;
+      dRear = myPos - t.pos;
+      if (dRear <= 0) dRear += N;
     } else {
-      // 하행: 위치가 작은 쪽이 전방
-      d=myPos-t.pos;
-      if(d<0) d+=N;
-      if(d<frontDist){frontDist=d;frontTrain=t;}
-      const dr=t.pos-myPos;
-      const dr2=dr<0?dr+N:dr;
-      if(dr2<rearDist){rearDist=dr2;rearTrain=t;}
+      // 하행: 인덱스가 작은 쪽이 전방
+      dFront = myPos - t.pos;
+      if (dFront <= 0) dFront += N;
+      dRear = t.pos - myPos;
+      if (dRear <= 0) dRear += N;
+    }
+
+    if (dFront < realFrontD) {
+      realFrontD = dFront;
+      realFront = t;
+    }
+    if (dRear < realRearD) {
+      realRearD = dRear;
+      realRear = t;
     }
   });
 
-  // 실질적 전방/후방 분리 (같은 방향 열차 중 정말 앞/뒤)
-  let realFront=null, realFrontD=Infinity;
-  let realRear=null, realRearD=Infinity;
-  sameDir.forEach(t=>{
-    if(myDir==='up'){
-      let d=t.pos-myPos; if(d<=0) d+=N;
-      if(d<N/2 && d<realFrontD){realFrontD=d;realFront=t;}
-      let dr=myPos-t.pos; if(dr<=0) dr+=N;
-      if(dr<N/2 && dr<realRearD){realRearD=dr;realRear=t;}
-    } else {
-      let d=myPos-t.pos; if(d<=0) d+=N;
-      if(d<N/2 && d<realFrontD){realFrontD=d;realFront=t;}
-      let dr=t.pos-myPos; if(dr<=0) dr+=N;
-      if(dr<N/2 && dr<realRearD){realRearD=dr;realRear=t;}
-    }
-  });
-
-  function distToTime(d){ return Math.round(d/0.04*0.8); }
-  function distToStations(d){ return Math.max(0,Math.round(d)); }
+  function distToTime(d) { return Math.round(d * 120); } // 역간 평균 120초
+  function distToStations(d) { return Math.max(0, Math.round(d)); }
 
   return {
-    front: realFront ? {train:realFront, sec:distToTime(realFrontD), stns:distToStations(realFrontD)} : null,
-    rear:  realRear  ? {train:realRear,  sec:distToTime(realRearD),  stns:distToStations(realRearD)}  : null
+    front: realFront ? { train: realFront, sec: realFront.etaToNextStationSec || distToTime(realFrontD), stns: distToStations(realFrontD) } : null,
+    rear: realRear ? { train: realRear, sec: realRear.etaToNextStationSec || distToTime(realRearD), stns: distToStations(realRearD) } : null
   };
 }
 
@@ -587,107 +534,101 @@ function timeClass(sec){
 }
 
 function updateGapPanel() {
-  const my = simTrains.find(t=>t.id===MY_TRAIN_ID);
-  if(!my) return;
-  const myIdx=Math.round(my.pos);
-  document.getElementById('myStnName').textContent=STATIONS[Math.min(myIdx,N-1)].n;
-
-  const g=calcGaps(my);
-
-  if(g.front){
-    const cls=timeClass(g.front.sec);
-    const fi=document.getElementById('frontBox');
-    fi.className='gap-box '+cls;
-    document.getElementById('frontTime').className='gap-time '+cls;
-    document.getElementById('frontTime').textContent=secToStr(g.front.sec);
-    document.getElementById('frontStn').textContent=STATIONS[Math.min(Math.round(g.front.train.pos),N-1)].n;
-    document.getElementById('frontStns').textContent=g.front.stns+'역 앞';
-    document.getElementById('sumFront').textContent=secToStr(g.front.sec);
-    document.getElementById('sumFront').className='s-val '+cls;
+  if (!MY_TRAIN_ID) {
+    document.getElementById('myStnName').textContent = '미설정';
+    document.getElementById('frontTime').textContent = '--';
+    document.getElementById('rearTime').textContent = '--';
+    return;
   }
-  if(g.rear){
-    const cls=timeClass(g.rear.sec);
-    const ri=document.getElementById('rearBox');
-    ri.className='gap-box '+cls;
-    document.getElementById('rearTime').className='gap-time '+cls;
-    document.getElementById('rearTime').textContent=secToStr(g.rear.sec);
-    document.getElementById('rearStn').textContent=STATIONS[Math.min(Math.round(g.rear.train.pos),N-1)].n;
-    document.getElementById('rearStns').textContent=g.rear.stns+'역 뒤';
-    document.getElementById('sumRear').textContent=secToStr(g.rear.sec);
-    document.getElementById('sumRear').className='s-val blue';
+
+  const my = simTrains.find(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+  if (!my) {
+    document.getElementById('myStnName').textContent = '미운행';
+    document.getElementById('frontTime').textContent = '--';
+    document.getElementById('rearTime').textContent = '--';
+    return;
+  }
+
+  const myIdx = Math.round(my.pos);
+  document.getElementById('myStnName').textContent = STATIONS[Math.min(myIdx, N - 1)].n;
+
+  const g = calcGaps(my);
+
+  if (g.front) {
+    const cls = timeClass(g.front.sec);
+    document.getElementById('frontBox').className = 'gap-box ' + cls;
+    document.getElementById('frontTime').className = 'gap-time ' + cls;
+    document.getElementById('frontTime').textContent = secToStr(g.front.sec);
+    document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n;
+    document.getElementById('frontStns').textContent = g.front.stns + '역 앞';
+    document.getElementById('sumFront').textContent = secToStr(g.front.sec);
+    document.getElementById('sumFront').className = 's-val ' + cls;
+  }
+  if (g.rear) {
+    const cls = timeClass(g.rear.sec);
+    document.getElementById('rearBox').className = 'gap-box ' + cls;
+    document.getElementById('rearTime').className = 'gap-time ' + cls;
+    document.getElementById('rearTime').textContent = secToStr(g.rear.sec);
+    document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n;
+    document.getElementById('rearStns').textContent = g.rear.stns + '역 뒤';
+    document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
+    document.getElementById('sumRear').className = 's-val blue';
   }
 }
 
-// ══════════════════════════════════════════════
-//  간격 상세 페이지
-// ══════════════════════════════════════════════
 function renderGapPage() {
-  const list=document.getElementById('gapList');
-  const warnBar=document.getElementById('gapWarnBar');
-  let warnCount=0;
+  const list = document.getElementById('gapList');
+  const warnBar = document.getElementById('gapWarnBar');
+  let warnCount = 0;
 
-  const rows = simTrains.map(t=>{
-    const isUp=t.dir==='up';
-    const sameDir=simTrains.filter(o=>o.id!==t.id&&o.dir===t.dir);
-    let frontD=Infinity, rearD=Infinity;
-    sameDir.forEach(o=>{
-      if(isUp){
-        let d=o.pos-t.pos; if(d<=0)d+=N;
-        if(d<N/2&&d<frontD)frontD=d;
-        let dr=t.pos-o.pos; if(dr<=0)dr+=N;
-        if(dr<N/2&&dr<rearD)rearD=dr;
-      } else {
-        let d=t.pos-o.pos; if(d<=0)d+=N;
-        if(d<N/2&&d<frontD)frontD=d;
-        let dr=o.pos-t.pos; if(dr<=0)dr+=N;
-        if(dr<N/2&&dr<rearD)rearD=dr;
-      }
-    });
-    const fSec=Math.round(frontD===Infinity?999:frontD/0.04*.8);
-    const rSec=Math.round(rearD===Infinity?999:rearD/0.04*.8);
-    const fStns=Math.max(0,Math.round(frontD===Infinity?0:frontD));
-    const rStns=Math.max(0,Math.round(rearD===Infinity?0:rearD));
-    if(fSec<90||rSec<90) warnCount++;
-    const isMy=t.id===MY_TRAIN_ID;
-    const dirCls=isUp?'up':'down';
-    const dirTxt=isUp?'상행':'하행';
-    const stnNow=STATIONS[Math.min(Math.round(t.pos),N-1)].n;
-    return `<div class="gap-train-card" style="${isMy?'border-color:var(--gold)':''}">
+  const rows = simTrains.map(t => {
+    const isUp = t.dir === 'up';
+    const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+    const g = calcGaps(t);
+
+    const fSec = g.front ? g.front.sec : 999;
+    const rSec = g.rear ? g.rear.sec : 999;
+    const fStns = g.front ? g.front.stns : 0;
+
+    if (fSec < 90 || rSec < 90) warnCount++;
+
+    const dirCls = isUp ? 'up' : 'down';
+    const dirTxt = isUp ? '상행' : '하행';
+    const stnNow = STATIONS[Math.min(Math.round(t.pos), N - 1)].n;
+
+    return `<div class="gap-train-card" style="${isMy ? 'border:2px solid var(--gold);background:var(--gold-bg);' : ''}">
       <div class="gtc-head">
-        <div class="gtc-num" style="${isMy?'color:var(--gold)':''}">
-          ${isMy?'🚇 내 열차 — ':''}${t.num} (${stnNow})
+        <div class="gtc-num" style="${isMy ? 'color:var(--gold);font-weight:900;' : ''}">
+          ${isMy ? '🚇 내 열차 — ' : ''}${t.num}호 (${stnNow})
         </div>
-        <span class="gtc-type ${dirCls} ${t.express?'express':''}">${dirTxt}${t.express?' 급행':''}</span>
+        <span class="gtc-type ${dirCls} ${t.express ? 'express' : ''}">${dirTxt}${t.express ? ' 급행' : ''}</span>
       </div>
       <div class="gap-metrics">
         <div class="gm-box">
-          <div class="gm-val" style="color:${fSec<90?'var(--red)':fSec<180?'var(--orange)':'var(--green)'}">${fSec>=999?'-':secToStr(fSec)}</div>
+          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fSec >= 999 ? '-' : secToStr(fSec)}</div>
           <div class="gm-lab">전방 시간</div>
         </div>
         <div class="gm-box">
-          <div class="gm-val" style="color:${fSec<90?'var(--red)':fSec<180?'var(--orange)':'var(--green)'}">${fStns>=30?'-':fStns+'역'}</div>
+          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fStns >= 30 ? '-' : fStns + '역'}</div>
           <div class="gm-lab">전방 간격</div>
         </div>
         <div class="gm-box">
-          <div class="gm-val" style="color:var(--down)">${rSec>=999?'-':secToStr(rSec)}</div>
+          <div class="gm-val" style="color:var(--down)">${rSec >= 999 ? '-' : secToStr(rSec)}</div>
           <div class="gm-lab">후방 시간</div>
         </div>
       </div>
     </div>`;
   }).join('');
 
-  list.innerHTML=rows;
-  if(warnCount>0){
+  list.innerHTML = rows;
+  if (warnCount > 0) {
     warnBar.classList.add('show');
-    document.getElementById('gapWarnMsg').textContent=`간격 주의 열차 ${warnCount}대 — 90초 미만 근접 운행`;
+    document.getElementById('gapWarnMsg').textContent = `간격 주의 열차 ${warnCount}대 — 90초 미만 근접 운행`;
   } else {
     warnBar.classList.remove('show');
   }
 }
 
-// ══════════════════════════════════════════════
-//  도착정보 렌더 (주요역)
-// ══════════════════════════════════════════════
 function renderArrival() {
   const KEY_STNS=[0,4,6,12,14,16,19,22,24,29];
   const grid=document.getElementById('arrivalGrid');
@@ -700,7 +641,7 @@ function renderArrival() {
       if(isUp){dist=si-t.pos;if(dist<0)dist+=N;}
       else{dist=t.pos-si;if(dist<0)dist+=N;}
       if(dist>0&&dist<5){
-        const sec=Math.round(dist/t.speed*.8);
+        const sec=Math.round(dist * 120);
         arrivals.push({dir:isUp?'→상행':'←하행',sec,num:t.num,express:t.express});
       }
     });
@@ -720,22 +661,12 @@ function renderArrival() {
   }).join('');
 }
 
-// ══════════════════════════════════════════════
-//  PDF 매뉴얼 시스템
-// ══════════════════════════════════════════════
+// PDF 매뉴얼 연동 로직
 pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-
-let pdfFiles=[];       // {name, doc, pages:[{num,text}]}
-let selectedFileIdx=-1;// -1=전체
-let lastSearchTerm='';
-let viewerDoc=null;
-let viewerPage=1;
-let viewerTotalPages=1;
-let viewerFileName='';
-
-// IndexedDB로 PDF 영속 저장
+let pdfFiles=[], selectedFileIdx=-1, lastSearchTerm='', viewerDoc=null, viewerPage=1, viewerTotalPages=1, viewerFileName='';
 const DB_NAME='line9manual_db', DB_VER=1, STORE='pdfs';
 let db=null;
+
 function openDB(){
   return new Promise((res,rej)=>{
     const req=indexedDB.open(DB_NAME,DB_VER);
@@ -761,14 +692,6 @@ async function getAllFromDB(){
     req.onerror=rej;
   });
 }
-async function deleteFromDB(name){
-  if(!db) await openDB();
-  return new Promise((res,rej)=>{
-    const tx=db.transaction(STORE,'readwrite');
-    tx.objectStore(STORE).delete(name);
-    tx.oncomplete=res; tx.onerror=rej;
-  });
-}
 
 async function loadPdfFromData(name, arrayBuffer) {
   const data=new Uint8Array(arrayBuffer);
@@ -788,8 +711,7 @@ async function handlePdfUpload(event) {
   if(!files.length) return;
   document.getElementById('loadingOverlay').classList.add('show');
   for(const file of files){
-    const alreadyExists=pdfFiles.find(p=>p.name===file.name);
-    if(alreadyExists) continue;
+    if(pdfFiles.find(p=>p.name===file.name)) continue;
     const ab=await file.arrayBuffer();
     const pdfObj=await loadPdfFromData(file.name,ab);
     pdfFiles.push(pdfObj);
@@ -860,22 +782,19 @@ function searchPdf(){
   const res=document.getElementById('pdfResults');
 
   if(!pdfFiles.length){
-    res.innerHTML=`<div class="no-results">등록된 PDF가 없습니다. + 추가 버튼으로 매뉴얼을 등록하세요.</div>`;
+    res.innerHTML=`<div class="no-results">등록된 PDF가 없습니다.</div>`;
     return;
   }
 
   const keywords=term.split(/\s+/).filter(Boolean);
   const results=[];
-
   const targetFiles=selectedFileIdx===-1?pdfFiles:[pdfFiles[selectedFileIdx]].filter(Boolean);
 
   targetFiles.forEach(pf=>{
     pf.pages.forEach(pg=>{
       const txt=pg.text;
       const lower=txt.toLowerCase();
-      const matched=keywords.every(kw=>lower.includes(kw.toLowerCase()));
-      if(matched){
-        // 하이라이트 스니펫 추출
+      if(keywords.every(kw=>lower.includes(kw.toLowerCase()))){
         const kw=keywords[0].toLowerCase();
         const idx=lower.indexOf(kw);
         const start=Math.max(0,idx-60);
@@ -887,13 +806,13 @@ function searchPdf(){
         });
         if(start>0) snippet='...'+snippet;
         if(end<txt.length) snippet+='...';
-        results.push({file:pf.name,page:pg.num,snippet,doc:pf.doc,fileName:pf.name});
+        results.push({file:pf.name,page:pg.num,snippet,doc:pf.doc});
       }
     });
   });
 
   if(!results.length){
-    res.innerHTML=`<div class="no-results">"${term}"에 대한 검색 결과가 없습니다.<br><span style="font-size:11px;color:var(--txt3)">다른 키워드로 검색해보세요</span></div>`;
+    res.innerHTML=`<div class="no-results">"${term}"에 대한 검색 결과가 없습니다.</div>`;
     return;
   }
 
@@ -907,7 +826,6 @@ function searchPdf(){
       <div class="rc-text">${r.snippet}</div>
     </div>`).join('');
 
-  // 결과 데이터 저장 (뷰어 오픈용)
   window._searchResults=results;
 }
 
@@ -917,7 +835,6 @@ function openPdfViewer(resultIdx){
   viewerDoc=r.doc;
   viewerPage=r.page;
   viewerTotalPages=r.doc.numPages;
-  viewerFileName=r.file;
   document.getElementById('pdfViewerTitle').textContent=r.file.replace('.pdf','');
   document.getElementById('pdfViewer').classList.add('show');
   renderPdfPage();
@@ -955,9 +872,6 @@ function changePdfPage(delta){
   renderPdfPage();
 }
 
-// ══════════════════════════════════════════════
-//  탭 전환
-// ══════════════════════════════════════════════
 function switchPage(name){
   document.querySelectorAll('.page').forEach(p=>{
     p.classList.remove('active');
@@ -973,36 +887,21 @@ function switchPage(name){
   if(name==='gap') renderGapPage();
 }
 
-// ══════════════════════════════════════════════
-//  실제 API 연동 (Vercel 프록시 경유)
-//  도착정보 API → 열차 위치 역방향 추론 방식
-// ══════════════════════════════════════════════
+// 실시간 API 연동 파트
 let apiMode = false;
 let apiTimer = null;
-let apiWarning = '';
 
 async function fetchRealTrains() {
-  // AbortSignal.timeout() 대신 AbortController + setTimeout 사용
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 20000);
+  const timer = setTimeout(() => controller.abort(), 10000);
   try {
     const res = await fetch('/api/subway', { signal: controller.signal });
     clearTimeout(timer);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (data.error) throw new Error(data.error);
-
-    apiWarning = data.warning || '';
-
-    const trains = data.trains || [];
-    if (!trains.length) {
-      if (apiWarning) throw new Error(apiWarning);
-      throw new Error('열차 데이터 없음');
-    }
-    return trains;
+    return data.trains || [];
   } catch (e) {
     clearTimeout(timer);
-    console.warn('[API] 실패:', e.message);
     return null;
   }
 }
@@ -1016,115 +915,56 @@ function setModeBadge(mode) {
     badge.style.cssText = 'font-size:10px;padding:3px 8px;border-radius:10px;background:rgba(74,158,232,.2);color:#4A9EE8;border:1px solid #4A9EE8';
     dot.className = 'pulse';
     txt.textContent = '실시간 연동';
-  } else if (mode === 'sim') {
+  } else {
     badge.textContent = '🟡 시뮬';
     badge.style.cssText = 'font-size:10px;padding:3px 8px;border-radius:10px;background:rgba(200,166,0,.2);color:var(--gold);border:1px solid var(--gold-dim)';
     dot.className = 'pulse';
     txt.textContent = '시뮬레이션';
-  } else {
-    badge.textContent = '🔴 오프라인';
-    badge.style.cssText = 'font-size:10px;padding:3px 8px;border-radius:10px;background:rgba(240,78,78,.15);color:var(--red);border:1px solid var(--red)';
-    dot.className = 'pulse off';
-    txt.textContent = '연결 실패';
   }
 }
 
-// 실제 API 데이터로 화면 갱신
 function applyRealTrains(trains) {
-  simTrains = trains;
+  simTrains = trains.map(t => ({
+    ...t,
+    id: String(t.id).trim(),
+    num: String(t.num).trim()
+  }));
   updateMyTrainId();
   renderMap();
   updateGapPanel();
   if (document.getElementById('mapPage').classList.contains('active')) renderArrival();
   if (document.getElementById('gapPage').classList.contains('active')) renderGapPage();
-  document.getElementById('sumTrains').textContent = trains.length;
+  document.getElementById('sumTrains').textContent = simTrains.length;
   document.getElementById('lastUpd').textContent = '실시간 갱신: ' + new Date().toLocaleTimeString('ko-KR');
 }
 
-// 5초마다 실제 API 재호출
-async function startRealMode() {
-  clearInterval(simTimer);
-  clearInterval(apiTimer);
-  apiMode = true;
-
-  const trains = await fetchRealTrains();
-  if (trains) {
-    applyRealTrains(trains);
-    setModeBadge('real');
-  } else {
-    // 첫 호출 실패 → 시뮬레이션 폴백
-    startSimFallback();
-    return;
-  }
-
-  apiTimer = setInterval(async () => {
-    const fresh = await fetchRealTrains();
-    if (fresh) {
-      applyRealTrains(fresh);
-      setModeBadge('real');
-    } else {
-      setModeBadge('offline');
-    }
-  }, 5000);
-}
-
-// 시뮬레이션 폴백 (API 실패 시)
-function startSimFallback() {
-  apiMode = false;
-  setModeBadge('sim');
-  clearInterval(apiTimer);
-
+async function init() {
+  renderStations();
   initSim();
   updateMyTrainId();
   renderMap();
   updateGapPanel();
   renderArrival();
 
-  simTimer = setInterval(() => {
-    stepSim();
-    if (document.getElementById('mapPage').classList.contains('active')) renderArrival();
-  }, 900);
-}
-
-// ══════════════════════════════════════════════
-//  초기화
-// ══════════════════════════════════════════════
-async function init() {
-  renderStations();
-
-  // 우선 시뮬레이션으로 화면 즉시 표시 (로딩 공백 방지)
-  initSim();
-  updateMyTrainId();
-  setTimeout(async () => {
-    renderMap();
-    updateGapPanel();
-    renderArrival();
-
-    // 실제 API 시도
+  const trains = await fetchRealTrains();
+  if (trains && trains.length > 0) {
+    apiMode = true;
+    applyRealTrains(trains);
+    setModeBadge('real');
+    apiTimer = setInterval(async () => {
+      const fresh = await fetchRealTrains();
+      if (fresh && fresh.length > 0) {
+        applyRealTrains(fresh);
+        setModeBadge('real');
+      }
+    }, 5000);
+  } else {
     setModeBadge('sim');
-    const trains = await fetchRealTrains();
-    if (trains && trains.length > 0) {
-      // 성공 → 실시간 모드 전환
-      clearInterval(simTimer);
-      applyRealTrains(trains);
-      setModeBadge('real');
-      apiTimer = setInterval(async () => {
-        const fresh = await fetchRealTrains();
-        if (fresh && fresh.length > 0) {
-          applyRealTrains(fresh);
-          setModeBadge('real');
-        } else {
-          setModeBadge('offline');
-        }
-      }, 5000);
-    } else {
-      // 실패 → 시뮬레이션 계속
-      simTimer = setInterval(() => {
-        stepSim();
-        if (document.getElementById('mapPage').classList.contains('active')) renderArrival();
-      }, 900);
-    }
-  }, 150);
+    simTimer = setInterval(() => {
+      stepSim();
+      if (document.getElementById('mapPage').classList.contains('active')) renderArrival();
+    }, 900);
+  }
 
   await openDB();
   await loadSavedPdfs();
