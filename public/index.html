@@ -48,7 +48,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 .s-val.red{color:var(--red)}
 .s-val.blue{color:var(--down)}
 .s-label{font-size:9px;color:var(--txt3);margin-top:2px}
-
 .gap-panel{margin:10px 14px 0;background:var(--bg2);border:1px solid var(--gold-dim);border-radius:var(--radius);padding:12px 14px}
 .gap-panel-title{font-size:11px;color:var(--gold);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .gap-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
@@ -238,31 +237,40 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
         </div>
       </div>
 
+      
       <!-- 내 열차 간격 패널 -->
-      <div class="gap-panel">
-        <div class="gap-panel-title">🚇 내 열차 기준 간격</div>
-        <div class="gap-row">
-          <div class="gap-box" id="frontBox">
-            <div class="gap-dir">← 전방 열차</div>
-            <div class="gap-time" id="frontTime">--</div>
-            <div class="gap-stn" id="frontStn">--</div>
-            <div class="gap-stations" id="frontStns">--</div>
-          </div>
-          <div>
-            <div class="gap-me">
-              <div class="gap-me-badge">내 열차</div>
-              <div class="gap-me-stn" id="myStnName">--</div>
-            </div>
-            <div class="gap-arrow" style="margin-top:4px">◀ ▶</div>
-          </div>
-          <div class="gap-box" id="rearBox">
-            <div class="gap-dir">후방 열차 →</div>
-            <div class="gap-time" id="rearTime">--</div>
-            <div class="gap-stn" id="rearStn">--</div>
-            <div class="gap-stations" id="rearStns">--</div>
-          </div>
-        </div>
+<div class="gap-panel">
+  <div class="gap-panel-title">🚇 내 열차 기준 간격</div>
+  <div class="gap-row">
+    <!-- 전방 열차 -->
+    <div class="gap-box" id="frontBox">
+      <div class="gap-dir">← 전방 열차</div>
+      <div class="gap-train-no" id="frontTrainNo" style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
+      <div class="gap-time" id="frontTime">--</div>
+      <div class="gap-stn" id="frontStn">--</div>
+      <div class="gap-stations" id="frontStns">--</div>
+    </div>
+
+    <!-- 내 열차 -->
+    <div>
+      <div class="gap-me">
+        <div class="gap-me-badge">내 열차</div>
+        <div class="gap-me-train-no" id="myTrainNo" style="font-size:14px; font-weight:bold; color:#007aff; margin-top:3px;">----</div>
+        <div class="gap-me-stn" id="myStnName">--</div>
       </div>
+      <div class="gap-arrow" style="margin-top:4px">◀ ▶</div>
+    </div>
+
+    <!-- 후방 열차 -->
+    <div class="gap-box" id="rearBox">
+      <div class="gap-dir">후방 열차 →</div>
+      <div class="gap-train-no" id="rearTrainNo" style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
+      <div class="gap-time" id="rearTime">--</div>
+      <div class="gap-stn" id="rearStn">--</div>
+      <div class="gap-stations" id="rearStns">--</div>
+    </div>
+  </div>
+</div>
 
       <!-- 범례 -->
       <div class="legend">
@@ -533,46 +541,68 @@ function timeClass(sec){
   return 'ok';
 }
 
-function updateGapPanel() {
-  if (!MY_TRAIN_ID) {
-    document.getElementById('myStnName').textContent = '미설정';
-    document.getElementById('frontTime').textContent = '--';
-    document.getElementById('rearTime').textContent = '--';
-    return;
+function updateGapPanel(gaps) {
+  // 1. 내 열차 정보 업데이트
+  const myTrainNo = localStorage.getItem('myTrainNo') || '미설정';
+  const myTrain = trainData.find(t => t.trainNo === myTrainNo);
+  
+  document.getElementById('myTrainNo').textContent = myTrainNo !== '미설정' ? `${myTrainNo}열차` : '미설정';
+  document.getElementById('myStnName').textContent = myTrain ? myTrain.stnNm : '--';
+
+  // 2. 전방 열차 정보 업데이트
+  const frontBox = document.getElementById('frontBox');
+  const frontTrainNoEl = document.getElementById('frontTrainNo');
+  const frontTimeEl = document.getElementById('frontTime');
+  const frontStnEl = document.getElementById('frontStn');
+  const frontStnsEl = document.getElementById('frontStns');
+
+  if (gaps && gaps.front) {
+    frontTrainNoEl.textContent = gaps.front.trainNo ? `${gaps.front.trainNo}열차` : '----';
+    frontTimeEl.textContent = `${Math.floor(gaps.front.gapSec / 60)}분 ${gaps.front.gapSec % 60}초`;
+    frontStnEl.textContent = gaps.front.stnNm || '--';
+    frontStnsEl.textContent = `(${gaps.front.stnGap}개 역 전방)`;
+
+    // 간격에 따른 경고 색상 적용
+    frontBox.classList.remove('warn', 'caution');
+    if (gaps.front.gapSec < 90) {
+      frontBox.classList.add('warn');
+    } else if (gaps.front.gapSec < 180) {
+      frontBox.classList.add('caution');
+    }
+  } else {
+    frontTrainNoEl.textContent = '----';
+    frontTimeEl.textContent = '--';
+    frontStnEl.textContent = '--';
+    frontStnsEl.textContent = '--';
+    frontBox.classList.remove('warn', 'caution');
   }
 
-  const my = simTrains.find(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
-  if (!my) {
-    document.getElementById('myStnName').textContent = '미운행';
-    document.getElementById('frontTime').textContent = '--';
-    document.getElementById('rearTime').textContent = '--';
-    return;
-  }
+  // 3. 후방 열차 정보 업데이트
+  const rearBox = document.getElementById('rearBox');
+  const rearTrainNoEl = document.getElementById('rearTrainNo');
+  const rearTimeEl = document.getElementById('rearTime');
+  const rearStnEl = document.getElementById('rearStn');
+  const rearStnsEl = document.getElementById('rearStns');
 
-  const myIdx = Math.round(my.pos);
-  document.getElementById('myStnName').textContent = STATIONS[Math.min(myIdx, N - 1)].n;
+  if (gaps && gaps.rear) {
+    rearTrainNoEl.textContent = gaps.rear.trainNo ? `${gaps.rear.trainNo}열차` : '----';
+    rearTimeEl.textContent = `${Math.floor(gaps.rear.gapSec / 60)}분 ${gaps.rear.gapSec % 60}초`;
+    rearStnEl.textContent = gaps.rear.stnNm || '--';
+    rearStnsEl.textContent = `(${gaps.rear.stnGap}개 역 후방)`;
 
-  const g = calcGaps(my);
-
-  if (g.front) {
-    const cls = timeClass(g.front.sec);
-    document.getElementById('frontBox').className = 'gap-box ' + cls;
-    document.getElementById('frontTime').className = 'gap-time ' + cls;
-    document.getElementById('frontTime').textContent = secToStr(g.front.sec);
-    document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n;
-    document.getElementById('frontStns').textContent = g.front.stns + '역 앞';
-    document.getElementById('sumFront').textContent = secToStr(g.front.sec);
-    document.getElementById('sumFront').className = 's-val ' + cls;
-  }
-  if (g.rear) {
-    const cls = timeClass(g.rear.sec);
-    document.getElementById('rearBox').className = 'gap-box ' + cls;
-    document.getElementById('rearTime').className = 'gap-time ' + cls;
-    document.getElementById('rearTime').textContent = secToStr(g.rear.sec);
-    document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n;
-    document.getElementById('rearStns').textContent = g.rear.stns + '역 뒤';
-    document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
-    document.getElementById('sumRear').className = 's-val blue';
+    // 간격에 따른 경고 색상 적용
+    rearBox.classList.remove('warn', 'caution');
+    if (gaps.rear.gapSec < 90) {
+      rearBox.classList.add('warn');
+    } else if (gaps.rear.gapSec < 180) {
+      rearBox.classList.add('caution');
+    }
+  } else {
+    rearTrainNoEl.textContent = '----';
+    rearTimeEl.textContent = '--';
+    rearStnEl.textContent = '--';
+    rearStnsEl.textContent = '--';
+    rearBox.classList.remove('warn', 'caution');
   }
 }
 
