@@ -401,7 +401,7 @@ function updateMyTrainId() {
     if (statusEl) {
       statusEl.textContent = found
         ? '실시간 위치 추적 중 ✓'
-        : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음 (입고/대기 중일 수 있음)`;
+        : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음`;
     }
   } else {
     MY_TRAIN_ID = apiMode ? null : 'U1';
