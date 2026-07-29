@@ -541,68 +541,75 @@ function timeClass(sec){
   return 'ok';
 }
 
-function updateGapPanel(gaps) {
-  // 1. 내 열차 정보 업데이트
-  const myTrainNo = localStorage.getItem('myTrainNo') || '미설정';
-  const myTrain = trainData.find(t => t.trainNo === myTrainNo);
-  
-  document.getElementById('myTrainNo').textContent = myTrainNo !== '미설정' ? `${myTrainNo}열차` : '미설정';
-  document.getElementById('myStnName').textContent = myTrain ? myTrain.stnNm : '--';
-
-  // 2. 전방 열차 정보 업데이트
-  const frontBox = document.getElementById('frontBox');
-  const frontTrainNoEl = document.getElementById('frontTrainNo');
-  const frontTimeEl = document.getElementById('frontTime');
-  const frontStnEl = document.getElementById('frontStn');
-  const frontStnsEl = document.getElementById('frontStns');
-
-  if (gaps && gaps.front) {
-    frontTrainNoEl.textContent = gaps.front.trainNo ? `${gaps.front.trainNo}열차` : '----';
-    frontTimeEl.textContent = `${Math.floor(gaps.front.gapSec / 60)}분 ${gaps.front.gapSec % 60}초`;
-    frontStnEl.textContent = gaps.front.stnNm || '--';
-    frontStnsEl.textContent = `(${gaps.front.stnGap}개 역 전방)`;
-
-    // 간격에 따른 경고 색상 적용
-    frontBox.classList.remove('warn', 'caution');
-    if (gaps.front.gapSec < 90) {
-      frontBox.classList.add('warn');
-    } else if (gaps.front.gapSec < 180) {
-      frontBox.classList.add('caution');
-    }
-  } else {
-    frontTrainNoEl.textContent = '----';
-    frontTimeEl.textContent = '--';
-    frontStnEl.textContent = '--';
-    frontStnsEl.textContent = '--';
-    frontBox.classList.remove('warn', 'caution');
+function updateGapPanel() {
+  if (!MY_TRAIN_ID) {
+    document.getElementById('myTrainNo').textContent = '----';
+    document.getElementById('myStnName').textContent = '미설정';
+    document.getElementById('frontTrainNo').textContent = '----';
+    document.getElementById('frontTime').textContent = '--';
+    document.getElementById('frontStn').textContent = '--';
+    document.getElementById('frontStns').textContent = '--';
+    document.getElementById('rearTrainNo').textContent = '----';
+    document.getElementById('rearTime').textContent = '--';
+    document.getElementById('rearStn').textContent = '--';
+    document.getElementById('rearStns').textContent = '--';
+    return;
   }
 
-  // 3. 후방 열차 정보 업데이트
-  const rearBox = document.getElementById('rearBox');
-  const rearTrainNoEl = document.getElementById('rearTrainNo');
-  const rearTimeEl = document.getElementById('rearTime');
-  const rearStnEl = document.getElementById('rearStn');
-  const rearStnsEl = document.getElementById('rearStns');
+  const my = simTrains.find(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+  if (!my) {
+    document.getElementById('myTrainNo').textContent = MY_TRAIN_ID;
+    document.getElementById('myStnName').textContent = '미운행';
+    document.getElementById('frontTrainNo').textContent = '----';
+    document.getElementById('frontTime').textContent = '--';
+    document.getElementById('frontStn').textContent = '--';
+    document.getElementById('frontStns').textContent = '--';
+    document.getElementById('rearTrainNo').textContent = '----';
+    document.getElementById('rearTime').textContent = '--';
+    document.getElementById('rearStn').textContent = '--';
+    document.getElementById('rearStns').textContent = '--';
+    return;
+  }
 
-  if (gaps && gaps.rear) {
-    rearTrainNoEl.textContent = gaps.rear.trainNo ? `${gaps.rear.trainNo}열차` : '----';
-    rearTimeEl.textContent = `${Math.floor(gaps.rear.gapSec / 60)}분 ${gaps.rear.gapSec % 60}초`;
-    rearStnEl.textContent = gaps.rear.stnNm || '--';
-    rearStnsEl.textContent = `(${gaps.rear.stnGap}개 역 후방)`;
+  // 내 열차 정보 표시
+  document.getElementById('myTrainNo').textContent = my.num || my.id || MY_TRAIN_ID;
+  const myIdx = Math.round(my.pos);
+  document.getElementById('myStnName').textContent = STATIONS[Math.min(myIdx, N - 1)].n;
 
-    // 간격에 따른 경고 색상 적용
-    rearBox.classList.remove('warn', 'caution');
-    if (gaps.rear.gapSec < 90) {
-      rearBox.classList.add('warn');
-    } else if (gaps.rear.gapSec < 180) {
-      rearBox.classList.add('caution');
+  const g = calcGaps(my);
+
+  // 전방 열차 정보 표시
+  if (g.front) {
+    const cls = timeClass(g.front.sec);
+    document.getElementById('frontTrainNo').textContent = g.front.train.num || g.front.train.id || '----';
+    document.getElementById('frontBox').className = 'gap-box ' + cls;
+    document.getElementById('frontTime').className = 'gap-time ' + cls;
+    document.getElementById('frontTime').textContent = secToStr(g.front.sec);
+    document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n;
+    document.getElementById('frontStns').textContent = g.front.stns + '역 앞';
+    if (document.getElementById('sumFront')) {
+      document.getElementById('sumFront').textContent = secToStr(g.front.sec);
+      document.getElementById('sumFront').className = 's-val ' + cls;
     }
   } else {
-    rearTrainNoEl.textContent = '----';
-    rearTimeEl.textContent = '--';
-    rearStnEl.textContent = '--';
-    rearStnsEl.textContent = '--';
-    rearBox.classList.remove('warn', 'caution');
+    document.getElementById('frontTrainNo').textContent = '----';
+  }
+
+  // 후방 열차 정보 표시
+  if (g.rear) {
+    const cls = timeClass(g.rear.sec);
+    document.getElementById('rearTrainNo').textContent = g.rear.train.num || g.rear.train.id || '----';
+    document.getElementById('rearBox').className = 'gap-box ' + cls;
+    document.getElementById('rearTime').className = 'gap-time ' + cls;
+    document.getElementById('rearTime').textContent = secToStr(g.rear.sec);
+    document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n;
+    document.getElementById('rearStns').textContent = g.rear.stns + '역 뒤';
+    if (document.getElementById('sumRear')) {
+      document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
+      document.getElementById('sumRear').className = 's-val blue';
+    }
+  } else {
+    document.getElementById('rearTrainNo').textContent = '----';
   }
 }
 
