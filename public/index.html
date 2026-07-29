@@ -278,7 +278,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
           
           <!-- SECTION 1: 개화 ~ 신논현 -->
           <div class="section-block" id="sec1">
-            <div class="section-title">개화 ── 신논현 (1구간)</div>
+            <div class="section-title"> 개화 ── 신논현 </div>
             <div class="track-lbl-up">상행 →</div>
             <div class="track-lbl-dn">← 하행</div>
             <div class="track-up"></div>
@@ -289,7 +289,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 
           <!-- SECTION 2: 언주 ~ 중앙보훈병원 -->
           <div class="section-block" id="sec2">
-            <div class="section-title">언주 ── 중앙보훈병원 (2구간)</div>
+            <div class="section-title"> 언주 ── 중앙보훈병원 </div>
             <div class="track-lbl-up">상행 →</div>
             <div class="track-lbl-dn">← 하행</div>
             <div class="track-up"></div>
@@ -500,8 +500,8 @@ function renderMap() {
     const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
     const isUp = t.dir === 'up';
     
-    // 레일 Y축 위치에 맞춰 마커 배치 (상행 79px, 하행 175px)
-    const topPx = isUp ? 79 : 175;
+    // 레일 Y축 위치에 맞춰 마커 배치 (상행 80px, 하행 180px)
+    const topPx = isUp ? 80 : 180;
     const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
     
     const div = document.createElement('div');
