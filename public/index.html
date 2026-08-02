@@ -1996,16 +1996,27 @@
       document.getElementById('nextPageBtn').disabled = viewerPage >= viewerTotalPages;
 
       const page = await viewerDoc.getPage(viewerPage);
-      const vw = Math.min(window.innerWidth - 20, 600);
-      const viewport = page.getViewport({ scale: vw / page.getViewport({ scale: 1 }).width });
+
+      // [수정] 화면 폭 축소 대신 원본 고배율(1.8배)로 렌더링하여 크고 선명하게 표시
+      const DESIRED_SCALE = 1.8; // 필요시 2.0 이상으로 올려 더 크게 조정 가능
+      const viewport = page.getViewport({ scale: DESIRED_SCALE });
+
       const canvas = document.createElement('canvas');
       canvas.width = viewport.width;
       canvas.height = viewport.height;
+
+      // 스크롤 및 터치 조작이 원활하도록 스타일 지정
+      canvas.style.width = viewport.width + 'px';
+      canvas.style.height = 'auto';
+      canvas.style.maxWidth = 'none'; // 자동 축소 방지
+
       const ctx = canvas.getContext('2d');
       await page.render({ canvasContext: ctx, viewport }).promise;
+
       wrap.innerHTML = '';
       wrap.appendChild(canvas);
       wrap.scrollTop = 0;
+      wrap.scrollLeft = 0;
     }
 
     function changePdfPage(delta) {
