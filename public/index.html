@@ -1718,10 +1718,13 @@
         return;
       }
 
-      const diaPdf = pdfFiles.find(p => p.name.includes('다이아')) || pdfFiles[0];
+      // 파일명에서 다이아 관련 키워드(다이아, dia, 시간표, 도표 등)를 탐색
+      const diaPdf = pdfFiles.find(p =>
+        /다이아|dia|시간표|도표/i.test(p.name)
+      ) || pdfFiles[0];
 
       if (diaPdf) {
-        // PDF 객체가 아직 로드되지 않은 경우 데이터로부터 다시 복원
+        // PDF 객체가 지연 로딩(Lazy Loading) 상태인 경우 데이터로부터 재복원
         if (!diaPdf.doc && diaPdf.data) {
           document.getElementById('loadingText').textContent = '다이아 PDF 로딩 중...';
           document.getElementById('loadingOverlay').classList.add('show');
