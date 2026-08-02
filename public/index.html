@@ -1269,7 +1269,7 @@
       </div>
 
       <!-- PAGE 3: 운행 다이아 전용 페이지 -->
-      <div class="page" id="diaPage">
+      <div class="page" id="diaPage" style="display:none;">
         <div class="dia-card">
           <div class="dia-title">🧭 운행다이아 신속 조회</div>
           <div class="dia-select-group">
@@ -1981,8 +1981,10 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
       const pageEl = document.getElementById(name + 'Page');
-      pageEl.style.display = (name === 'pdf' || name === 'dia') ? 'flex' : 'block';
-      pageEl.classList.add('active');
+      if (pageEl) {
+        pageEl.style.display = (name === 'pdf') ? 'flex' : 'block';
+        pageEl.classList.add('active');
+      }
       document.getElementById('tab-' + name).classList.add('active');
 
       if (name === 'gap') renderGapPage();
