@@ -213,6 +213,51 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px}
 #pdfUpload{display:none}
 .no-results{padding:20px;text-align:center;color:var(--txt3);font-size:13px}
+
+/* 💎 다이아 바로가기 UI 전용 스타일 (다크모드 커스텀 적용) */
+.dia-selector-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  background-color: var(--bg2);
+  border-bottom: 1px solid var(--bg4);
+  flex-shrink: 0;
+}
+
+.dia-label {
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dia-select {
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--txt);
+  background-color: var(--bg3);
+  border: 1px solid var(--bg4);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+
+.dia-select:focus {
+  border-color: var(--gold);
+}
+
+.dia-select:disabled {
+  background-color: var(--bg);
+  color: var(--txt3);
+  border-color: var(--bg3);
+  cursor: not-allowed;
+}
 </style>
 </head>
 <body>
