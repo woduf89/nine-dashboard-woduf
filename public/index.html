@@ -352,7 +352,6 @@
       border-radius: 2px
     }
 
-    /* 🚨 2단 분할 시인성 노선도 스타일 */
     .map-scroll {
       overflow-x: auto;
       padding: 12px 0 20px;
@@ -386,7 +385,6 @@
       margin-bottom: 12px
     }
 
-    /* 트랙 선 및 라벨 (겹침 완화 적용) */
     .track-up {
       position: absolute;
       left: 40px;
@@ -500,17 +498,14 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, .8);
     }
 
-    /* 상행선 트랙 레일(top: 88px) 위치 맞춤 */
     .stn-circle.up {
       top: 82px;
     }
 
-    /* 하행선 트랙 레일(top: 185px) 위치 맞춤 */
     .stn-circle.down {
       top: 179px;
     }
 
-    /* 급행정차역 동그라미 색상 (상/하행 공통) */
     .stn.express .stn-circle {
       background: var(--red);
       border-color: #fff;
@@ -525,7 +520,6 @@
       height: 78px
     }
 
-    /* 열차 마커 ('일반', '급행' 명확 표기) */
     .train-marker {
       position: absolute;
       z-index: 10;
@@ -598,9 +592,6 @@
       font-size: 12px;
       border: 1px solid var(--gold)
     }
-
-
-
 
     /* PAGE 2 — 간격 상세 */
     #gapPage {
@@ -700,7 +691,96 @@
       display: flex
     }
 
-    /* PAGE 3 — PDF 매뉴얼 */
+    /* 🚨 PAGE 3 — 운행 다이아 (새로 추가 및 리스타일링) */
+    #diaPage {
+      background: var(--bg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .dia-card {
+      background: var(--bg2);
+      border: 1px solid var(--bg4);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .dia-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dia-select-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dia-select-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .dia-select-wrap label {
+      font-size: 11px;
+      color: var(--txt2);
+      font-weight: bold;
+    }
+
+    .dia-dropdown {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: bold;
+      background: var(--bg3);
+      border: 1px solid var(--bg4);
+      color: var(--txt);
+      border-radius: var(--radius-sm);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='%23C8A600' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+    }
+
+    .dia-dropdown:focus {
+      border-color: var(--gold);
+    }
+
+    .dia-dropdown:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .dia-btn {
+      width: 100%;
+      background: var(--gold);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: background 0.2s;
+    }
+
+    .dia-btn:active {
+      background: var(--gold-dim);
+    }
+
+    /* PAGE 4 — PDF 매뉴얼 */
     #pdfPage {
       background: var(--bg);
       display: flex;
@@ -1065,13 +1145,16 @@
         중...</span>
     </div>
 
-    <!-- 탭바 -->
+    <!-- 탭바 (운행다이아 정식 탭 추가) -->
     <div id="tabBar">
       <button class="tab-btn active" onclick="switchPage('map')" id="tab-map">
         <div class="tab-icon">🗺</div>노선도
       </button>
       <button class="tab-btn" onclick="switchPage('gap')" id="tab-gap">
         <div class="tab-icon">📏</div>간격
+      </button>
+      <button class="tab-btn" onclick="switchPage('dia')" id="tab-dia">
+        <div class="tab-icon">📅</div>운행다이아
       </button>
       <button class="tab-btn" onclick="switchPage('pdf')" id="tab-pdf">
         <div class="tab-icon">📋</div>매뉴얼
@@ -1083,7 +1166,6 @@
 
       <!-- PAGE 1: 실시간 노선도 -->
       <div class="page active" id="mapPage">
-
         <!-- 요약 카드 -->
         <div class="summary-strip">
           <div class="s-card">
@@ -1152,10 +1234,9 @@
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <!-- 2단 가시성 개판 노선도 -->
+        <!-- 2단 가시성 노선도 -->
         <div class="map-scroll">
           <div class="map-wrap" id="mapWrap">
-
             <!-- SECTION 1: 개화 ~ 신논현 -->
             <div class="section-block" id="sec1">
               <div class="section-title"> 개화 ── 신논현 </div>
@@ -1166,7 +1247,6 @@
               <div class="stations-row" id="stationsRow1"></div>
               <div class="train-container" id="trainMarkers1"></div>
             </div>
-
             <!-- SECTION 2: 언주 ~ 중앙보훈병원 -->
             <div class="section-block" id="sec2">
               <div class="section-title"> 언주 ── 중앙보훈병원 </div>
@@ -1177,37 +1257,9 @@
               <div class="stations-row" id="stationsRow2"></div>
               <div class="train-container" id="trainMarkers2"></div>
             </div>
-
           </div>
         </div>
-
       </div>
-
-
-
-      <!-- style 태그 없이 하나로 합쳐진 HTML 코드 -->
-      <div
-        style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 15px 0; padding: 12px 16px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; font-family: sans-serif;">
-        <span style="font-weight: bold; font-size: 14px; color: #333;">🧭 운행다이아 바로가기:</span>
-
-        <select id="diaTypeSelect" onchange="updateDiaNumberOptions()"
-          style="padding: 8px 12px; font-size: 14px; border: 1px solid #ced4da; border-radius: 6px; background-color: #fff; cursor: pointer;">
-          <option value="">-- 1차 분류 (일형) --</option>
-          <option value="평휴">평휴</option>
-          <option value="휴평">휴평</option>
-          <option value="휴휴">휴휴</option>
-          <option value="평평">평평</option>
-        </select>
-
-        <select id="diaNumSelect" onchange="jumpToDiaPage()"
-          style="padding: 8px 12px; font-size: 14px; border: 1px solid #ced4da; border-radius: 6px; background-color: #fff; cursor: pointer;"
-          disabled>
-          <option value="">-- 2차 분류 (다이아) --</option>
-        </select>
-      </div>
-
-
-
 
       <!-- PAGE 2: 간격 상세 -->
       <div class="page" id="gapPage">
@@ -1216,7 +1268,42 @@
         <div id="gapList"></div>
       </div>
 
-      <!-- PAGE 3: PDF 매뉴얼 -->
+      <!-- 🚨 PAGE 3: 운행 다이아 전용 페이지 (새로 분리 구축) -->
+      <div class="page" id="diaPage">
+        <div class="dia-card">
+          <div class="dia-title">🧭 운행다이아 신속 조회</div>
+          <div class="dia-select-group">
+            <div class="dia-select-wrap">
+              <label>1차 분류 (일형)</label>
+              <select id="diaTypeSelect" onchange="updateDiaNumberOptions()" class="dia-dropdown">
+                <option value="">-- 일형 선택 --</option>
+                <option value="평휴">평휴</option>
+                <option value="휴평">휴평</option>
+                <option value="휴휴">휴휴</option>
+                <option value="평평">평평</option>
+              </select>
+            </div>
+
+            <div class="dia-select-wrap">
+              <label>2차 분류 (다이아 번호)</label>
+              <select id="diaNumSelect" class="dia-dropdown" disabled>
+                <option value="">-- 다이아 번호 선택 --</option>
+              </select>
+            </div>
+
+            <button type="button" onclick="jumpToDiaPage()" class="dia-btn">다이아 조회 및 뷰어 열기</button>
+          </div>
+        </div>
+
+        <!--안내 문구-->
+        <div style="font-size: 12px; color: var(--txt3); padding: 0 8px; line-height: 1.6;">
+          💡 <strong>사용 방법:</strong><br>
+          1. '매뉴얼' 탭에서 운행 다이아 정보가 담긴 PDF 파일을 먼저 등록해 주세요.<br>
+          2. 등록 완료 후 본 탭에서 일형과 다이아 번호를 조합해 신속히 해당 다이아 도표 페이지로 이동할 수 있습니다.
+        </div>
+      </div>
+
+      <!-- PAGE 4: PDF 매뉴얼 -->
       <div class="page" id="pdfPage" style="display:none;flex-direction:column">
         <div class="pdf-toolbar">
           <div class="pdf-search-wrap">
@@ -1232,7 +1319,7 @@
           <div class="pdf-empty">
             <div class="pdf-empty-icon">📄</div>
             <div class="pdf-empty-title">PDF 매뉴얼을 등록하세요</div>
-            <div class="pdf-empty-desc">아래 + 버튼으로 고장 조치 매뉴얼 PDF를 추가하면<br>앱 실행 시 자동으로 로드되어 검색할 수 있습니다</div>
+            <div class="pdf-empty-desc">아래 + 버튼으로 고장 조치 매뉴얼 또는 운행다이아 PDF를 추가하면<br>앱 실행 시 자동으로 로드되어 검색 및 조회가 가능합니다</div>
             <br>
             <button class="search-btn" onclick="document.getElementById('pdfUpload').click()">+ PDF 추가</button>
           </div>
@@ -1240,10 +1327,9 @@
       </div>
 
     </div>
-
   </div>
 
-  <!-- PDF 뷰어 -->
+  <!-- PDF 뷰어 모달 -->
   <div class="pdf-viewer-wrap" id="pdfViewer">
     <div class="pdf-viewer-header">
       <button class="pdf-viewer-back" onclick="closePdfViewer()">← 닫기</button>
@@ -1258,6 +1344,7 @@
     </div>
   </div>
 
+  <!-- 로딩 오버레이 -->
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-box">
       <div class="spinner"></div>
@@ -1268,7 +1355,7 @@
   <input type="file" id="pdfUpload" accept=".pdf" multiple onchange="handlePdfUpload(event)" />
 
   <script>
-    // 9호선 역 데이터 (개화역 e:false로 수정)
+    // 9호선 역 데이터
     const STATIONS = [
       { n: '개화', c: '9001', e: false }, { n: '김포공항', c: '9002', e: true }, { n: '공항시장', c: '9003', e: false },
       { n: '신방화', c: '9004', e: false }, { n: '마곡나루', c: '9005', e: true }, { n: '양천향교', c: '9006', e: false },
@@ -1285,7 +1372,6 @@
       { n: '둔촌오륜', c: '9037', e: false }, { n: '중앙보훈병원', c: '9038', e: true }
     ];
 
-    // 신논현역 인덱스 (24) 기준으로 노선 분할
     const CUT_IDX = 24;
 
     let MY_TRAIN_ID = null;
@@ -1313,9 +1399,7 @@
         const found = simTrains.some(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
         if (badge) badge.textContent = `내 열차 ${MY_TRAIN_MANUAL}`;
         if (statusEl) {
-          statusEl.textContent = found
-            ? '실시간 위치 추적 중 ✓'
-            : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음`;
+          statusEl.textContent = found ? '실시간 위치 추적 중 ✓' : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음`;
         }
       } else {
         MY_TRAIN_ID = apiMode ? null : 'U1';
@@ -1357,30 +1441,18 @@
     }
 
     function renderStations() {
-      const html1 = STATIONS.slice(0, CUT_IDX + 1).map((s, i) => `
+      const makeHtml = (s, i) => `
     <div class="stn ${s.e ? 'express' : ''}" id="stn_${i}">
       <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
       <div class="stn-icon">&nbsp;</div>
       <div class="stn-circle up"></div>
       <div class="stn-bottom"></div>
       <div class="stn-circle down"></div>
-      <!-- 🔻 하행선 아래 역 이름 추가 -->
       <div class="stn-name-down ${s.e ? 'express' : ''}">${s.n}</div>
-    </div>`).join('');
+    </div>`;
 
-      const html2 = STATIONS.slice(CUT_IDX + 1).map((s, i) => `
-    <div class="stn ${s.e ? 'express' : ''}" id="stn_${i + CUT_IDX + 1}">
-      <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
-      <div class="stn-icon">&nbsp;</div>
-      <div class="stn-circle up"></div>
-      <div class="stn-bottom"></div>
-      <div class="stn-circle down"></div>
-      <!-- 🔻 하행선 아래 역 이름 추가 -->
-      <div class="stn-name-down ${s.e ? 'express' : ''}">${s.n}</div>
-    </div>`).join('');
-
-      document.getElementById('stationsRow1').innerHTML = html1;
-      document.getElementById('stationsRow2').innerHTML = html2;
+      document.getElementById('stationsRow1').innerHTML = STATIONS.slice(0, CUT_IDX + 1).map((s, i) => makeHtml(s, i)).join('');
+      document.getElementById('stationsRow2').innerHTML = STATIONS.slice(CUT_IDX + 1).map((s, i) => makeHtml(s, i + CUT_IDX + 1)).join('');
     }
 
     function getStationX(secIdx, stnIdx) {
@@ -1401,18 +1473,13 @@
       simTrains.forEach(t => {
         const idxF = Math.floor(t.pos);
         const idxC = Math.min(idxF + 1, N - 1);
-
-        // 열차가 속한 구간 판단 (1구간: 개화~신논현, 2구간: 언주~보훈병원)
         const secIdx = idxF <= CUT_IDX ? 1 : 2;
 
-        // 구간 분할 경계 처리
-        if (secIdx === 1 && idxC > CUT_IDX) return;
+        if (secIdx === 1 & idxC > CUT_IDX) return;
 
         const frac = t.pos - idxF;
         const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
         const isUp = t.dir === 'up';
-
-        // 레일 Y축 위치에 맞춰 마커 배치 (상행 80px, 하행 180px)
         const topPx = isUp ? 80 : 180;
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
 
@@ -1442,33 +1509,19 @@
       sameDir.forEach(t => {
         let dFront, dRear;
         if (myDir === 'up') {
-          dFront = t.pos - myPos;
-          if (dFront <= 0) dFront += N;
-          dRear = myPos - t.pos;
-          if (dRear <= 0) dRear += N;
+          dFront = t.pos - myPos; if (dFront <= 0) dFront += N;
+          dRear = myPos - t.pos; if (dRear <= 0) dRear += N;
         } else {
-          dFront = myPos - t.pos;
-          if (dFront <= 0) dFront += N;
-          dRear = t.pos - myPos;
-          if (dRear <= 0) dRear += N;
+          dFront = myPos - t.pos; if (dFront <= 0) dFront += N;
+          dRear = t.pos - myPos; if (dRear <= 0) dRear += N;
         }
-
-        if (dFront < realFrontD) {
-          realFrontD = dFront;
-          realFront = t;
-        }
-        if (dRear < realRearD) {
-          realRearD = dRear;
-          realRear = t;
-        }
+        if (dFront < realFrontD) { realFrontD = dFront; realFront = t; }
+        if (dRear < realRearD) { realRearD = dRear; realRear = t; }
       });
 
-      function distToTime(d) { return Math.round(d * 120); }
-      function distToStations(d) { return Math.max(0, Math.round(d)); }
-
       return {
-        front: realFront ? { train: realFront, sec: realFront.etaToNextStationSec || distToTime(realFrontD), stns: distToStations(realFrontD) } : null,
-        rear: realRear ? { train: realRear, sec: realRear.etaToNextStationSec || distToTime(realRearD), stns: distToStations(realRearD) } : null
+        front: realFront ? { train: realFront, sec: Math.round(realFrontD * 120), stns: Math.max(0, Math.round(realFrontD)) } : null,
+        rear: realRear ? { train: realRear, sec: Math.round(realRearD * 120), stns: Math.max(0, Math.round(realRearD)) } : null
       };
     }
 
@@ -1485,17 +1538,9 @@
     }
 
     function updateGapPanel() {
+      const els = ['myTrainNo', 'myStnName', 'frontTrainNo', 'frontTime', 'frontStn', 'frontStns', 'rearTrainNo', 'rearTime', 'rearStn', 'rearStns'];
       if (!MY_TRAIN_ID) {
-        document.getElementById('myTrainNo').textContent = '----';
-        document.getElementById('myStnName').textContent = '미설정';
-        document.getElementById('frontTrainNo').textContent = '----';
-        document.getElementById('frontTime').textContent = '--';
-        document.getElementById('frontStn').textContent = '--';
-        document.getElementById('frontStns').textContent = '--';
-        document.getElementById('rearTrainNo').textContent = '----';
-        document.getElementById('rearTime').textContent = '--';
-        document.getElementById('rearStn').textContent = '--';
-        document.getElementById('rearStns').textContent = '--';
+        els.forEach(id => document.getElementById(id).textContent = id.includes('No') || id.includes('Time') || id.includes('Stn') ? '----' : '미설정');
         return;
       }
 
@@ -1503,53 +1548,35 @@
       if (!my) {
         document.getElementById('myTrainNo').textContent = MY_TRAIN_ID;
         document.getElementById('myStnName').textContent = '미운행';
-        document.getElementById('frontTrainNo').textContent = '----';
-        document.getElementById('frontTime').textContent = '--';
-        document.getElementById('frontStn').textContent = '--';
-        document.getElementById('frontStns').textContent = '--';
-        document.getElementById('rearTrainNo').textContent = '----';
-        document.getElementById('rearTime').textContent = '--';
-        document.getElementById('rearStn').textContent = '--';
-        document.getElementById('rearStns').textContent = '--';
         return;
       }
 
       document.getElementById('myTrainNo').textContent = my.num || my.id || MY_TRAIN_ID;
-      const myIdx = Math.round(my.pos);
-      document.getElementById('myStnName').textContent = STATIONS[Math.min(myIdx, N - 1)].n;
+      document.getElementById('myStnName').textContent = STATIONS[Math.min(Math.round(my.pos), N - 1)].n;
 
       const g = calcGaps(my);
 
       if (g.front) {
         const cls = timeClass(g.front.sec);
-        document.getElementById('frontTrainNo').textContent = g.front.train.num || g.front.train.id || '----';
+        document.getElementById('frontTrainNo').textContent = g.front.train.num || g.front.train.id;
         document.getElementById('frontBox').className = 'gap-box ' + cls;
         document.getElementById('frontTime').className = 'gap-time ' + cls;
         document.getElementById('frontTime').textContent = secToStr(g.front.sec);
         document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n;
         document.getElementById('frontStns').textContent = g.front.stns + '역 앞';
-        if (document.getElementById('sumFront')) {
-          document.getElementById('sumFront').textContent = secToStr(g.front.sec);
-          document.getElementById('sumFront').className = 's-val ' + cls;
-        }
-      } else {
-        document.getElementById('frontTrainNo').textContent = '----';
+        document.getElementById('sumFront').textContent = secToStr(g.front.sec);
+        document.getElementById('sumFront').className = 's-val ' + cls;
       }
-
       if (g.rear) {
         const cls = timeClass(g.rear.sec);
-        document.getElementById('rearTrainNo').textContent = g.rear.train.num || g.rear.train.id || '----';
+        document.getElementById('rearTrainNo').textContent = g.rear.train.num || g.rear.train.id;
         document.getElementById('rearBox').className = 'gap-box ' + cls;
         document.getElementById('rearTime').className = 'gap-time ' + cls;
         document.getElementById('rearTime').textContent = secToStr(g.rear.sec);
         document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n;
         document.getElementById('rearStns').textContent = g.rear.stns + '역 뒤';
-        if (document.getElementById('sumRear')) {
-          document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
-          document.getElementById('sumRear').className = 's-val blue';
-        }
-      } else {
-        document.getElementById('rearTrainNo').textContent = '----';
+        document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
+        document.getElementById('sumRear').className = 's-val blue';
       }
     }
 
@@ -1558,27 +1585,19 @@
       const warnBar = document.getElementById('gapWarnBar');
       let warnCount = 0;
 
-      const rows = simTrains.map(t => {
-        const isUp = t.dir === 'up';
+      list.innerHTML = simTrains.map(t => {
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
         const g = calcGaps(t);
-
         const fSec = g.front ? g.front.sec : 999;
         const rSec = g.rear ? g.rear.sec : 999;
         const fStns = g.front ? g.front.stns : 0;
 
         if (fSec < 90 || rSec < 90) warnCount++;
 
-        const dirCls = isUp ? 'up' : 'down';
-        const dirTxt = isUp ? '상행' : '하행';
-        const stnNow = STATIONS[Math.min(Math.round(t.pos), N - 1)].n;
-
         return `<div class="gap-train-card" style="${isMy ? 'border:2px solid var(--gold);background:var(--gold-bg);' : ''}">
       <div class="gtc-head">
-        <div class="gtc-num" style="${isMy ? 'color:var(--gold);font-weight:900;' : ''}">
-          ${isMy ? '🚇 내 열차 — ' : ''}${t.num}호 (${stnNow})
-        </div>
-        <span class="gtc-type ${dirCls} ${t.express ? 'express' : ''}">${dirTxt}${t.express ? ' 급행' : ' 일반'}</span>
+        <div class="gtc-num">${isMy ? '🚇 내 열차 — ' : ''}${t.num}호 (${STATIONS[Math.min(Math.round(t.pos), N - 1)].n})</div>
+        <span class="gtc-type ${t.dir} ${t.express ? 'express' : ''}">${t.dir === 'up' ? '상행' : '하행'}${t.express ? ' 급행' : ' 일반'}</span>
       </div>
       <div class="gap-metrics">
         <div class="gm-box">
@@ -1586,7 +1605,7 @@
           <div class="gm-lab">전방 시간</div>
         </div>
         <div class="gm-box">
-          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fStns >= 30 ? '-' : fStns + '역'}</div>
+          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fSec >= 999 ? '-' : fStns + '역'}</div>
           <div class="gm-lab">전방 간격</div>
         </div>
         <div class="gm-box">
@@ -1597,7 +1616,6 @@
     </div>`;
       }).join('');
 
-      list.innerHTML = rows;
       if (warnCount > 0) {
         warnBar.classList.add('show');
         document.getElementById('gapWarnMsg').textContent = `간격 주의 열차 ${warnCount}대 — 90초 미만 근접 운행`;
@@ -1606,7 +1624,7 @@
       }
     }
 
-    // 1. 다이아별 PDF 페이지 매핑 테이블 
+    // ── 🚨 운행 다이아 매핑 및 페이지 이동 매커니즘 ──
     const DIA_MAP = {
       "평휴": {
         "61다이아": 1, "62다이아": 2, "63다이아": 3, "64다이아": 4, "65다이아": 5,
@@ -1660,54 +1678,60 @@
       }
     };
 
-    // 2. 1차 분류 변경 시 2차 분류(다이아 번호) 옵션 동적 생성
     function updateDiaNumberOptions() {
       const typeSelect = document.getElementById('diaTypeSelect');
       const numSelect = document.getElementById('diaNumSelect');
       const selectedType = typeSelect.value;
 
-      // 초기화
-      numSelect.innerHTML = '<option value="">-- 2차 분류 (다이아) --</option>';
+      numSelect.innerHTML = '<option value="">-- 다이아 번호 선택 --</option>';
 
       if (!selectedType || !DIA_MAP[selectedType]) {
         numSelect.disabled = true;
         return;
       }
 
-      // 선택한 유형의 다이아 목록 불러오기
       const diaList = DIA_MAP[selectedType];
       for (const diaNum in diaList) {
         const option = document.createElement('option');
-        option.value = diaList[diaNum]; // 값으로 해당 페이지 번호를 저장
+        option.value = diaList[diaNum];
         option.textContent = diaNum;
         numSelect.appendChild(option);
       }
-
       numSelect.disabled = false;
     }
 
-    // 3. 2차 분류 선택 시 해당 PDF 페이지로 이동
     function jumpToDiaPage() {
       const numSelect = document.getElementById('diaNumSelect');
       const targetPage = parseInt(numSelect.value, 10);
 
-      if (!targetPage) return;
+      if (!targetPage) {
+        alert('조회할 다이아 번호를 선택해 주세요.');
+        return;
+      }
 
-      // 기존 앱의 PDF Render 함수 호출
-      if (typeof renderPage === 'function') {
-        renderPage(targetPage);
-      } else if (typeof renderPdfPage === 'function') {
-        renderPdfPage(targetPage);
-      } else if (window.pdfDoc) {
-        window.currentPageNum = targetPage;
-        if (typeof renderPdfPage === 'function') renderPdfPage(targetPage);
+      // 등록된 PDF가 없을 때 에러 방지
+      if (!pdfFiles.length) {
+        alert('등록된 PDF 문서가 없습니다. [매뉴얼] 탭에서 다이아 PDF를 먼저 등록해 주세요.');
+        return;
+      }
+
+      // 전용 운행다이아 타이틀이 들어간 파일 우선 매핑하거나, 등록된 첫 파일 기준
+      const diaPdf = pdfFiles.find(p => p.name.includes('다이아')) || pdfFiles[0];
+
+      if (diaPdf && diaPdf.doc) {
+        viewerDoc = diaPdf.doc;
+        viewerPage = Math.min(targetPage, diaPdf.doc.numPages);
+        viewerTotalPages = diaPdf.doc.numPages;
+        document.getElementById('pdfViewerTitle').textContent = diaPdf.name.replace('.pdf', '') + ' (자동 연동)';
+        document.getElementById('pdfViewer').classList.add('show');
+        renderPdfPage();
       }
     }
 
 
-    // PDF 매뉴얼 관련
+    // ── PDF 엔진 및 IndexedDB 로직 ──
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    let pdfFiles = [], selectedFileIdx = -1, lastSearchTerm = '', viewerDoc = null, viewerPage = 1, viewerTotalPages = 1, viewerFileName = '';
+    let pdfFiles = [], selectedFileIdx = -1, lastSearchTerm = '', viewerDoc = null, viewerPage = 1, viewerTotalPages = 1;
     const DB_NAME = 'line9manual_db', DB_VER = 1, STORE = 'pdfs';
     let db = null;
 
@@ -1924,14 +1948,14 @@
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
       const pageEl = document.getElementById(name + 'Page');
-      pageEl.style.display = (name === 'pdf') ? 'flex' : 'block';
+      pageEl.style.display = (name === 'pdf' || name === 'dia') ? 'flex' : 'block';
       pageEl.classList.add('active');
       document.getElementById('tab-' + name).classList.add('active');
 
       if (name === 'gap') renderGapPage();
     }
 
-    // 실시간 API 수신 파트
+    // 실시간 API 연동 파트
     let apiMode = false;
     let apiTimer = null;
 
@@ -1968,11 +1992,7 @@
     }
 
     function applyRealTrains(trains) {
-      simTrains = trains.map(t => ({
-        ...t,
-        id: String(t.id).trim(),
-        num: String(t.num).trim()
-      }));
+      simTrains = trains.map(t => ({ ...t, id: String(t.id).trim(), num: String(t.num).trim() }));
       updateMyTrainId();
       renderMap();
       updateGapPanel();
@@ -2002,9 +2022,7 @@
         }, 30000);
       } else {
         setModeBadge('sim');
-        simTimer = setInterval(() => {
-          stepSim();
-        }, 900);
+        simTimer = setInterval(() => { stepSim(); }, 900);
       }
 
       await openDB();
