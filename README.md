@@ -39,15 +39,20 @@ vercel --prod
 
 ## 프로젝트 구조
 
-```
-line9-app/
-├── api/
-│   └── subway.js        # Vercel Serverless Function (API 키 프록시)
-├── public/
-│   └── index.html       # 앱 본체 (단일 파일)
-├── vercel.json          # Vercel 라우팅 설정
-└── README.md
-```
+line9-driver-app/
+├── index.html              # HTML 구조만 남긴 가벼운 메인 파일
+├── css/
+│   └── style.css           # 모든 <style> 태그 내용
+└── js/
+    ├── data/
+    │   ├── stations.js     # STATIONS (노선 역 정보)
+    │   └── diaMap.js       # DIA_MAP (운행 다이아 매핑 데이터)
+    ├── modules/
+    │   ├── map.js          # 실시간 노선도 및 렌더링 로직
+    │   ├── gap.js          # 열차 간격 계산 및 간격 페이지 로직
+    │   ├── dia.js          # 운행 다이아 조회 로직
+    │   └── pdf.js          # PDF.js 연동, 검색 및 IndexedDB 로직
+    └── app.js              # 앱 초기화(init) 및 메인 스크립트
 
 ## 동작 방식
 
