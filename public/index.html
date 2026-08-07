@@ -1173,48 +1173,49 @@
 
       <!-- PAGE 1: 실시간 노선도 -->
       <div class="page active" id="mapPage">
-
-        <div class="map-ctrl-bar">
-          <button class="me-btn save my-train-btn" onclick="promptMyTrainNo()">
-            🚇 지금 몰고 있는 열차 입력
-          </button>
-        </div>
-
+        <!-- 요약 카드 -->
         <div class="summary-strip">
           <div class="s-card">
-            <div class="s-val" id="sumTrains">--</div>
+            <div class="s-val" id="sumTrains">0</div>
             <div class="s-label">운행 열차</div>
           </div>
           <div class="s-card">
             <div class="s-val green" id="sumFront">-</div>
-            <div class="s-label">선행 간격</div>
+            <div class="s-label">전방 간격</div>
           </div>
           <div class="s-card">
             <div class="s-val blue" id="sumRear">-</div>
-            <div class="s-label">후속 간격</div>
+            <div class="s-label">후방 간격</div>
           </div>
         </div>
 
+        <!-- 내 열차 간격 패널 -->
         <div class="gap-panel">
           <div class="gap-panel-title">🚇 내 열차 기준 간격</div>
           <div class="gap-row">
             <div class="gap-box" id="frontBox">
               <div class="gap-dir">← 선행 열차</div>
-              <div class="gap-num" id="frontNum">--</div>
+              <div class="gap-train-no" id="frontTrainNo"
+                style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
               <div class="gap-time" id="frontTime">--</div>
               <div class="gap-stn" id="frontStn">--</div>
               <div class="gap-stations" id="frontStns">--</div>
             </div>
+
             <div>
-              <div class="gap-me" onclick="promptMyTrainNo()" style="cursor:pointer" title="눌러서 내 열차 번호 설정">
-                <div class="gap-me-badge">내 열차 <span id="myTrainNoBadge" style="opacity:.75">번호 설정</span></div>
+              <div class="gap-me">
+                <div class="gap-me-badge">내 열차</div>
+                <div class="gap-me-train-no" id="myTrainNo"
+                  style="font-size:14px; font-weight:bold; color:#007aff; margin-top:3px;">----</div>
                 <div class="gap-me-stn" id="myStnName">--</div>
               </div>
               <div class="gap-arrow" style="margin-top:4px">◀ ▶</div>
             </div>
+
             <div class="gap-box" id="rearBox">
               <div class="gap-dir">후속 열차 →</div>
-              <div class="gap-num" id="rearNum">--</div>
+              <div class="gap-train-no" id="rearTrainNo"
+                style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
               <div class="gap-time" id="rearTime">--</div>
               <div class="gap-stn" id="rearStn">--</div>
               <div class="gap-stations" id="rearStns">--</div>
@@ -1222,77 +1223,49 @@
           </div>
         </div>
 
+        <!-- 범례 -->
         <div class="legend">
           <div class="li">
-            <div class="lb" style="background:var(--up)"></div>상행 (중앙보훈병원)
+            <div class="lb" style="background:var(--up)"></div>상행(개화방면)
           </div>
           <div class="li">
-            <div class="lb" style="background:var(--down)"></div>하행 (개화/김포공항)
+            <div class="lb" style="background:var(--down)"></div>하행(보훈병원방면)
           </div>
           <div class="li">
-            <div class="lb" style="background:var(--red)"></div>급행
+            <div class="lb" style="background:var(--red)"></div>급행열차
           </div>
-          <div class="li" style="margin-left:auto;font-size:9px;color:var(--txt3)" id="lastUpd">갱신중...</div>
+          <div class="li">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--red);border:1px solid #fff"></div>
+            급행정차역
+          </div>
+          <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <div class="split-map-container">
-          <div class="map-section">
-            <div class="section-title">📍 [1구간] 개화 ↔ 여의도</div>
-            <div class="map-scroll">
-              <div class="map-wrap" id="mapWrap1">
-                <div class="track-lbl-up">상행 →</div>
-                <div class="track-lbl-dn">← 하행</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow1"></div>
-                <div id="trainMarkers1"></div>
-              </div>
+        <!-- 2단 가시성 노선도 -->
+        <div class="map-scroll">
+          <div class="map-wrap" id="mapWrap">
+            <!-- SECTION 1: 개화 ~ 신논현 -->
+            <div class="section-block" id="sec1">
+              <div class="section-title"> 개화 ── 신논현 </div>
+              <div class="track-lbl-up">상선 →</div>
+              <div class="track-lbl-dn">← 하선</div>
+              <div class="track-up"></div>
+              <div class="track-down"></div>
+              <div class="stations-row" id="stationsRow1"></div>
+              <div class="train-container" id="trainMarkers1"></div>
             </div>
-          </div>
-
-          <div class="map-section">
-            <div class="section-title">📍 [2구간] 샛강 ↔ 신논현</div>
-            <div class="map-scroll">
-              <div class="map-wrap" id="mapWrap2">
-                <div class="track-lbl-up">상행 →</div>
-                <div class="track-lbl-dn">← 하행</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow2"></div>
-                <div id="trainMarkers2"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="map-section">
-            <div class="section-title">📍 [3구간] 언주 ↔ 석촌</div>
-            <div class="map-scroll">
-              <div class="map-wrap" id="mapWrap3">
-                <div class="track-lbl-up">상행 →</div>
-                <div class="track-lbl-dn">← 하행</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow3"></div>
-                <div id="trainMarkers3"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="map-section">
-            <div class="section-title">📍 [4구간] 송파나루 ↔ 중앙보훈병원</div>
-            <div class="map-scroll">
-              <div class="map-wrap" id="mapWrap4">
-                <div class="track-lbl-up">상행 →</div>
-                <div class="track-lbl-dn">← 하행</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow4"></div>
-                <div id="trainMarkers4"></div>
-              </div>
+            <!-- SECTION 2: 언주 ~ 중앙보훈병원 -->
+            <div class="section-block" id="sec2">
+              <div class="section-title"> 언주 ── 중앙보훈병원 </div>
+              <div class="track-lbl-up">상선 →</div>
+              <div class="track-lbl-dn">← 하선</div>
+              <div class="track-up"></div>
+              <div class="track-down"></div>
+              <div class="stations-row" id="stationsRow2"></div>
+              <div class="train-container" id="trainMarkers2"></div>
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- PAGE 2: 간격 상세 -->
@@ -1389,53 +1362,69 @@
 
   <script>
     const STATIONS = [
-      { n: '개화', c: '9001', e: true }, { n: '김포공항', c: '9002', e: true }, { n: '공항시장', c: '9003', e: false },
+      { n: '개화', c: '9001', e: false }, { n: '김포공항', c: '9002', e: true }, { n: '공항시장', c: '9003', e: false },
       { n: '신방화', c: '9004', e: false }, { n: '마곡나루', c: '9005', e: true }, { n: '양천향교', c: '9006', e: false },
       { n: '가양', c: '9007', e: true }, { n: '증미', c: '9008', e: false }, { n: '등촌', c: '9009', e: false },
-      { n: '염창', c: '9010', e: false }, { n: '신목동', c: '9011', e: false }, { n: '선유도', c: '9012', e: false },
+      { n: '염창', c: '9010', e: true }, { n: '신목동', c: '9011', e: false }, { n: '선유도', c: '9012', e: false },
       { n: '당산', c: '9013', e: true }, { n: '국회의사당', c: '9014', e: false }, { n: '여의도', c: '9015', e: true },
       { n: '샛강', c: '9016', e: false }, { n: '노량진', c: '9017', e: true }, { n: '노들', c: '9018', e: false },
       { n: '흑석', c: '9019', e: false }, { n: '동작', c: '9020', e: true }, { n: '구반포', c: '9021', e: false },
       { n: '신반포', c: '9022', e: false }, { n: '고속터미널', c: '9023', e: true }, { n: '사평', c: '9024', e: false },
-      { n: '신논현', c: '9025', e: true }, { n: '언주', c: '9026', e: false }, { n: '선정릉', c: '9027', e: false },
-      { n: '삼성중앙', c: '9028', e: false }, { n: '봉은사', c: '9029', e: false }, { n: '종합운동장', c: '9030', e: true },
+      { n: '신논현', c: '9025', e: true }, { n: '언주', c: '9026', e: false }, { n: '선정릉', c: '9027', e: true },
+      { n: '삼성중앙', c: '9028', e: false }, { n: '봉은사', c: '9029', e: true }, { n: '종합운동장', c: '9030', e: true },
       { n: '삼전', c: '9031', e: false }, { n: '석촌고분', c: '9032', e: false }, { n: '석촌', c: '9033', e: true },
       { n: '송파나루', c: '9034', e: false }, { n: '한성백제', c: '9035', e: false }, { n: '올림픽공원', c: '9036', e: true },
       { n: '둔촌오륜', c: '9037', e: false }, { n: '중앙보훈병원', c: '9038', e: true }
     ];
 
-    const MY_TRAIN_NO_KEY = 'line9_my_train_no';
-    let MY_TRAIN_NO = localStorage.getItem(MY_TRAIN_NO_KEY) || '';
-
-    function getMyTrainNo() { return MY_TRAIN_NO; }
-    function isMyTrain(t) { return !!MY_TRAIN_NO && t.num === MY_TRAIN_NO; }
-
-    function promptMyTrainNo() {
-      const v = prompt('내 열차 번호 4자리를 입력하세요 (예: 9011)', MY_TRAIN_NO);
-      if (v === null) return;
-      MY_TRAIN_NO = v.trim();
-      localStorage.setItem(MY_TRAIN_NO_KEY, MY_TRAIN_NO);
-      renderMyTrainBadge();
-      renderMap();
-      updateGapPanel();
-    }
-
-    function renderMyTrainBadge() {
-      const el = document.getElementById('myTrainNoBadge');
-      if (el) el.textContent = MY_TRAIN_NO ? `#${MY_TRAIN_NO}` : '번호 설정';
-    }
-
+    const CUT_IDX = 24;
+    let MY_TRAIN_ID = null;
+    let MY_TRAIN_MANUAL = localStorage.getItem('myTrainNo') || '';
     let simTrains = [];
     let simTimer = null;
     const N = STATIONS.length;
 
+    function promptTrainNo() {
+      const v = window.prompt('지금 몰고 있는 열차번호를 입력하세요 (예: 9116)', MY_TRAIN_MANUAL);
+      if (v === null) return;
+      MY_TRAIN_MANUAL = v.trim();
+      localStorage.setItem('myTrainNo', MY_TRAIN_MANUAL);
+      updateMyTrainId();
+      renderMap();
+      updateGapPanel();
+    }
+
+    function updateMyTrainId() {
+      const badge = document.getElementById('myTrainBadge');
+      const statusEl = document.getElementById('myTrainStatus');
+
+      if (MY_TRAIN_MANUAL) {
+        MY_TRAIN_ID = String(MY_TRAIN_MANUAL).trim();
+        const found = simTrains.some(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+        if (badge) badge.textContent = `내 열차 ${MY_TRAIN_MANUAL}`;
+        if (statusEl) {
+          statusEl.textContent = found ? '실시간 위치 추적 중 ✓' : `⚠ 실시간 목록에 ${MY_TRAIN_MANUAL}호 없음`;
+        }
+      } else {
+        MY_TRAIN_ID = apiMode ? null : 'U1';
+        if (badge) badge.textContent = '내 열차 설정';
+        if (statusEl) statusEl.textContent = '"내 열차 설정"을 눌러 열차번호를 입력하세요';
+      }
+    }
+
     function initSim() {
       simTrains = [];
       [0, 4, 8, 12, 16, 20, 24, 28, 33].forEach((pos, i) => {
-        simTrains.push({ id: 'U' + (i + 1), dir: 'up', pos: pos, express: i % 3 === 0, num: `90${10 + i}`, speed: i % 3 === 0 ? .065 : .038 });
+        simTrains.push({
+          id: 'U' + (i + 1), dir: 'up', pos: pos + Math.random() * .5,
+          express: i % 3 === 0, num: `90${10 + i}`, speed: i % 3 === 0 ? .065 : .038
+        });
       });
       [2, 6, 10, 14, 18, 22, 26, 30, 35].forEach((pos, i) => {
-        simTrains.push({ id: 'D' + (i + 1), dir: 'down', pos: pos, express: i % 3 === 0, num: `91${10 + i}`, speed: i % 3 === 0 ? .065 : .038 });
+        simTrains.push({
+          id: 'D' + (i + 1), dir: 'down', pos: pos + Math.random() * .5,
+          express: i % 3 === 0, num: `91${10 + i}`, speed: i % 3 === 0 ? .065 : .038
+        });
       });
     }
 
@@ -1451,131 +1440,92 @@
       });
       renderMap();
       updateGapPanel();
+      if (document.getElementById('gapPage').classList.contains('active')) renderGapPage();
       document.getElementById('lastUpd').textContent = '갱신: ' + new Date().toLocaleTimeString('ko-KR');
     }
 
     function renderStations() {
-      const s1 = STATIONS.slice(0, 15);
-      const s2 = STATIONS.slice(14, 25);
-      const s3 = STATIONS.slice(25, 33);
-      const s4 = STATIONS.slice(32);
-
-      document.getElementById('stationsRow1').innerHTML = s1.map((s, i) => `
+      const makeHtml = (s, i) => `
     <div class="stn ${s.e ? 'express' : ''}" id="stn_${i}">
       <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
-      <div class="stn-circle"></div>
-    </div>`).join('');
+      <div class="stn-icon">&nbsp;</div>
+      <div class="stn-circle up"></div>
+      <div class="stn-bottom"></div>
+      <div class="stn-circle down"></div>
+      <div class="stn-name-down ${s.e ? 'express' : ''}">${s.n}</div>
+    </div>`;
 
-      document.getElementById('stationsRow2').innerHTML = s2.map((s, i) => `
-    <div class="stn ${s.e ? 'express' : ''}" id="stn_${i + 14}">
-      <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
-      <div class="stn-circle"></div>
-    </div>`).join('');
-
-      document.getElementById('stationsRow3').innerHTML = s3.map((s, i) => `
-    <div class="stn ${s.e ? 'express' : ''}" id="stn_${i + 25}">
-      <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
-      <div class="stn-circle"></div>
-    </div>`).join('');
-
-      document.getElementById('stationsRow4').innerHTML = s4.map((s, i) => `
-    <div class="stn ${s.e ? 'express' : ''}" id="stn_${i + 32}">
-      <div class="stn-name ${s.e ? 'express' : ''}">${s.n}</div>
-      <div class="stn-circle"></div>
-    </div>`).join('');
+      document.getElementById('stationsRow1').innerHTML = STATIONS.slice(0, CUT_IDX + 1).map((s, i) => makeHtml(s, i)).join('');
+      document.getElementById('stationsRow2').innerHTML = STATIONS.slice(CUT_IDX + 1).map((s, i) => makeHtml(s, i + CUT_IDX + 1)).join('');
     }
 
-    function getSectionInfo(idx) {
-      if (idx <= 14) return { id: 1, offset: 0 };
-      if (idx <= 24) return { id: 2, offset: 14 };
-      if (idx <= 32) return { id: 3, offset: 25 };
-      return { id: 4, offset: 32 };
-    }
-
-    function getStationX(idx) {
-      const info = getSectionInfo(idx);
-      const wrap = document.getElementById(`mapWrap${info.id}`);
-      const node = document.getElementById(`stn_${idx}`);
-      if (!node || !wrap) return 0;
-      const wr = wrap.getBoundingClientRect();
-      const nr = node.getBoundingClientRect();
-      return nr.left - wr.left + nr.width / 2;
+    function getStationX(secIdx, stnIdx) {
+      const sec = document.getElementById('sec' + secIdx);
+      const nodes = sec.querySelectorAll('.stn');
+      const relIdx = secIdx === 1 ? stnIdx : stnIdx - (CUT_IDX + 1);
+      if (!nodes[relIdx]) return 0;
+      const sr = sec.getBoundingClientRect();
+      const nr = nodes[relIdx].getBoundingClientRect();
+      return nr.left - sr.left + nr.width / 2;
     }
 
     function renderMap() {
       const m1 = document.getElementById('trainMarkers1');
       const m2 = document.getElementById('trainMarkers2');
-      const m3 = document.getElementById('trainMarkers3');
-      const m4 = document.getElementById('trainMarkers4');
-      if (!m1 || !m2 || !m3 || !m4) return;
-      m1.innerHTML = '';
-      m2.innerHTML = '';
-      m3.innerHTML = '';
-      m4.innerHTML = '';
+      m1.innerHTML = ''; m2.innerHTML = '';
 
       simTrains.forEach(t => {
-        const idx = Math.floor(t.pos);
-        const info = getSectionInfo(idx);
-        let targetContainer = m1;
-        if (info.id === 2) targetContainer = m2;
-        else if (info.id === 3) targetContainer = m3;
-        else if (info.id === 4) targetContainer = m4;
-
         const idxF = Math.floor(t.pos);
         const idxC = Math.min(idxF + 1, N - 1);
+        const secIdx = idxF <= CUT_IDX ? 1 : 2;
+
+        if (secIdx === 1 && idxC > CUT_IDX) return;
+
         const frac = t.pos - idxF;
-        const x = getStationX(idxF) + (getStationX(idxC) - getStationX(idxF)) * frac;
-
+        const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
         const isUp = t.dir === 'up';
-        const topPx = isUp ? 58 : 110;
-        const isMy = isMyTrain(t);
-
-        let destName = isUp ? '중앙보훈병원' : (t.express ? '김포공항' : '개화');
-        let typeTxt = t.express ? '급행' : '일반';
+        const topPx = isUp ? 80 : 180;
+        const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
 
         const div = document.createElement('div');
-        div.className = `train-marker ${isMy ? 'blink-my-train' : ''}`;
-        div.style.left = (x - 18) + 'px';
+        div.className = 'train-marker';
+        div.style.left = x + 'px';
         div.style.top = topPx + 'px';
-
         div.innerHTML = `
       <div class="train-body ${isUp ? 'up' : 'down'} ${t.express ? 'express-t' : ''} ${isMy ? 'my' : ''}">
-        ${isUp ? '▶' : '◀'} ${t.num} (${typeTxt})
+        ${t.express ? '급행' : '일반'}
       </div>
-      <div class="train-dest">${destName}행</div>`;
+      <div class="train-num ${isMy ? 'my' : ''}">${isMy ? '🚇' + t.num : t.num}</div>`;
 
-        targetContainer.appendChild(div);
+        if (secIdx === 1) m1.appendChild(div);
+        else m2.appendChild(div);
       });
     }
 
     function calcGaps(myTrain) {
       const myPos = myTrain.pos;
       const myDir = myTrain.dir;
-      const sameDir = simTrains.filter(t => t !== myTrain && t.dir === myDir);
+      const sameDir = simTrains.filter(t => String(t.id).trim() !== String(myTrain.id).trim() && t.dir === myDir);
 
       let realFront = null, realFrontD = Infinity;
       let realRear = null, realRearD = Infinity;
 
       sameDir.forEach(t => {
+        let dFront, dRear;
         if (myDir === 'up') {
-          let d = t.pos - myPos; if (d <= 0) d += N;
-          if (d < N / 2 && d < realFrontD) { realFrontD = d; realFront = t; }
-          let dr = myPos - t.pos; if (dr <= 0) dr += N;
-          if (dr < N / 2 && dr < realRearD) { realRearD = dr; realRear = t; }
+          dFront = t.pos - myPos; if (dFront <= 0) dFront += N;
+          dRear = myPos - t.pos; if (dRear <= 0) dRear += N;
         } else {
-          let d = myPos - t.pos; if (d <= 0) d += N;
-          if (d < N / 2 && d < realFrontD) { realFrontD = d; realFront = t; }
-          let dr = t.pos - myPos; if (dr <= 0) dr += N;
-          if (dr < N / 2 && dr < realRearD) { realRearD = dr; realRear = t; }
+          dFront = myPos - t.pos; if (dFront <= 0) dFront += N;
+          dRear = t.pos - myPos; if (dRear <= 0) dRear += N;
         }
+        if (dFront < realFrontD) { realFrontD = dFront; realFront = t; }
+        if (dRear < realRearD) { realRearD = dRear; realRear = t; }
       });
 
-      function distToTime(d) { return Math.round(d / 0.04 * 0.8); }
-      function distToStations(d) { return Math.max(0, Math.round(d)); }
-
       return {
-        front: realFront ? { train: realFront, sec: distToTime(realFrontD), stns: distToStations(realFrontD) } : null,
-        rear: realRear ? { train: realRear, sec: distToTime(realRearD), stns: distToStations(realRearD) } : null
+        front: realFront ? { train: realFront, sec: Math.round(realFrontD * 120), stns: Math.max(0, Math.round(realFrontD)) } : null,
+        rear: realRear ? { train: realRear, sec: Math.round(realRearD * 120), stns: Math.max(0, Math.round(realRearD)) } : null
       };
     }
 
@@ -1585,55 +1535,97 @@
       return s > 0 ? `${m}분${s}초` : `${m}분`;
     }
 
-    function updateGapPanel() {
-      renderMyTrainBadge();
-      const my = simTrains.find(t => isMyTrain(t));
+    function timeClass(sec) {
+      if (sec < 90) return 'warn';
+      if (sec < 180) return 'caution';
+      return 'ok';
+    }
 
-      if (!my) {
-        document.getElementById('myStnName').textContent = MY_TRAIN_NO ? '열차 미운행' : '번호 설정 필요';
-        document.getElementById('frontNum').textContent = '--';
-        document.getElementById('rearNum').textContent = '--';
+    function updateGapPanel() {
+      const els = ['myTrainNo', 'myStnName', 'frontTrainNo', 'frontTime', 'frontStn', 'frontStns', 'rearTrainNo', 'rearTime', 'rearStn', 'rearStns'];
+      if (!MY_TRAIN_ID) {
+        els.forEach(id => document.getElementById(id).textContent = id.includes('No') || id.includes('Time') || id.includes('Stn') ? '----' : '미설정');
         return;
       }
 
-      const myIdx = Math.min(Math.round(my.pos), N - 1);
-      document.getElementById('myStnName').textContent = `[${my.num}] ${STATIONS[myIdx].n}역`;
+      const my = simTrains.find(t => String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+      if (!my) {
+        document.getElementById('myTrainNo').textContent = MY_TRAIN_ID;
+        document.getElementById('myStnName').textContent = '미운행';
+        return;
+      }
+
+      document.getElementById('myTrainNo').textContent = my.num || my.id || MY_TRAIN_ID;
+      document.getElementById('myStnName').textContent = STATIONS[Math.min(Math.round(my.pos), N - 1)].n;
 
       const g = calcGaps(my);
 
       if (g.front) {
-        document.getElementById('frontNum').textContent = `#${g.front.train.num} (${g.front.train.express ? '급행' : '일반'})`;
+        const cls = timeClass(g.front.sec);
+        document.getElementById('frontTrainNo').textContent = g.front.train.num || g.front.train.id;
+        document.getElementById('frontBox').className = 'gap-box ' + cls;
+        document.getElementById('frontTime').className = 'gap-time ' + cls;
         document.getElementById('frontTime').textContent = secToStr(g.front.sec);
-        document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n + '역';
+        document.getElementById('frontStn').textContent = STATIONS[Math.min(Math.round(g.front.train.pos), N - 1)].n;
         document.getElementById('frontStns').textContent = g.front.stns + '역 앞';
         document.getElementById('sumFront').textContent = secToStr(g.front.sec);
-      } else {
-        document.getElementById('frontNum').textContent = '선행 없음';
+        document.getElementById('sumFront').className = 's-val ' + cls;
       }
-
       if (g.rear) {
-        document.getElementById('rearNum').textContent = `#${g.rear.train.num} (${g.rear.train.express ? '급행' : '일반'})`;
+        const cls = timeClass(g.rear.sec);
+        document.getElementById('rearTrainNo').textContent = g.rear.train.num || g.rear.train.id;
+        document.getElementById('rearBox').className = 'gap-box ' + cls;
+        document.getElementById('rearTime').className = 'gap-time ' + cls;
         document.getElementById('rearTime').textContent = secToStr(g.rear.sec);
-        document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n + '역';
+        document.getElementById('rearStn').textContent = STATIONS[Math.min(Math.round(g.rear.train.pos), N - 1)].n;
         document.getElementById('rearStns').textContent = g.rear.stns + '역 뒤';
         document.getElementById('sumRear').textContent = secToStr(g.rear.sec);
+        document.getElementById('sumRear').className = 's-val blue';
+      }
+    }
+
+    function renderGapPage() {
+      const list = document.getElementById('gapList');
+      const warnBar = document.getElementById('gapWarnBar');
+      let warnCount = 0;
+
+      list.innerHTML = simTrains.map(t => {
+        const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+        const g = calcGaps(t);
+        const fSec = g.front ? g.front.sec : 999;
+        const rSec = g.rear ? g.rear.sec : 999;
+        const fStns = g.front ? g.front.stns : 0;
+
+        if (fSec < 90 || rSec < 90) warnCount++;
+
+        return `<div class="gap-train-card" style="${isMy ? 'border:2px solid var(--gold);background:var(--gold-bg);' : ''}">
+      <div class="gtc-head">
+        <div class="gtc-num">${isMy ? '🚇 내 열차 — ' : ''}${t.num}호 (${STATIONS[Math.min(Math.round(t.pos), N - 1)].n})</div>
+        <span class="gtc-type ${t.dir} ${t.express ? 'express' : ''}">${t.dir === 'up' ? '상행' : '하행'}${t.express ? ' 급행' : ' 일반'}</span>
+      </div>
+      <div class="gap-metrics">
+        <div class="gm-box">
+          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fSec >= 999 ? '-' : secToStr(fSec)}</div>
+          <div class="gm-lab">전방 시간</div>
+        </div>
+        <div class="gm-box">
+          <div class="gm-val" style="color:${fSec < 90 ? 'var(--red)' : fSec < 180 ? 'var(--orange)' : 'var(--green)'}">${fSec >= 999 ? '-' : fStns + '역'}</div>
+          <div class="gm-lab">전방 간격</div>
+        </div>
+        <div class="gm-box">
+          <div class="gm-val" style="color:var(--down)">${rSec >= 999 ? '-' : secToStr(rSec)}</div>
+          <div class="gm-lab">후방 시간</div>
+        </div>
+      </div>
+    </div>`;
+      }).join('');
+
+      if (warnCount > 0) {
+        warnBar.classList.add('show');
+        document.getElementById('gapWarnMsg').textContent = `간격 주의 열차 ${warnCount}대 — 90초 미만 근접 운행`;
       } else {
-        document.getElementById('rearNum').textContent = '후속 없음';
+        warnBar.classList.remove('show');
       }
-    }
-
-    async function refreshRealMode() {
-      const payload = await fetchRealTrains();
-      if (payload && payload.trains) {
-        simTrains = payload.trains;
-        renderMap();
-        updateGapPanel();
-      }
-    }
-
-    function startRealMode() {
-      refreshRealMode();
-      setInterval(refreshRealMode, 30000);
     }
 
     const DIA_MAP = {
