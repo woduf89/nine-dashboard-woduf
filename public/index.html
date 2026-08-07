@@ -9,8 +9,9 @@
   <style>
     :root {
       --gold: #C8A600;
+      --gold-bright: #FFD700;
       --gold-dim: #8a7200;
-      --gold-bg: rgba(200, 166, 0, .13);
+      --gold-bg: rgba(200, 166, 0, .18);
       --up: #C8A600;
       --down: #4A9EE8;
       --bg: #0b0f14;
@@ -187,11 +188,56 @@
       background: var(--bg)
     }
 
+    /* 🔴 [개선 1] 지시 및 특이사항 배너 최상단 배치 및 대폭 강조 🔴 */
+    .map-notes-banner {
+      margin: 12px 14px 6px;
+      background: #1e1b10;
+      border: 2px solid var(--gold-bright);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(200, 166, 0, 0.25);
+    }
+
+    .map-note-item {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #ffffff;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .map-note-item.drive-inst {
+      border-left: 4px solid var(--gold-bright);
+      padding-left: 10px;
+    }
+
+    .map-note-item.mainline-issue {
+      border-left: 4px solid var(--red);
+      padding-left: 10px;
+    }
+
+    .map-note-item strong {
+      font-size: 14px;
+      font-weight: 900;
+      margin-right: 6px;
+    }
+
+    .map-note-item.drive-inst strong {
+      color: var(--gold-bright);
+    }
+
+    .map-note-item.mainline-issue strong {
+      color: #ff6b6b;
+    }
+
     .summary-strip {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 8px;
-      padding: 12px 14px 0
+      padding: 8px 14px 0
     }
 
     .s-card {
@@ -338,18 +384,23 @@
       text-align: center
     }
 
+    /* 🔴 [개선 2] 명확하고 가시성 높은 범례(Legend) 🔴 */
     .legend {
       display: flex;
       gap: 12px;
-      padding: 10px 14px 4px;
+      padding: 12px 14px 6px;
       flex-wrap: wrap;
-      align-items: center
+      align-items: center;
+      background: var(--bg2);
+      margin: 10px 14px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--bg4);
     }
 
     .li {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-size: 11px;
       color: var(--txt);
       font-weight: bold
@@ -361,42 +412,16 @@
       border-radius: 2px
     }
 
-    /* 노선도 상단 지시/특이사항 표출 배너 */
-    .map-notes-banner {
-      margin: 6px 14px 10px;
-      background: var(--bg2);
-      border: 1px solid var(--gold-dim);
-      border-radius: var(--radius-sm);
-      padding: 10px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .map-note-item {
-      font-size: 11px;
-      line-height: 1.4;
-      color: var(--txt);
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
-
-    .map-note-item strong {
-      color: var(--gold);
-      margin-right: 4px;
-    }
-
     .map-scroll {
       overflow-x: auto;
       padding: 8px 0 20px;
       -webkit-overflow-scrolling: touch
     }
 
-    /* 4단 모바일 최적화 레이아웃 (최소 너비 조정) */
     .map-wrap {
       position: relative;
       padding: 10px 20px;
-      min-width: 680px;
+      min-width: 720px;
     }
 
     .section-block {
@@ -481,12 +506,13 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 44px;
+      width: 46px;
       cursor: pointer
     }
 
+    /* 🔴 [개선 3] 시각적 위계(Visual Hierarchy) 적용된 역명 및 서식 🔴 */
     .stn-name {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--txt2);
       text-align: center;
       line-height: 1.2;
@@ -496,36 +522,41 @@
       justify-content: center;
       margin-bottom: 8px;
       word-break: keep-all;
-      font-weight: bold
+      font-weight: 600;
+      transition: all 0.2s;
     }
 
     .stn-name.express {
-      color: var(--red);
+      color: #ff5252;
       font-weight: 900;
-      font-size: 13px
+      font-size: 13px;
+      text-shadow: 0 0 6px rgba(255, 82, 82, 0.4);
     }
 
     .stn-name-down {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--txt2);
       text-align: center;
       line-height: 1.2;
       margin-top: 88px;
       word-break: keep-all;
-      font-weight: bold;
+      font-weight: 600;
+      transition: all 0.2s;
     }
 
     .stn-name-down.express {
-      color: var(--red);
+      color: #ff5252;
       font-weight: 900;
       font-size: 13px;
+      text-shadow: 0 0 6px rgba(255, 82, 82, 0.4);
     }
 
+    /* 🔴 [개선 4] 급행역/일반역 심볼 크기 및 디자인 대폭 차별화 🔴 */
     .stn-circle {
-      width: 18px;
-      height: 18px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
-      background: var(--bg);
+      background: var(--bg2);
       border: 3px solid var(--gold);
       margin: 0 auto;
       position: absolute;
@@ -534,16 +565,27 @@
     }
 
     .stn-circle.up {
-      top: 82px;
+      top: 84px;
     }
 
     .stn-circle.down {
-      top: 179px;
+      top: 181px;
     }
 
     .stn.express .stn-circle {
+      width: 22px;
+      height: 22px;
       background: var(--red);
-      border-color: #fff;
+      border: 3.5px solid #ffffff;
+      box-shadow: 0 0 8px rgba(240, 78, 78, 0.8);
+    }
+
+    .stn.express .stn-circle.up {
+      top: 80px;
+    }
+
+    .stn.express .stn-circle.down {
+      top: 177px;
     }
 
     .stn-icon {
@@ -1271,6 +1313,13 @@
 
       <!-- PAGE 1: 실시간 노선도 -->
       <div class="page active" id="mapPage">
+
+        <!-- 🔴 [위치 변경] 지시 및 특이사항 실시간 표출 배너 (최상단 배치 및 대폭 확장) 🔴 -->
+        <div class="map-notes-banner" id="mapNotesBanner" style="display: none;">
+          <div class="map-note-item drive-inst" id="mapDriveInstruction" style="display: none;"></div>
+          <div class="map-note-item mainline-issue" id="mapMainlineIssue" style="display: none;"></div>
+        </div>
+
         <!-- 요약 카드 -->
         <div class="summary-strip">
           <div class="s-card">
@@ -1321,7 +1370,7 @@
           </div>
         </div>
 
-        <!-- 범례 -->
+        <!-- 범례 (디자인 개선) -->
         <div class="legend">
           <div class="li">
             <div class="lb" style="background:var(--up)"></div>상행(개화방면)
@@ -1333,16 +1382,10 @@
             <div class="lb" style="background:var(--red)"></div>급행열차
           </div>
           <div class="li">
-            <div style="width:12px;height:12px;border-radius:50%;background:var(--red);border:1px solid #fff"></div>
+            <div style="width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid #fff"></div>
             급행정차역
           </div>
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
-        </div>
-
-        <!-- 지시 및 특이사항 실시간 표출 배너 영역 -->
-        <div class="map-notes-banner" id="mapNotesBanner" style="display: none;">
-          <div class="map-note-item" id="mapDriveInstruction" style="display: none;"></div>
-          <div class="map-note-item" id="mapMainlineIssue" style="display: none;"></div>
         </div>
 
         <!-- 4단 모바일 최적화 가시성 노선도 -->
@@ -1524,12 +1567,7 @@
       { n: '둔촌오륜', c: '9037', e: false }, { n: '중앙보훈병원', c: '9038', e: true }
     ];
 
-    /* 4단 분할 인덱스 정의 (0-based)
-       구간 1: 개화(0) ~ 여의도(14) [총 15개]
-       구간 2: 샛강(15) ~ 신논현(24) [총 10개]
-       구간 3: 언주(25) ~ 석촌(32) [총 8개]
-       구간 4: 송파나루(33) ~ 중앙보훈병원(37) [총 5개]
-    */
+    /* 4단 분할 인덱스 정의 */
     const CUT1_IDX = 14;
     const CUT2_IDX = 24;
     const CUT3_IDX = 32;
@@ -1649,7 +1687,6 @@
         else if (idxF > CUT2_IDX) secIdx = 3;
         else if (idxF > CUT1_IDX) secIdx = 2;
 
-        // 경계선 이탈 예방 처리
         if (secIdx === 1 && idxC > CUT1_IDX) return;
         if (secIdx === 2 && idxC > CUT2_IDX) return;
         if (secIdx === 3 && idxC > CUT3_IDX) return;
@@ -1657,7 +1694,7 @@
         const frac = t.pos - idxF;
         const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
         const isUp = t.dir === 'up';
-        const topPx = isUp ? 80 : 180;
+        const topPx = isUp ? 78 : 178;
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
 
         const div = document.createElement('div');
@@ -1951,6 +1988,7 @@
       }
     }
 
+    /* 🔴 [개선 5] 배너의 가독성을 확 높인 실시간 업데이트 함수 🔴 */
     function updateMapNotesDisplay(instText, issueText) {
       const banner = document.getElementById('mapNotesBanner');
       const instEl = document.getElementById('mapDriveInstruction');
