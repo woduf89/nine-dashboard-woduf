@@ -109,15 +109,8 @@
     }
 
     @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .3
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: .3 }
     }
 
     /* ── 탭 바 ── */
@@ -188,7 +181,6 @@
       background: var(--bg)
     }
 
-    /* 🔴 [개선 1] 지시 및 특이사항 배너 최상단 배치 및 대폭 강조 🔴 */
     .map-notes-banner {
       margin: 12px 14px 6px;
       background: #1e1b10;
@@ -254,17 +246,9 @@
       color: var(--gold)
     }
 
-    .s-val.green {
-      color: var(--green)
-    }
-
-    .s-val.red {
-      color: var(--red)
-    }
-
-    .s-val.blue {
-      color: var(--down)
-    }
+    .s-val.green { color: var(--green) }
+    .s-val.red { color: var(--red) }
+    .s-val.blue { color: var(--down) }
 
     .s-label {
       font-size: 10px;
@@ -306,17 +290,9 @@
       border: 1px solid var(--bg4)
     }
 
-    .gap-box.warn {
-      border-color: var(--red)
-    }
-
-    .gap-box.caution {
-      border-color: var(--orange)
-    }
-
-    .gap-box.ok {
-      border-color: var(--green)
-    }
+    .gap-box.warn { border-color: var(--red) }
+    .gap-box.caution { border-color: var(--orange) }
+    .gap-box.ok { border-color: var(--green) }
 
     .gap-dir {
       font-size: 10px;
@@ -331,17 +307,9 @@
       line-height: 1
     }
 
-    .gap-time.warn {
-      color: var(--red)
-    }
-
-    .gap-time.caution {
-      color: var(--orange)
-    }
-
-    .gap-time.ok {
-      color: var(--green)
-    }
+    .gap-time.warn { color: var(--red) }
+    .gap-time.caution { color: var(--orange) }
+    .gap-time.ok { color: var(--green) }
 
     .gap-stn {
       font-size: 12px;
@@ -384,7 +352,6 @@
       text-align: center
     }
 
-    /* 🔴 [개선 2] 명확하고 가시성 높은 범례(Legend) 🔴 */
     .legend {
       display: flex;
       gap: 12px;
@@ -412,25 +379,98 @@
       border-radius: 2px
     }
 
-    .map-scroll {
-      overflow-x: auto;
-      padding: 8px 0 20px;
-      -webkit-overflow-scrolling: touch
+    /* ── 노선도 슬라이더 컨트롤 스타일 ── */
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 8px 12px;
+      background: var(--bg2);
+      margin: 10px 14px 0;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--bg4);
     }
 
-    .map-wrap {
-      position: relative;
-      padding: 10px 20px;
-      min-width: 720px;
+    .slider-nav-btn {
+      background: var(--bg3);
+      border: 1px solid var(--bg4);
+      color: var(--gold);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .slider-nav-btn:active {
+      background: var(--bg4);
+    }
+
+    .slider-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+    }
+
+    .sec-tab-group {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .sec-tab-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sec-tab {
+      background: var(--bg3);
+      border: 1px solid var(--bg4);
+      color: var(--txt2);
+      padding: 5px 10px;
+      border-radius: 14px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .sec-tab.active {
+      background: var(--gold-bg);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* ── 노선도 슬라이더 트랙 ── */
+    .map-slider-viewport {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .map-slider-track {
+      display: flex;
+      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+    }
+
+    .section-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      overflow-x: auto;
+      padding: 8px 0 20px;
+      -webkit-overflow-scrolling: touch;
     }
 
     .section-block {
       position: relative;
-      margin-bottom: 35px
-    }
-
-    .section-block:last-child {
-      margin-bottom: 10px
+      padding: 10px 20px;
+      min-width: 720px; /* 역명이 포개지지 않는 최적 너비 */
+      margin-bottom: 0;
     }
 
     .section-title {
@@ -510,7 +550,6 @@
       cursor: pointer
     }
 
-    /* 🔴 [개선 3] 시각적 위계(Visual Hierarchy) 적용된 역명 및 서식 🔴 */
     .stn-name {
       font-size: 11px;
       color: var(--txt2);
@@ -551,7 +590,6 @@
       text-shadow: 0 0 6px rgba(255, 82, 82, 0.4);
     }
 
-    /* 🔴 [개선 4] 급행역/일반역 심볼 크기 및 디자인 대폭 차별화 🔴 */
     .stn-circle {
       width: 14px;
       height: 14px;
@@ -564,13 +602,8 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, .8);
     }
 
-    .stn-circle.up {
-      top: 84px;
-    }
-
-    .stn-circle.down {
-      top: 181px;
-    }
+    .stn-circle.up { top: 84px; }
+    .stn-circle.down { top: 181px; }
 
     .stn.express .stn-circle {
       width: 22px;
@@ -580,22 +613,15 @@
       box-shadow: 0 0 8px rgba(240, 78, 78, 0.8);
     }
 
-    .stn.express .stn-circle.up {
-      top: 80px;
-    }
-
-    .stn.express .stn-circle.down {
-      top: 177px;
-    }
+    .stn.express .stn-circle.up { top: 80px; }
+    .stn.express .stn-circle.down { top: 177px; }
 
     .stn-icon {
       font-size: 11px;
       margin-bottom: 2px
     }
 
-    .stn-bottom {
-      height: 78px
-    }
+    .stn-bottom { height: 78px }
 
     .train-marker {
       position: absolute;
@@ -641,13 +667,8 @@
     }
 
     @keyframes myPulse {
-      0% {
-        transform: scale(1);
-      }
-
-      100% {
-        transform: scale(1.25);
-      }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.25); }
     }
 
     .train-num {
@@ -764,9 +785,7 @@
       font-weight: bold
     }
 
-    .gap-warn-bar.show {
-      display: flex
-    }
+    .gap-warn-bar.show { display: flex }
 
     /* PAGE 3 — 운행 다이아 */
     #diaPage {
@@ -830,10 +849,7 @@
       background-position: right 10px center;
     }
 
-    .dia-dropdown:focus {
-      border-color: var(--gold);
-    }
-
+    .dia-dropdown:focus { border-color: var(--gold); }
     .dia-dropdown:disabled {
       opacity: 0.4;
       cursor: not-allowed;
@@ -853,9 +869,7 @@
       transition: background 0.2s;
     }
 
-    .dia-btn:active {
-      background: var(--gold-dim);
-    }
+    .dia-btn:active { background: var(--gold-dim); }
 
     /* PAGE — 지시/특이사항 */
     #notePage {
@@ -900,9 +914,7 @@
       font-family: inherit;
     }
 
-    .note-textarea:focus {
-      border-color: var(--gold);
-    }
+    .note-textarea:focus { border-color: var(--gold); }
 
     .note-btn-group {
       display: flex;
@@ -928,9 +940,7 @@
     }
 
     /* PAGE 4 — PDF 매뉴얼 */
-    #pdfPage {
-      background: var(--bg);
-    }
+    #pdfPage { background: var(--bg); }
 
     .pdf-toolbar {
       background: var(--bg2);
@@ -956,13 +966,8 @@
       outline: none
     }
 
-    .pdf-search:focus {
-      border-color: var(--gold)
-    }
-
-    .pdf-search::placeholder {
-      color: var(--txt3)
-    }
+    .pdf-search:focus { border-color: var(--gold) }
+    .pdf-search::placeholder { color: var(--txt3) }
 
     .search-btn {
       background: var(--gold);
@@ -985,9 +990,7 @@
       padding-bottom: 2px
     }
 
-    .pdf-file-tabs::-webkit-scrollbar {
-      display: none
-    }
+    .pdf-file-tabs::-webkit-scrollbar { display: none }
 
     .pdf-ftab {
       background: var(--bg3);
@@ -1044,9 +1047,7 @@
       transition: border-color .2s
     }
 
-    .result-card:active {
-      border-color: var(--gold)
-    }
+    .result-card:active { border-color: var(--gold) }
 
     .rc-head {
       display: flex;
@@ -1119,9 +1120,7 @@
       flex-direction: column;
     }
 
-    .pdf-viewer-wrap.show {
-      display: flex !important;
-    }
+    .pdf-viewer-wrap.show { display: flex !important; }
 
     .pdf-viewer-header {
       background: var(--bg2);
@@ -1206,9 +1205,7 @@
       z-index: 200;
     }
 
-    .loading-overlay.show {
-      display: flex !important;
-    }
+    .loading-overlay.show { display: flex !important; }
 
     .loading-box {
       background: var(--bg2);
@@ -1229,9 +1226,7 @@
     }
 
     @keyframes spin {
-      to {
-        transform: rotate(360deg)
-      }
+      to { transform: rotate(360deg) }
     }
 
     ::-webkit-scrollbar {
@@ -1239,18 +1234,14 @@
       height: 6px
     }
 
-    ::-webkit-scrollbar-track {
-      background: transparent
-    }
+    ::-webkit-scrollbar-track { background: transparent }
 
     ::-webkit-scrollbar-thumb {
       background: var(--bg4);
       border-radius: 3px
     }
 
-    #pdfUpload {
-      display: none
-    }
+    #pdfUpload { display: none }
 
     .no-results {
       padding: 20px;
@@ -1311,10 +1302,10 @@
     <!-- 페이지 영역 -->
     <div id="pages">
 
-      <!-- PAGE 1: 실시간 노선도 -->
+      <!-- PAGE 1: 실시간 노선도 (슬라이드 전환 개편) -->
       <div class="page active" id="mapPage">
 
-        <!-- 🔴 [위치 변경] 지시 및 특이사항 실시간 표출 배너 (최상단 배치 및 대폭 확장) 🔴 -->
+        <!-- 지시 및 특이사항 실시간 표출 배너 -->
         <div class="map-notes-banner" id="mapNotesBanner" style="display: none;">
           <div class="map-note-item drive-inst" id="mapDriveInstruction" style="display: none;"></div>
           <div class="map-note-item mainline-issue" id="mapMainlineIssue" style="display: none;"></div>
@@ -1370,7 +1361,7 @@
           </div>
         </div>
 
-        <!-- 범례 (디자인 개선) -->
+        <!-- 범례 -->
         <div class="legend">
           <div class="li">
             <div class="lb" style="background:var(--up)"></div>상행(개화방면)
@@ -1388,51 +1379,75 @@
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <!-- 4단 모바일 최적화 가시성 노선도 -->
-        <div class="map-scroll">
-          <div class="map-wrap" id="mapWrap">
-            <!-- SECTION 1: 개화 ~ 여의도 (역 15개) -->
-            <div class="section-block" id="sec1">
-              <div class="section-title"> 개화 ── 여의도 </div>
-              <div class="track-lbl-up">상선 →</div>
-              <div class="track-lbl-dn">← 하선</div>
-              <div class="track-up"></div>
-              <div class="track-down"></div>
-              <div class="stations-row" id="stationsRow1"></div>
-              <div class="train-container" id="trainMarkers1"></div>
+        <!-- 🔴 [신규] 4개 구간 슬라이더 내비게이션 바 🔴 -->
+        <div class="slider-nav">
+          <button class="slider-nav-btn" id="prevSecBtn" onclick="moveSlide(-1)" disabled>◀ 이전</button>
+          <div class="sec-tab-group">
+            <button class="sec-tab active" onclick="goToSlide(0)">1. 개화~여의도</button>
+            <button class="sec-tab" onclick="goToSlide(1)">2. 샛강~신논현</button>
+            <button class="sec-tab" onclick="goToSlide(2)">3. 언주~석촌</button>
+            <button class="sec-tab" onclick="goToSlide(3)">4. 송파~보훈</button>
+          </div>
+          <button class="slider-nav-btn" id="nextSecBtn" onclick="moveSlide(1)">다음 ▶</button>
+        </div>
+
+        <!-- 🔴 [신규] 슬라이더 트랙 컨테이너 🔴 -->
+        <div class="map-slider-viewport">
+          <div class="map-slider-track" id="mapSliderTrack">
+            <!-- SLIDE 1: 개화 ~ 여의도 (역 15개) -->
+            <div class="section-slide">
+              <div class="section-block" id="sec1">
+                <div class="section-title"> 개화 ── 여의도 </div>
+                <div class="track-lbl-up">상선 →</div>
+                <div class="track-lbl-dn">← 하선</div>
+                <div class="track-up"></div>
+                <div class="track-down"></div>
+                <div class="stations-row" id="stationsRow1"></div>
+                <div class="train-container" id="trainMarkers1"></div>
+              </div>
             </div>
-            <!-- SECTION 2: 샛강 ~ 신논현 (역 10개) -->
-            <div class="section-block" id="sec2">
-              <div class="section-title"> 샛강 ── 신논현 </div>
-              <div class="track-lbl-up">상선 →</div>
-              <div class="track-lbl-dn">← 하선</div>
-              <div class="track-up"></div>
-              <div class="track-down"></div>
-              <div class="stations-row" id="stationsRow2"></div>
-              <div class="train-container" id="trainMarkers2"></div>
+
+            <!-- SLIDE 2: 샛강 ~ 신논현 (역 10개) -->
+            <div class="section-slide">
+              <div class="section-block" id="sec2">
+                <div class="section-title"> 샛강 ── 신논현 </div>
+                <div class="track-lbl-up">상선 →</div>
+                <div class="track-lbl-dn">← 하선</div>
+                <div class="track-up"></div>
+                <div class="track-down"></div>
+                <div class="stations-row" id="stationsRow2"></div>
+                <div class="train-container" id="trainMarkers2"></div>
+              </div>
             </div>
-            <!-- SECTION 3: 언주 ~ 석촌 (역 8개) -->
-            <div class="section-block" id="sec3">
-              <div class="section-title"> 언주 ── 석촌 </div>
-              <div class="track-lbl-up">상선 →</div>
-              <div class="track-lbl-dn">← 하선</div>
-              <div class="track-up"></div>
-              <div class="track-down"></div>
-              <div class="stations-row" id="stationsRow3"></div>
-              <div class="train-container" id="trainMarkers3"></div>
+
+            <!-- SLIDE 3: 언주 ~ 석촌 (역 8개) -->
+            <div class="section-slide">
+              <div class="section-block" id="sec3">
+                <div class="section-title"> 언주 ── 석촌 </div>
+                <div class="track-lbl-up">상선 →</div>
+                <div class="track-lbl-dn">← 하선</div>
+                <div class="track-up"></div>
+                <div class="track-down"></div>
+                <div class="stations-row" id="stationsRow3"></div>
+                <div class="train-container" id="trainMarkers3"></div>
+              </div>
             </div>
-            <!-- SECTION 4: 송파나루 ~ 중앙보훈병원 (역 5개) -->
-            <div class="section-block" id="sec4">
-              <div class="section-title"> 송파나루 ── 중앙보훈병원 </div>
-              <div class="track-lbl-up">상선 →</div>
-              <div class="track-lbl-dn">← 하선</div>
-              <div class="track-up"></div>
-              <div class="track-down"></div>
-              <div class="stations-row" id="stationsRow4"></div>
-              <div class="train-container" id="trainMarkers4"></div>
+
+            <!-- SLIDE 4: 송파나루 ~ 중앙보훈병원 (역 5개) -->
+            <div class="section-slide">
+              <div class="section-block" id="sec4">
+                <div class="section-title"> 송파나루 ── 중앙보훈병원 </div>
+                <div class="track-lbl-up">상선 →</div>
+                <div class="track-lbl-dn">← 하선</div>
+                <div class="track-up"></div>
+                <div class="track-down"></div>
+                <div class="stations-row" id="stationsRow4"></div>
+                <div class="train-container" id="trainMarkers4"></div>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
 
       <!-- PAGE 2: 간격 상세 -->
@@ -1572,11 +1587,43 @@
     const CUT2_IDX = 24;
     const CUT3_IDX = 32;
 
+    /* 🔴 [신규] 슬라이더 위치 제어 변수 🔴 */
+    let currentSlide = 0;
+    const TOTAL_SLIDES = 4;
+
     let MY_TRAIN_ID = null;
     let MY_TRAIN_MANUAL = localStorage.getItem('myTrainNo') || '';
     let simTrains = [];
     let simTimer = null;
     const N = STATIONS.length;
+
+    /* 🔴 [신규] 노선도 슬라이드 제어 함수 🔴 */
+    function goToSlide(idx) {
+      if (idx < 0 || idx >= TOTAL_SLIDES) return;
+      currentSlide = idx;
+
+      const track = document.getElementById('mapSliderTrack');
+      if (track) {
+        track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+
+      const tabs = document.querySelectorAll('.sec-tab');
+      tabs.forEach((tab, i) => {
+        if (i === currentSlide) tab.classList.add('active');
+        else tab.classList.remove('active');
+      });
+
+      const prevBtn = document.getElementById('prevSecBtn');
+      const nextBtn = document.getElementById('nextSecBtn');
+      if (prevBtn) prevBtn.disabled = (currentSlide === 0);
+      if (nextBtn) nextBtn.disabled = (currentSlide === TOTAL_SLIDES - 1);
+
+      renderMap();
+    }
+
+    function moveSlide(dir) {
+      goToSlide(currentSlide + dir);
+    }
 
     function promptTrainNo() {
       const v = window.prompt('지금 몰고 있는 열차번호를 입력하세요 (예: 9116)', MY_TRAIN_MANUAL);
@@ -1955,7 +2002,6 @@
       }
     }
 
-    /* ── 지시사항 / 특이사항 메모 저장 및 노선도 실시간 표출 ── */
     function loadNotes() {
       const driveInstruction = localStorage.getItem('driveInstruction') || '';
       const mainlineIssue = localStorage.getItem('mainlineIssue') || '';
@@ -1988,7 +2034,6 @@
       }
     }
 
-    /* 🔴 [개선 5] 배너의 가독성을 확 높인 실시간 업데이트 함수 🔴 */
     function updateMapNotesDisplay(instText, issueText) {
       const banner = document.getElementById('mapNotesBanner');
       const instEl = document.getElementById('mapDriveInstruction');
@@ -2019,7 +2064,6 @@
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // ── PDF 엔진 및 DB 안정화 로직 ──
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     let pdfFiles = [], selectedFileIdx = -1, lastSearchTerm = '', viewerDoc = null, viewerPage = 1, viewerTotalPages = 1;
     const DB_NAME = 'line9manual_db', DB_VER = 1, STORE = 'pdfs';
