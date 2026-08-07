@@ -109,8 +109,15 @@
     }
 
     @keyframes blink {
-      0%, 100% { opacity: 1 }
-      50% { opacity: .3 }
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
     }
 
     /* ── 탭 바 ── */
@@ -246,9 +253,17 @@
       color: var(--gold)
     }
 
-    .s-val.green { color: var(--green) }
-    .s-val.red { color: var(--red) }
-    .s-val.blue { color: var(--down) }
+    .s-val.green {
+      color: var(--green)
+    }
+
+    .s-val.red {
+      color: var(--red)
+    }
+
+    .s-val.blue {
+      color: var(--down)
+    }
 
     .s-label {
       font-size: 10px;
@@ -290,9 +305,17 @@
       border: 1px solid var(--bg4)
     }
 
-    .gap-box.warn { border-color: var(--red) }
-    .gap-box.caution { border-color: var(--orange) }
-    .gap-box.ok { border-color: var(--green) }
+    .gap-box.warn {
+      border-color: var(--red)
+    }
+
+    .gap-box.caution {
+      border-color: var(--orange)
+    }
+
+    .gap-box.ok {
+      border-color: var(--green)
+    }
 
     .gap-dir {
       font-size: 10px;
@@ -307,9 +330,17 @@
       line-height: 1
     }
 
-    .gap-time.warn { color: var(--red) }
-    .gap-time.caution { color: var(--orange) }
-    .gap-time.ok { color: var(--green) }
+    .gap-time.warn {
+      color: var(--red)
+    }
+
+    .gap-time.caution {
+      color: var(--orange)
+    }
+
+    .gap-time.ok {
+      color: var(--green)
+    }
 
     .gap-stn {
       font-size: 12px;
@@ -469,7 +500,7 @@
     .section-block {
       position: relative;
       padding: 10px 20px;
-      min-width: 720px; /* 역명이 포개지지 않는 최적 너비 */
+      min-width: 720px;
       margin-bottom: 0;
     }
 
@@ -602,8 +633,13 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, .8);
     }
 
-    .stn-circle.up { top: 84px; }
-    .stn-circle.down { top: 181px; }
+    .stn-circle.up {
+      top: 84px;
+    }
+
+    .stn-circle.down {
+      top: 181px;
+    }
 
     .stn.express .stn-circle {
       width: 22px;
@@ -613,15 +649,22 @@
       box-shadow: 0 0 8px rgba(240, 78, 78, 0.8);
     }
 
-    .stn.express .stn-circle.up { top: 80px; }
-    .stn.express .stn-circle.down { top: 177px; }
+    .stn.express .stn-circle.up {
+      top: 80px;
+    }
+
+    .stn.express .stn-circle.down {
+      top: 177px;
+    }
 
     .stn-icon {
       font-size: 11px;
       margin-bottom: 2px
     }
 
-    .stn-bottom { height: 78px }
+    .stn-bottom {
+      height: 78px
+    }
 
     .train-marker {
       position: absolute;
@@ -632,17 +675,18 @@
     }
 
     .train-body {
-      width: 44px;
+      width: 50px;
       height: 24px;
       border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 900;
       color: #000;
       position: relative;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, .5)
+      box-shadow: 0 3px 6px rgba(0, 0, 0, .5);
+      gap: 2px;
     }
 
     .train-body.up {
@@ -667,8 +711,13 @@
     }
 
     @keyframes myPulse {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.25); }
+      0% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(1.25);
+      }
     }
 
     .train-num {
@@ -785,7 +834,9 @@
       font-weight: bold
     }
 
-    .gap-warn-bar.show { display: flex }
+    .gap-warn-bar.show {
+      display: flex
+    }
 
     /* PAGE 3 — 운행 다이아 */
     #diaPage {
@@ -849,7 +900,10 @@
       background-position: right 10px center;
     }
 
-    .dia-dropdown:focus { border-color: var(--gold); }
+    .dia-dropdown:focus {
+      border-color: var(--gold);
+    }
+
     .dia-dropdown:disabled {
       opacity: 0.4;
       cursor: not-allowed;
@@ -869,7 +923,9 @@
       transition: background 0.2s;
     }
 
-    .dia-btn:active { background: var(--gold-dim); }
+    .dia-btn:active {
+      background: var(--gold-dim);
+    }
 
     /* PAGE — 지시/특이사항 */
     #notePage {
@@ -914,7 +970,9 @@
       font-family: inherit;
     }
 
-    .note-textarea:focus { border-color: var(--gold); }
+    .note-textarea:focus {
+      border-color: var(--gold);
+    }
 
     .note-btn-group {
       display: flex;
@@ -940,7 +998,9 @@
     }
 
     /* PAGE 4 — PDF 매뉴얼 */
-    #pdfPage { background: var(--bg); }
+    #pdfPage {
+      background: var(--bg);
+    }
 
     .pdf-toolbar {
       background: var(--bg2);
@@ -966,8 +1026,13 @@
       outline: none
     }
 
-    .pdf-search:focus { border-color: var(--gold) }
-    .pdf-search::placeholder { color: var(--txt3) }
+    .pdf-search:focus {
+      border-color: var(--gold)
+    }
+
+    .pdf-search::placeholder {
+      color: var(--txt3)
+    }
 
     .search-btn {
       background: var(--gold);
@@ -990,7 +1055,9 @@
       padding-bottom: 2px
     }
 
-    .pdf-file-tabs::-webkit-scrollbar { display: none }
+    .pdf-file-tabs::-webkit-scrollbar {
+      display: none
+    }
 
     .pdf-ftab {
       background: var(--bg3);
@@ -1047,7 +1114,9 @@
       transition: border-color .2s
     }
 
-    .result-card:active { border-color: var(--gold) }
+    .result-card:active {
+      border-color: var(--gold)
+    }
 
     .rc-head {
       display: flex;
@@ -1120,7 +1189,9 @@
       flex-direction: column;
     }
 
-    .pdf-viewer-wrap.show { display: flex !important; }
+    .pdf-viewer-wrap.show {
+      display: flex !important;
+    }
 
     .pdf-viewer-header {
       background: var(--bg2);
@@ -1205,7 +1276,9 @@
       z-index: 200;
     }
 
-    .loading-overlay.show { display: flex !important; }
+    .loading-overlay.show {
+      display: flex !important;
+    }
 
     .loading-box {
       background: var(--bg2);
@@ -1226,7 +1299,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg) }
+      to {
+        transform: rotate(360deg)
+      }
     }
 
     ::-webkit-scrollbar {
@@ -1234,14 +1309,18 @@
       height: 6px
     }
 
-    ::-webkit-scrollbar-track { background: transparent }
+    ::-webkit-scrollbar-track {
+      background: transparent
+    }
 
     ::-webkit-scrollbar-thumb {
       background: var(--bg4);
       border-radius: 3px
     }
 
-    #pdfUpload { display: none }
+    #pdfUpload {
+      display: none
+    }
 
     .no-results {
       padding: 20px;
@@ -1302,7 +1381,7 @@
     <!-- 페이지 영역 -->
     <div id="pages">
 
-      <!-- PAGE 1: 실시간 노선도 (슬라이드 전환 개편) -->
+      <!-- PAGE 1: 실시간 노선도 -->
       <div class="page active" id="mapPage">
 
         <!-- 지시 및 특이사항 실시간 표출 배너 -->
@@ -1379,7 +1458,7 @@
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <!-- 🔴 [신규] 4개 구간 슬라이더 내비게이션 바 🔴 -->
+        <!-- 4개 구간 슬라이더 내비게이션 바 -->
         <div class="slider-nav">
           <button class="slider-nav-btn" id="prevSecBtn" onclick="moveSlide(-1)" disabled>◀ 이전</button>
           <div class="sec-tab-group">
@@ -1391,7 +1470,7 @@
           <button class="slider-nav-btn" id="nextSecBtn" onclick="moveSlide(1)">다음 ▶</button>
         </div>
 
-        <!-- 🔴 [신규] 슬라이더 트랙 컨테이너 🔴 -->
+        <!-- 슬라이더 트랙 컨테이너 -->
         <div class="map-slider-viewport">
           <div class="map-slider-track" id="mapSliderTrack">
             <!-- SLIDE 1: 개화 ~ 여의도 (역 15개) -->
@@ -1587,7 +1666,7 @@
     const CUT2_IDX = 24;
     const CUT3_IDX = 32;
 
-    /* 🔴 [신규] 슬라이더 위치 제어 변수 🔴 */
+    /* 슬라이더 위치 제어 변수 */
     let currentSlide = 0;
     const TOTAL_SLIDES = 4;
 
@@ -1597,7 +1676,7 @@
     let simTimer = null;
     const N = STATIONS.length;
 
-    /* 🔴 [신규] 노선도 슬라이드 제어 함수 🔴 */
+    /* 노선도 슬라이드 제어 함수 */
     function goToSlide(idx) {
       if (idx < 0 || idx >= TOTAL_SLIDES) return;
       currentSlide = idx;
@@ -1743,6 +1822,7 @@
         const isUp = t.dir === 'up';
         const topPx = isUp ? 78 : 178;
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
+        const dirArrow = isUp ? '▶' : '◀';
 
         const div = document.createElement('div');
         div.className = 'train-marker';
@@ -1750,7 +1830,7 @@
         div.style.top = topPx + 'px';
         div.innerHTML = `
       <div class="train-body ${isUp ? 'up' : 'down'} ${t.express ? 'express-t' : ''} ${isMy ? 'my' : ''}">
-        ${t.express ? '급행' : '일반'}
+        ${dirArrow} ${t.express ? '급행' : '일반'}
       </div>
       <div class="train-num ${isMy ? 'my' : ''}">${isMy ? '🚇' + t.num : t.num}</div>`;
 
