@@ -109,15 +109,8 @@
     }
 
     @keyframes blink {
-
-      0%,
-      100% {
-        opacity: 1
-      }
-
-      50% {
-        opacity: .3
-      }
+      0%, 100% { opacity: 1 }
+      50% { opacity: .3 }
     }
 
     /* ── 탭 바 ── */
@@ -253,17 +246,9 @@
       color: var(--gold)
     }
 
-    .s-val.green {
-      color: var(--green)
-    }
-
-    .s-val.red {
-      color: var(--red)
-    }
-
-    .s-val.blue {
-      color: var(--down)
-    }
+    .s-val.green { color: var(--green) }
+    .s-val.red { color: var(--red) }
+    .s-val.blue { color: var(--down) }
 
     .s-label {
       font-size: 10px;
@@ -305,17 +290,9 @@
       border: 1px solid var(--bg4)
     }
 
-    .gap-box.warn {
-      border-color: var(--red)
-    }
-
-    .gap-box.caution {
-      border-color: var(--orange)
-    }
-
-    .gap-box.ok {
-      border-color: var(--green)
-    }
+    .gap-box.warn { border-color: var(--red) }
+    .gap-box.caution { border-color: var(--orange) }
+    .gap-box.ok { border-color: var(--green) }
 
     .gap-dir {
       font-size: 10px;
@@ -330,17 +307,9 @@
       line-height: 1
     }
 
-    .gap-time.warn {
-      color: var(--red)
-    }
-
-    .gap-time.caution {
-      color: var(--orange)
-    }
-
-    .gap-time.ok {
-      color: var(--green)
-    }
+    .gap-time.warn { color: var(--red) }
+    .gap-time.caution { color: var(--orange) }
+    .gap-time.ok { color: var(--green) }
 
     .gap-stn {
       font-size: 12px;
@@ -410,12 +379,13 @@
       border-radius: 2px
     }
 
-    /* ── 세로 배치 노선도 스타일 ── */
+    /* ── ㄹ자 세로 배치 노선도 스타일 ── */
     .map-vertical-container {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 18px;
       padding: 10px 14px 30px;
+      position: relative;
     }
 
     .section-block {
@@ -424,8 +394,7 @@
       background: var(--bg2);
       border-radius: var(--radius-sm);
       border: 1px solid var(--bg4);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow: visible;
     }
 
     .section-title {
@@ -443,7 +412,7 @@
     .track-up {
       position: absolute;
       left: 35px;
-      right: 10px;
+      right: 35px;
       height: 6px;
       background: var(--up);
       top: 88px;
@@ -454,7 +423,7 @@
     .track-down {
       position: absolute;
       left: 35px;
-      right: 10px;
+      right: 35px;
       height: 6px;
       background: var(--down);
       top: 185px;
@@ -488,6 +457,38 @@
       border-radius: 4px;
       border: 1px solid var(--down);
       z-index: 2
+    }
+
+    /* ㄹ자 턴 연결곡선 (우측) */
+    .curve-turn-right {
+      position: absolute;
+      right: -15px;
+      top: 88px;
+      width: 30px;
+      height: 120px;
+      border-right: 6px solid var(--gold);
+      border-top: 6px solid var(--gold);
+      border-bottom: 6px solid var(--gold);
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ㄹ자 턴 연결곡선 (좌측) */
+    .curve-turn-left {
+      position: absolute;
+      left: -15px;
+      top: 88px;
+      width: 30px;
+      height: 120px;
+      border-left: 6px solid var(--gold);
+      border-top: 6px solid var(--gold);
+      border-bottom: 6px solid var(--gold);
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      z-index: 0;
+      pointer-events: none;
     }
 
     .stations-row {
@@ -559,13 +560,8 @@
       box-shadow: 0 0 4px rgba(0, 0, 0, .8);
     }
 
-    .stn-circle.up {
-      top: 84px;
-    }
-
-    .stn-circle.down {
-      top: 181px;
-    }
+    .stn-circle.up { top: 84px; }
+    .stn-circle.down { top: 181px; }
 
     .stn.express .stn-circle {
       width: 22px;
@@ -575,22 +571,11 @@
       box-shadow: 0 0 8px rgba(240, 78, 78, 0.8);
     }
 
-    .stn.express .stn-circle.up {
-      top: 80px;
-    }
+    .stn.express .stn-circle.up { top: 80px; }
+    .stn.express .stn-circle.down { top: 177px; }
 
-    .stn.express .stn-circle.down {
-      top: 177px;
-    }
-
-    .stn-icon {
-      font-size: 11px;
-      margin-bottom: 2px
-    }
-
-    .stn-bottom {
-      height: 78px
-    }
+    .stn-icon { font-size: 11px; margin-bottom: 2px }
+    .stn-bottom { height: 78px }
 
     .train-marker {
       position: absolute;
@@ -615,20 +600,9 @@
       gap: 2px;
     }
 
-    .train-body.up {
-      background: var(--up);
-      color: #000
-    }
-
-    .train-body.down {
-      background: var(--down);
-      color: #fff
-    }
-
-    .train-body.express-t {
-      background: var(--red) !important;
-      color: #fff !important
-    }
+    .train-body.up { background: var(--up); color: #000 }
+    .train-body.down { background: var(--down); color: #fff }
+    .train-body.express-t { background: var(--red) !important; color: #fff !important }
 
     .train-body.my {
       box-shadow: 0 0 15px 6px rgba(255, 220, 0, 1);
@@ -637,13 +611,8 @@
     }
 
     @keyframes myPulse {
-      0% {
-        transform: scale(1);
-      }
-
-      100% {
-        transform: scale(1.25);
-      }
+      0% { transform: scale(1); }
+      100% { transform: scale(1.25); }
     }
 
     .train-num {
@@ -667,85 +636,19 @@
     }
 
     /* PAGE 2 — 간격 상세 */
-    #gapPage {
-      background: var(--bg);
-      padding: 14px
-    }
-
-    .gap-detail-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 12px
-    }
-
-    .gap-train-card {
-      background: var(--bg2);
-      border: 1px solid var(--bg4);
-      border-radius: var(--radius);
-      padding: 12px 14px;
-      margin-bottom: 10px
-    }
-
-    .gtc-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px
-    }
-
-    .gtc-num {
-      font-size: 13px;
-      font-weight: 800
-    }
-
-    .gtc-type {
-      font-size: 11px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: bold
-    }
-
-    .gtc-type.up {
-      background: rgba(200, 166, 0, .2);
-      color: var(--up)
-    }
-
-    .gtc-type.down {
-      background: rgba(74, 158, 232, .2);
-      color: var(--down)
-    }
-
-    .gtc-type.express {
-      background: rgba(240, 78, 78, .2);
-      color: var(--red)
-    }
-
-    .gap-metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px
-    }
-
-    .gm-box {
-      background: var(--bg3);
-      border-radius: 6px;
-      padding: 8px;
-      text-align: center
-    }
-
-    .gm-val {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--txt)
-    }
-
-    .gm-lab {
-      font-size: 10px;
-      color: var(--txt2);
-      margin-top: 2px
-    }
-
+    #gapPage { background: var(--bg); padding: 14px }
+    .gap-detail-title { font-size: 15px; font-weight: 800; color: var(--gold); margin-bottom: 12px }
+    .gap-train-card { background: var(--bg2); border: 1px solid var(--bg4); border-radius: var(--radius); padding: 12px 14px; margin-bottom: 10px }
+    .gtc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px }
+    .gtc-num { font-size: 13px; font-weight: 800 }
+    .gtc-type { font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: bold }
+    .gtc-type.up { background: rgba(200, 166, 0, .2); color: var(--up) }
+    .gtc-type.down { background: rgba(74, 158, 232, .2); color: var(--down) }
+    .gtc-type.express { background: rgba(240, 78, 78, .2); color: var(--red) }
+    .gap-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px }
+    .gm-box { background: var(--bg3); border-radius: 6px; padding: 8px; text-align: center }
+    .gm-val { font-size: 15px; font-weight: 800; color: var(--txt) }
+    .gm-lab { font-size: 10px; color: var(--txt2); margin-top: 2px }
     .gap-warn-bar {
       background: rgba(240, 78, 78, .15);
       border: 1px solid rgba(240, 78, 78, .4);
@@ -759,55 +662,15 @@
       gap: 6px;
       font-weight: bold
     }
-
-    .gap-warn-bar.show {
-      display: flex
-    }
+    .gap-warn-bar.show { display: flex }
 
     /* PAGE 3 — 운행 다이아 */
-    #diaPage {
-      background: var(--bg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .dia-card {
-      background: var(--bg2);
-      border: 1px solid var(--bg4);
-      border-radius: var(--radius);
-      padding: 16px;
-    }
-
-    .dia-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--gold);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .dia-select-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .dia-select-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .dia-select-wrap label {
-      font-size: 11px;
-      color: var(--txt2);
-      font-weight: bold;
-    }
-
+    #diaPage { background: var(--bg); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+    .dia-card { background: var(--bg2); border: 1px solid var(--bg4); border-radius: var(--radius); padding: 16px; }
+    .dia-title { font-size: 15px; font-weight: 800; color: var(--gold); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+    .dia-select-group { display: flex; flex-direction: column; gap: 12px; }
+    .dia-select-wrap { display: flex; flex-direction: column; gap: 6px; }
+    .dia-select-wrap label { font-size: 11px; color: var(--txt2); font-weight: bold; }
     .dia-dropdown {
       width: 100%;
       padding: 12px;
@@ -825,16 +688,8 @@
       background-repeat: no-repeat;
       background-position: right 10px center;
     }
-
-    .dia-dropdown:focus {
-      border-color: var(--gold);
-    }
-
-    .dia-dropdown:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-
+    .dia-dropdown:focus { border-color: var(--gold); }
+    .dia-dropdown:disabled { opacity: 0.4; cursor: not-allowed; }
     .dia-btn {
       width: 100%;
       background: var(--gold);
@@ -848,39 +703,12 @@
       margin-top: 6px;
       transition: background 0.2s;
     }
-
-    .dia-btn:active {
-      background: var(--gold-dim);
-    }
+    .dia-btn:active { background: var(--gold-dim); }
 
     /* PAGE — 지시/특이사항 */
-    #notePage {
-      background: var(--bg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .note-card {
-      background: var(--bg2);
-      border: 1px solid var(--bg4);
-      border-radius: var(--radius);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .note-title {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
+    #notePage { background: var(--bg); padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+    .note-card { background: var(--bg2); border: 1px solid var(--bg4); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .note-title { font-size: 15px; font-weight: 800; color: var(--gold); display: flex; align-items: center; gap: 6px; }
     .note-textarea {
       width: 100%;
       height: 130px;
@@ -895,365 +723,62 @@
       resize: vertical;
       font-family: inherit;
     }
-
-    .note-textarea:focus {
-      border-color: var(--gold);
-    }
-
-    .note-btn-group {
-      display: flex;
-      gap: 8px;
-      justify-content: flex-end;
-    }
-
-    .note-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 8px 16px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .note-btn.secondary {
-      background: var(--bg3);
-      color: var(--txt2);
-      border: 1px solid var(--bg4);
-    }
+    .note-textarea:focus { border-color: var(--gold); }
+    .note-btn-group { display: flex; gap: 8px; justify-content: flex-end; }
+    .note-btn { background: var(--gold); color: #000; border: none; border-radius: var(--radius-sm); padding: 8px 16px; font-size: 12px; font-weight: 800; cursor: pointer; }
+    .note-btn.secondary { background: var(--bg3); color: var(--txt2); border: 1px solid var(--bg4); }
 
     /* PAGE 4 — PDF 매뉴얼 */
-    #pdfPage {
-      background: var(--bg);
-    }
-
-    .pdf-toolbar {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--bg4);
-      padding: 10px 14px;
-      flex-shrink: 0
-    }
-
-    .pdf-search-wrap {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px
-    }
-
-    .pdf-search {
-      flex: 1;
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      color: var(--txt);
-      border-radius: var(--radius-sm);
-      padding: 9px 12px;
-      font-size: 13px;
-      outline: none
-    }
-
-    .pdf-search:focus {
-      border-color: var(--gold)
-    }
-
-    .pdf-search::placeholder {
-      color: var(--txt3)
-    }
-
-    .search-btn {
-      background: var(--gold);
-      color: #000;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 9px 14px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0
-    }
-
-    .pdf-file-tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      padding-bottom: 2px
-    }
-
-    .pdf-file-tabs::-webkit-scrollbar {
-      display: none
-    }
-
-    .pdf-ftab {
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 11px;
-      color: var(--txt2);
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: all .2s
-    }
-
-    .pdf-ftab.active {
-      background: var(--gold-bg);
-      border-color: var(--gold);
-      color: var(--gold);
-      font-weight: bold
-    }
-
-    .pdf-add-btn {
-      background: var(--bg3);
-      border: 1px dashed var(--bg4);
-      border-radius: 20px;
-      padding: 4px 10px;
-      font-size: 11px;
-      color: var(--txt3);
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0
-    }
-
-    .pdf-results {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px 14px;
-      -webkit-overflow-scrolling: touch
-    }
-
-    .result-count {
-      font-size: 11px;
-      color: var(--txt3);
-      margin-bottom: 8px
-    }
-
-    .result-card {
-      background: var(--bg2);
-      border: 1px solid var(--bg4);
-      border-radius: var(--radius-sm);
-      padding: 12px;
-      margin-bottom: 8px;
-      cursor: pointer;
-      transition: border-color .2s
-    }
-
-    .result-card:active {
-      border-color: var(--gold)
-    }
-
-    .rc-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 6px
-    }
-
-    .rc-file {
-      font-size: 11px;
-      color: var(--gold);
-      font-weight: 700
-    }
-
-    .rc-page {
-      font-size: 10px;
-      color: var(--txt3);
-      background: var(--bg3);
-      border-radius: 4px;
-      padding: 1px 6px
-    }
-
-    .rc-text {
-      font-size: 12px;
-      color: var(--txt2);
-      line-height: 1.6
-    }
-
-    .rc-text mark {
-      background: rgba(200, 166, 0, .35);
-      color: var(--gold);
-      border-radius: 2px;
-      padding: 0 1px
-    }
-
-    .pdf-empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--txt3)
-    }
-
-    .pdf-empty-icon {
-      font-size: 36px;
-      margin-bottom: 12px
-    }
-
-    .pdf-empty-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--txt2);
-      margin-bottom: 6px
-    }
-
-    .pdf-empty-desc {
-      font-size: 12px;
-      line-height: 1.6
-    }
+    #pdfPage { background: var(--bg); }
+    .pdf-toolbar { background: var(--bg2); border-bottom: 1px solid var(--bg4); padding: 10px 14px; flex-shrink: 0 }
+    .pdf-search-wrap { display: flex; gap: 8px; margin-bottom: 8px }
+    .pdf-search { flex: 1; background: var(--bg3); border: 1px solid var(--bg4); color: var(--txt); border-radius: var(--radius-sm); padding: 9px 12px; font-size: 13px; outline: none }
+    .pdf-search:focus { border-color: var(--gold) }
+    .pdf-search::placeholder { color: var(--txt3) }
+    .search-btn { background: var(--gold); color: #000; border: none; border-radius: var(--radius-sm); padding: 9px 14px; font-size: 12px; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 0 }
+    .pdf-file-tabs { display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px }
+    .pdf-file-tabs::-webkit-scrollbar { display: none }
+    .pdf-ftab { background: var(--bg3); border: 1px solid var(--bg4); border-radius: 20px; padding: 4px 10px; font-size: 11px; color: var(--txt2); cursor: pointer; white-space: nowrap; flex-shrink: 0; transition: all .2s }
+    .pdf-ftab.active { background: var(--gold-bg); border-color: var(--gold); color: var(--gold); font-weight: bold }
+    .pdf-add-btn { background: var(--bg3); border: 1px dashed var(--bg4); border-radius: 20px; padding: 4px 10px; font-size: 11px; color: var(--txt3); cursor: pointer; white-space: nowrap; flex-shrink: 0 }
+    .pdf-results { flex: 1; overflow-y: auto; padding: 10px 14px; -webkit-overflow-scrolling: touch }
+    .result-count { font-size: 11px; color: var(--txt3); margin-bottom: 8px }
+    .result-card { background: var(--bg2); border: 1px solid var(--bg4); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 8px; cursor: pointer; transition: border-color .2s }
+    .result-card:active { border-color: var(--gold) }
+    .rc-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px }
+    .rc-file { font-size: 11px; color: var(--gold); font-weight: 700 }
+    .rc-page { font-size: 10px; color: var(--txt3); background: var(--bg3); border-radius: 4px; padding: 1px 6px }
+    .rc-text { font-size: 12px; color: var(--txt2); line-height: 1.6 }
+    .rc-text mark { background: rgba(200, 166, 0, .35); color: var(--gold); border-radius: 2px; padding: 0 1px }
+    .pdf-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; color: var(--txt3) }
+    .pdf-empty-icon { font-size: 36px; margin-bottom: 12px }
+    .pdf-empty-title { font-size: 14px; font-weight: 700; color: var(--txt2); margin-bottom: 6px }
+    .pdf-empty-desc { font-size: 12px; line-height: 1.6 }
 
     /* PDF 뷰어 모달 기본 제어 */
-    .pdf-viewer-wrap {
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 100;
-      display: none;
-      flex-direction: column;
-    }
+    .pdf-viewer-wrap { position: fixed; inset: 0; background: var(--bg); z-index: 100; display: none; flex-direction: column; }
+    .pdf-viewer-wrap.show { display: flex !important; }
+    .pdf-viewer-header { background: var(--bg2); border-bottom: 1px solid var(--bg4); padding: 10px 14px; display: flex; align-items: center; gap: 10px; flex-shrink: 0 }
+    .pdf-viewer-back { background: var(--bg3); border: 1px solid var(--bg4); color: var(--txt); border-radius: var(--radius-sm); padding: 6px 12px; font-size: 12px; cursor: pointer }
+    .pdf-viewer-title { font-size: 13px; font-weight: 700; color: var(--txt); flex: 1 }
+    .pdf-viewer-page { font-size: 11px; color: var(--txt2) }
+    .pdf-canvas-wrap { flex: 1; overflow: auto; display: flex; flex-direction: column; align-items: center; padding: 10px; -webkit-overflow-scrolling: touch }
+    .pdf-canvas-wrap canvas { max-width: 100%; border-radius: 4px }
+    .pdf-nav { display: flex; justify-content: center; align-items: center; gap: 14px; padding: 10px; background: var(--bg2); border-top: 1px solid var(--bg4); flex-shrink: 0 }
+    .pdf-nav-btn { background: var(--bg3); border: 1px solid var(--bg4); color: var(--txt); border-radius: var(--radius-sm); padding: 7px 16px; font-size: 12px; cursor: pointer }
+    .pdf-nav-btn:disabled { opacity: .3; cursor: default }
 
-    .pdf-viewer-wrap.show {
-      display: flex !important;
-    }
+    .loading-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, .6); display: none; align-items: center; justify-content: center; z-index: 200; }
+    .loading-overlay.show { display: flex !important; }
+    .loading-box { background: var(--bg2); border: 1px solid var(--bg4); border-radius: var(--radius); padding: 20px 28px; text-align: center }
+    .spinner { width: 28px; height: 28px; border: 3px solid var(--bg4); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 10px }
 
-    .pdf-viewer-header {
-      background: var(--bg2);
-      border-bottom: 1px solid var(--bg4);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0
-    }
-
-    .pdf-viewer-back {
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      color: var(--txt);
-      border-radius: var(--radius-sm);
-      padding: 6px 12px;
-      font-size: 12px;
-      cursor: pointer
-    }
-
-    .pdf-viewer-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--txt);
-      flex: 1
-    }
-
-    .pdf-viewer-page {
-      font-size: 11px;
-      color: var(--txt2)
-    }
-
-    .pdf-canvas-wrap {
-      flex: 1;
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px;
-      -webkit-overflow-scrolling: touch
-    }
-
-    .pdf-canvas-wrap canvas {
-      max-width: 100%;
-      border-radius: 4px
-    }
-
-    .pdf-nav {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 14px;
-      padding: 10px;
-      background: var(--bg2);
-      border-top: 1px solid var(--bg4);
-      flex-shrink: 0
-    }
-
-    .pdf-nav-btn {
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      color: var(--txt);
-      border-radius: var(--radius-sm);
-      padding: 7px 16px;
-      font-size: 12px;
-      cursor: pointer
-    }
-
-    .pdf-nav-btn:disabled {
-      opacity: .3;
-      cursor: default
-    }
-
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .6);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-    }
-
-    .loading-overlay.show {
-      display: flex !important;
-    }
-
-    .loading-box {
-      background: var(--bg2);
-      border: 1px solid var(--bg4);
-      border-radius: var(--radius);
-      padding: 20px 28px;
-      text-align: center
-    }
-
-    .spinner {
-      width: 28px;
-      height: 28px;
-      border: 3px solid var(--bg4);
-      border-top-color: var(--gold);
-      border-radius: 50%;
-      animation: spin .8s linear infinite;
-      margin: 0 auto 10px
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg)
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--bg4);
-      border-radius: 3px
-    }
-
-    #pdfUpload {
-      display: none
-    }
-
-    .no-results {
-      padding: 20px;
-      text-align: center;
-      color: var(--txt3);
-      font-size: 13px
-    }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    ::-webkit-scrollbar { width: 6px; height: 6px }
+    ::-webkit-scrollbar-track { background: transparent }
+    ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px }
+    #pdfUpload { display: none }
+    .no-results { padding: 20px; text-align: center; color: var(--txt3); font-size: 13px }
   </style>
 </head>
 
@@ -1268,40 +793,23 @@
         <div class="pulse" id="statusDot"></div>
         <span id="statusTxt">연결중...</span>
       </div>
-      <div id="modeBadge"
-        style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--bg3);color:var(--txt3);border:1px solid var(--bg4)">
-        대기중</div>
+      <div id="modeBadge" style="font-size:10px;padding:3px 8px;border-radius:10px;background:var(--bg3);color:var(--txt3);border:1px solid var(--bg4)">대기중</div>
     </div>
 
     <!-- 내 열차 설정 바 -->
-    <div
-      style="background:var(--bg2);border-bottom:1px solid var(--bg4);padding:8px 16px;display:flex;align-items:center;gap:8px;flex-shrink:0">
+    <div style="background:var(--bg2);border-bottom:1px solid var(--bg4);padding:8px 16px;display:flex;align-items:center;gap:8px;flex-shrink:0">
       <span style="font-size:12px;color:var(--txt2);font-weight:bold">내 열차</span>
-      <button onclick="promptTrainNo()" id="myTrainBadge"
-        style="background:var(--gold-bg);border:1px solid var(--gold-dim);color:var(--gold);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0">내
-        열차 설정</button>
-      <span id="myTrainStatus"
-        style="font-size:11px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">불러오는
-        중...</span>
+      <button onclick="promptTrainNo()" id="myTrainBadge" style="background:var(--gold-bg);border:1px solid var(--gold-dim);color:var(--gold);border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;cursor:pointer;flex-shrink:0">내 열차 설정</button>
+      <span id="myTrainStatus" style="font-size:11px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">불러오는 중...</span>
     </div>
 
     <!-- 탭바 -->
     <div id="tabBar">
-      <button class="tab-btn active" onclick="switchPage('map')" id="tab-map">
-        <div class="tab-icon">🗺</div>노선도
-      </button>
-      <button class="tab-btn" onclick="switchPage('gap')" id="tab-gap">
-        <div class="tab-icon">📏</div>간격
-      </button>
-      <button class="tab-btn" onclick="switchPage('dia')" id="tab-dia">
-        <div class="tab-icon">📅</div>운행다이아
-      </button>
-      <button class="tab-btn" onclick="switchPage('note')" id="tab-note">
-        <div class="tab-icon">📝</div>지시/특이
-      </button>
-      <button class="tab-btn" onclick="switchPage('pdf')" id="tab-pdf">
-        <div class="tab-icon">📋</div>매뉴얼
-      </button>
+      <button class="tab-btn active" onclick="switchPage('map')" id="tab-map"><div class="tab-icon">🗺</div>노선도</button>
+      <button class="tab-btn" onclick="switchPage('gap')" id="tab-gap"><div class="tab-icon">📏</div>간격</button>
+      <button class="tab-btn" onclick="switchPage('dia')" id="tab-dia"><div class="tab-icon">📅</div>운행다이아</button>
+      <button class="tab-btn" onclick="switchPage('note')" id="tab-note"><div class="tab-icon">📝</div>지시/특이</button>
+      <button class="tab-btn" onclick="switchPage('pdf')" id="tab-pdf"><div class="tab-icon">📋</div>매뉴얼</button>
     </div>
 
     <!-- 페이지 영역 -->
@@ -1318,18 +826,9 @@
 
         <!-- 요약 카드 -->
         <div class="summary-strip">
-          <div class="s-card">
-            <div class="s-val" id="sumTrains">0</div>
-            <div class="s-label">운행 열차</div>
-          </div>
-          <div class="s-card">
-            <div class="s-val green" id="sumFront">-</div>
-            <div class="s-label">전방 간격</div>
-          </div>
-          <div class="s-card">
-            <div class="s-val blue" id="sumRear">-</div>
-            <div class="s-label">후방 간격</div>
-          </div>
+          <div class="s-card"><div class="s-val" id="sumTrains">0</div><div class="s-label">운행 열차</div></div>
+          <div class="s-card"><div class="s-val green" id="sumFront">-</div><div class="s-label">전방 간격</div></div>
+          <div class="s-card"><div class="s-val blue" id="sumRear">-</div><div class="s-label">후방 간격</div></div>
         </div>
 
         <!-- 내 열차 간격 패널 -->
@@ -1338,8 +837,7 @@
           <div class="gap-row">
             <div class="gap-box" id="frontBox">
               <div class="gap-dir">← 선행 열차</div>
-              <div class="gap-train-no" id="frontTrainNo"
-                style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
+              <div class="gap-train-no" id="frontTrainNo" style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
               <div class="gap-time" id="frontTime">--</div>
               <div class="gap-stn" id="frontStn">--</div>
               <div class="gap-stations" id="frontStns">--</div>
@@ -1348,8 +846,7 @@
             <div>
               <div class="gap-me">
                 <div class="gap-me-badge">내 열차</div>
-                <div class="gap-me-train-no" id="myTrainNo"
-                  style="font-size:14px; font-weight:bold; color:#007aff; margin-top:3px;">----</div>
+                <div class="gap-me-train-no" id="myTrainNo" style="font-size:14px; font-weight:bold; color:#007aff; margin-top:3px;">----</div>
                 <div class="gap-me-stn" id="myStnName">--</div>
               </div>
               <div class="gap-arrow" style="margin-top:4px">◀ ▶</div>
@@ -1357,8 +854,7 @@
 
             <div class="gap-box" id="rearBox">
               <div class="gap-dir">후속 열차 →</div>
-              <div class="gap-train-no" id="rearTrainNo"
-                style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
+              <div class="gap-train-no" id="rearTrainNo" style="font-size:13px; font-weight:bold; color:#f39c12; margin-top:2px;">----</div>
               <div class="gap-time" id="rearTime">--</div>
               <div class="gap-stn" id="rearStn">--</div>
               <div class="gap-stations" id="rearStns">--</div>
@@ -1368,25 +864,16 @@
 
         <!-- 범례 -->
         <div class="legend">
-          <div class="li">
-            <div class="lb" style="background:var(--up)"></div>상행(개화방면)
-          </div>
-          <div class="li">
-            <div class="lb" style="background:var(--down)"></div>하행(보훈병원방면)
-          </div>
-          <div class="li">
-            <div class="lb" style="background:var(--red)"></div>급행열차
-          </div>
-          <div class="li">
-            <div style="width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid #fff"></div>
-            급행정차역
-          </div>
+          <div class="li"><div class="lb" style="background:var(--up)"></div>상행(개화방면)</div>
+          <div class="li"><div class="lb" style="background:var(--down)"></div>하행(보훈병원방면)</div>
+          <div class="li"><div class="lb" style="background:var(--red)"></div>급행열차</div>
+          <div class="li"><div style="width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid #fff"></div>급행정차역</div>
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <!-- 세로형 전체 노선도 컨테이너 (7개씩 5개 구간 + 3개 역 1개 구간) -->
+        <!-- ㄹ자 전체 연결 노선도 컨테이너 (7개씩 연결) -->
         <div class="map-vertical-container">
-          <!-- 1구간: 개화 ~ 가양 (7개 역) -->
+          <!-- 1구간: 개화 ~ 가양 (순방향 L→R) -->
           <div class="section-block" id="sec1">
             <div class="section-title">1구간: 개화 ── 가양</div>
             <div class="track-lbl-up">상선 →</div>
@@ -1395,20 +882,22 @@
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow1"></div>
             <div class="train-container" id="trainMarkers1"></div>
+            <div class="curve-turn-right"></div>
           </div>
 
-          <!-- 2구간: 증미 ~ 국회의사당 (7개 역) -->
+          <!-- 2구간: 증미 ~ 국회의사당 (역방향 R→L) -->
           <div class="section-block" id="sec2">
             <div class="section-title">2구간: 증미 ── 국회의사당</div>
-            <div class="track-lbl-up">상선 →</div>
-            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-lbl-up" style="right:0; left:auto;">← 상선</div>
+            <div class="track-lbl-dn" style="right:0; left:auto;">하선 →</div>
             <div class="track-up"></div>
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow2"></div>
             <div class="train-container" id="trainMarkers2"></div>
+            <div class="curve-turn-left"></div>
           </div>
 
-          <!-- 3구간: 여의도 ~ 구반포 (7개 역) -->
+          <!-- 3구간: 여의도 ~ 구반포 (순방향 L→R) -->
           <div class="section-block" id="sec3">
             <div class="section-title">3구간: 여의도 ── 구반포</div>
             <div class="track-lbl-up">상선 →</div>
@@ -1417,20 +906,22 @@
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow3"></div>
             <div class="train-container" id="trainMarkers3"></div>
+            <div class="curve-turn-right"></div>
           </div>
 
-          <!-- 4구간: 신반포 ~ 삼성중앙 (7개 역) -->
+          <!-- 4구간: 신반포 ~ 삼성중앙 (역방향 R→L) -->
           <div class="section-block" id="sec4">
             <div class="section-title">4구간: 신반포 ── 삼성중앙</div>
-            <div class="track-lbl-up">상선 →</div>
-            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-lbl-up" style="right:0; left:auto;">← 상선</div>
+            <div class="track-lbl-dn" style="right:0; left:auto;">하선 →</div>
             <div class="track-up"></div>
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow4"></div>
             <div class="train-container" id="trainMarkers4"></div>
+            <div class="curve-turn-left"></div>
           </div>
 
-          <!-- 5구간: 봉은사 ~ 한성백제 (7개 역) -->
+          <!-- 5구간: 봉은사 ~ 한성백제 (순방향 L→R) -->
           <div class="section-block" id="sec5">
             <div class="section-title">5구간: 봉은사 ── 한성백제</div>
             <div class="track-lbl-up">상선 →</div>
@@ -1439,13 +930,14 @@
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow5"></div>
             <div class="train-container" id="trainMarkers5"></div>
+            <div class="curve-turn-right"></div>
           </div>
 
-          <!-- 6구간: 올림픽공원 ~ 중앙보훈병원 (3개 역) -->
+          <!-- 6구간: 올림픽공원 ~ 중앙보훈병원 (역방향 R→L) -->
           <div class="section-block" id="sec6">
             <div class="section-title">6구간: 올림픽공원 ── 중앙보훈병원</div>
-            <div class="track-lbl-up">상선 →</div>
-            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-lbl-up" style="right:0; left:auto;">← 상선</div>
+            <div class="track-lbl-dn" style="right:0; left:auto;">하선 →</div>
             <div class="track-up"></div>
             <div class="track-down"></div>
             <div class="stations-row" id="stationsRow6"></div>
@@ -1500,8 +992,7 @@
       <div class="page" id="notePage">
         <div class="note-card">
           <div class="note-title">📢 운전지시사항</div>
-          <textarea id="driveInstruction" class="note-textarea"
-            placeholder="당일 주요 운전지시사항을 작성하세요 (예: 특정 구간 서행, 안전운행 지시 등)"></textarea>
+          <textarea id="driveInstruction" class="note-textarea" placeholder="당일 주요 운전지시사항을 작성하세요 (예: 특정 구간 서행, 안전운행 지시 등)"></textarea>
           <div class="note-btn-group">
             <button class="note-btn secondary" onclick="clearNote('driveInstruction')">초기화</button>
             <button class="note-btn" onclick="saveNotes()">저장</button>
@@ -1510,8 +1001,7 @@
 
         <div class="note-card">
           <div class="note-title">⚠️ 본선특이사항</div>
-          <textarea id="mainlineIssue" class="note-textarea"
-            placeholder="본선 특이사항 및 서행/점검 구간 등을 작성하세요 (예: OO역~OO역 상선 신호 점검, PSD 수동 취급 등)"></textarea>
+          <textarea id="mainlineIssue" class="note-textarea" placeholder="본선 특이사항 및 서행/점검 구간 등을 작성하세요 (예: OO역~OO역 상선 신호 점검, PSD 수동 취급 등)"></textarea>
           <div class="note-btn-group">
             <button class="note-btn secondary" onclick="clearNote('mainlineIssue')">초기화</button>
             <button class="note-btn" onclick="saveNotes()">저장</button>
@@ -1523,8 +1013,7 @@
       <div class="page" id="pdfPage">
         <div class="pdf-toolbar">
           <div class="pdf-search-wrap">
-            <input class="pdf-search" id="pdfSearchInput" placeholder="키워드 검색 (예: 브레이크 고장, 화재 조치)"
-              onkeydown="if(event.key==='Enter')searchPdf()" />
+            <input class="pdf-search" id="pdfSearchInput" placeholder="키워드 검색 (예: 브레이크 고장, 화재 조치)" onkeydown="if(event.key==='Enter')searchPdf()" />
             <button class="search-btn" onclick="searchPdf()">검색</button>
           </div>
           <div class="pdf-file-tabs" id="pdfFileTabs">
@@ -1653,6 +1142,7 @@
       document.getElementById('lastUpd').textContent = '갱신: ' + new Date().toLocaleTimeString('ko-KR');
     }
 
+    /* ㄹ자 렌더링: 짝수 구간(2, 4, 6구간) 역순 정렬 */
     function renderStations() {
       const makeHtml = (s, i) => `
     <div class="stn ${s.e ? 'express' : ''}" id="stn_${i}">
@@ -1664,30 +1154,27 @@
       <div class="stn-name-down ${s.e ? 'express' : ''}">${s.n}</div>
     </div>`;
 
-      document.getElementById('stationsRow1').innerHTML = STATIONS.slice(0, 7).map((s, i) => makeHtml(s, i)).join('');
-      document.getElementById('stationsRow2').innerHTML = STATIONS.slice(7, 14).map((s, i) => makeHtml(s, i + 7)).join('');
-      document.getElementById('stationsRow3').innerHTML = STATIONS.slice(14, 21).map((s, i) => makeHtml(s, i + 14)).join('');
-      document.getElementById('stationsRow4').innerHTML = STATIONS.slice(21, 28).map((s, i) => makeHtml(s, i + 21)).join('');
-      document.getElementById('stationsRow5').innerHTML = STATIONS.slice(28, 35).map((s, i) => makeHtml(s, i + 28)).join('');
-      document.getElementById('stationsRow6').innerHTML = STATIONS.slice(35).map((s, i) => makeHtml(s, i + 35)).join('');
+      const renderSection = (sliceArr, startIndex, isReverse = false) => {
+        let items = sliceArr.map((s, idx) => ({ station: s, globalIdx: startIndex + idx }));
+        if (isReverse) items.reverse();
+        return items.map(item => makeHtml(item.station, item.globalIdx)).join('');
+      };
+
+      document.getElementById('stationsRow1').innerHTML = renderSection(STATIONS.slice(0, 7), 0, false);
+      document.getElementById('stationsRow2').innerHTML = renderSection(STATIONS.slice(7, 14), 7, true);
+      document.getElementById('stationsRow3').innerHTML = renderSection(STATIONS.slice(14, 21), 14, false);
+      document.getElementById('stationsRow4').innerHTML = renderSection(STATIONS.slice(21, 28), 21, true);
+      document.getElementById('stationsRow5').innerHTML = renderSection(STATIONS.slice(28, 35), 28, false);
+      document.getElementById('stationsRow6').innerHTML = renderSection(STATIONS.slice(35), 35, true);
     }
 
     function getStationX(secIdx, stnIdx) {
       const sec = document.getElementById('sec' + secIdx);
       if (!sec) return 0;
-      const nodes = sec.querySelectorAll('.stn');
-
-      let baseIdx = 0;
-      if (secIdx === 2) baseIdx = 7;
-      else if (secIdx === 3) baseIdx = 14;
-      else if (secIdx === 4) baseIdx = 21;
-      else if (secIdx === 5) baseIdx = 28;
-      else if (secIdx === 6) baseIdx = 35;
-
-      const relIdx = stnIdx - baseIdx;
-      if (!nodes[relIdx]) return 0;
+      const targetNode = sec.querySelector(`#stn_${stnIdx}`);
+      if (!targetNode) return 0;
       const sr = sec.getBoundingClientRect();
-      const nr = nodes[relIdx].getBoundingClientRect();
+      const nr = targetNode.getBoundingClientRect();
       return nr.left - sr.left + nr.width / 2;
     }
 
@@ -1716,14 +1203,17 @@
         else if (idxF >= 7) { secIdx = 2; cutMax = 13; }
         else { secIdx = 1; cutMax = 6; }
 
-        if (idxC > cutMax) return;
+        if (idxC > cutMax && idxF === cutMax) return;
 
         const frac = t.pos - idxF;
         const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
         const isUp = t.dir === 'up';
         const topPx = isUp ? 78 : 178;
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
-        const dirArrow = isUp ? '▶' : '◀';
+        
+        // 짝수 구간일 경우 진행 화살표 시각적 처리
+        const isEvenSec = (secIdx % 2 === 0);
+        let dirArrow = isUp ? (isEvenSec ? '◀' : '▶') : (isEvenSec ? '▶' : '◀');
 
         const div = document.createElement('div');
         div.className = 'train-marker';
