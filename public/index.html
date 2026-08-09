@@ -446,7 +446,7 @@
       right: 10px;
       height: 6px;
       background: var(--up);
-      top: 88px;
+      top: 112px;
       border-radius: 3px;
       z-index: 0
     }
@@ -465,7 +465,7 @@
     .track-lbl-up {
       position: absolute;
       left: 0px;
-      top: 80px;
+      top: 104px;
       font-size: 10px;
       color: var(--up);
       font-weight: 900;
@@ -560,7 +560,7 @@
     }
 
     .stn-circle.up {
-      top: 84px;
+      top: 108px;
     }
 
     .stn-circle.down {
@@ -576,7 +576,7 @@
     }
 
     .stn.express .stn-circle.up {
-      top: 80px;
+      top: 104px;
     }
 
     .stn.express .stn-circle.down {
@@ -1721,7 +1721,7 @@
         const frac = t.pos - idxF;
         const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
         const isUp = t.dir === 'up';
-        const topPx = isUp ? 78 : 178;
+        const topPx = isUp ? 102 : 178;
         const isMy = MY_TRAIN_ID && (String(t.id).trim() === MY_TRAIN_ID || String(t.num).trim() === MY_TRAIN_ID);
         const dirArrow = isUp ? '▶' : '◀';
 
