@@ -410,98 +410,22 @@
       border-radius: 2px
     }
 
-    /* ── 노선도 슬라이더 컨트롤 스타일 ── */
-    .slider-nav {
+    /* ── 세로 배치 노선도 스타일 ── */
+    .map-vertical-container {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-      padding: 8px 12px;
-      background: var(--bg2);
-      margin: 10px 14px 0;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--bg4);
-    }
-
-    .slider-nav-btn {
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      color: var(--gold);
-      padding: 6px 10px;
-      border-radius: var(--radius-sm);
-      font-size: 11px;
-      font-weight: bold;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-
-    .slider-nav-btn:active {
-      background: var(--bg4);
-    }
-
-    .slider-nav-btn:disabled {
-      opacity: 0.25;
-      cursor: not-allowed;
-    }
-
-    .sec-tab-group {
-      display: flex;
-      gap: 4px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .sec-tab-group::-webkit-scrollbar {
-      display: none;
-    }
-
-    .sec-tab {
-      background: var(--bg3);
-      border: 1px solid var(--bg4);
-      color: var(--txt2);
-      padding: 5px 10px;
-      border-radius: 14px;
-      font-size: 11px;
-      font-weight: bold;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-
-    .sec-tab.active {
-      background: var(--gold-bg);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* ── 노선도 슬라이더 트랙 ── */
-    .map-slider-viewport {
-      width: 100%;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-
-    .map-slider-track {
-      display: flex;
-      transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
-      width: 100%;
-    }
-
-    .section-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      overflow-x: auto;
-      padding: 8px 0 20px;
-      -webkit-overflow-scrolling: touch;
+      flex-direction: column;
+      gap: 12px;
+      padding: 10px 14px 30px;
     }
 
     .section-block {
       position: relative;
-      padding: 10px 20px;
-      min-width: 720px;
-      margin-bottom: 0;
+      padding: 10px 16px;
+      background: var(--bg2);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--bg4);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .section-title {
@@ -570,7 +494,8 @@
       display: flex;
       justify-content: space-between;
       position: relative;
-      z-index: 1
+      z-index: 1;
+      min-width: 100%;
     }
 
     .stn {
@@ -578,7 +503,8 @@
       flex-direction: column;
       align-items: center;
       width: 46px;
-      cursor: pointer
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
     .stn-name {
@@ -1458,72 +1384,72 @@
           <div class="li" style="margin-left:auto;font-size:10px;color:var(--txt3)" id="lastUpd">갱신중...</div>
         </div>
 
-        <!-- 4개 구간 슬라이더 내비게이션 바 -->
-        <div class="slider-nav">
-          <button class="slider-nav-btn" id="prevSecBtn" onclick="moveSlide(-1)" disabled>◀ 이전</button>
-          <div class="sec-tab-group">
-            <button class="sec-tab active" onclick="goToSlide(0)">1. 개화~여의도</button>
-            <button class="sec-tab" onclick="goToSlide(1)">2. 샛강~신논현</button>
-            <button class="sec-tab" onclick="goToSlide(2)">3. 언주~석촌</button>
-            <button class="sec-tab" onclick="goToSlide(3)">4. 송파~보훈</button>
+        <!-- 세로형 전체 노선도 컨테이너 (7개씩 5개 구간 + 3개 역 1개 구간) -->
+        <div class="map-vertical-container">
+          <!-- 1구간: 개화 ~ 가양 (7개 역) -->
+          <div class="section-block" id="sec1">
+            <div class="section-title">1구간: 개화 ── 가양</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow1"></div>
+            <div class="train-container" id="trainMarkers1"></div>
           </div>
-          <button class="slider-nav-btn" id="nextSecBtn" onclick="moveSlide(1)">다음 ▶</button>
-        </div>
 
-        <!-- 슬라이더 트랙 컨테이너 -->
-        <div class="map-slider-viewport">
-          <div class="map-slider-track" id="mapSliderTrack">
-            <!-- SLIDE 1: 개화 ~ 여의도 (역 15개) -->
-            <div class="section-slide">
-              <div class="section-block" id="sec1">
-                <div class="section-title"> 개화 ── 여의도 </div>
-                <div class="track-lbl-up">상선 →</div>
-                <div class="track-lbl-dn">← 하선</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow1"></div>
-                <div class="train-container" id="trainMarkers1"></div>
-              </div>
-            </div>
+          <!-- 2구간: 증미 ~ 국회의사당 (7개 역) -->
+          <div class="section-block" id="sec2">
+            <div class="section-title">2구간: 증미 ── 국회의사당</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow2"></div>
+            <div class="train-container" id="trainMarkers2"></div>
+          </div>
 
-            <!-- SLIDE 2: 샛강 ~ 신논현 (역 10개) -->
-            <div class="section-slide">
-              <div class="section-block" id="sec2">
-                <div class="section-title"> 샛강 ── 신논현 </div>
-                <div class="track-lbl-up">상선 →</div>
-                <div class="track-lbl-dn">← 하선</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow2"></div>
-                <div class="train-container" id="trainMarkers2"></div>
-              </div>
-            </div>
+          <!-- 3구간: 여의도 ~ 구반포 (7개 역) -->
+          <div class="section-block" id="sec3">
+            <div class="section-title">3구간: 여의도 ── 구반포</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow3"></div>
+            <div class="train-container" id="trainMarkers3"></div>
+          </div>
 
-            <!-- SLIDE 3: 언주 ~ 석촌 (역 8개) -->
-            <div class="section-slide">
-              <div class="section-block" id="sec3">
-                <div class="section-title"> 언주 ── 석촌 </div>
-                <div class="track-lbl-up">상선 →</div>
-                <div class="track-lbl-dn">← 하선</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow3"></div>
-                <div class="train-container" id="trainMarkers3"></div>
-              </div>
-            </div>
+          <!-- 4구간: 신반포 ~ 삼성중앙 (7개 역) -->
+          <div class="section-block" id="sec4">
+            <div class="section-title">4구간: 신반포 ── 삼성중앙</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow4"></div>
+            <div class="train-container" id="trainMarkers4"></div>
+          </div>
 
-            <!-- SLIDE 4: 송파나루 ~ 중앙보훈병원 (역 5개) -->
-            <div class="section-slide">
-              <div class="section-block" id="sec4">
-                <div class="section-title"> 송파나루 ── 중앙보훈병원 </div>
-                <div class="track-lbl-up">상선 →</div>
-                <div class="track-lbl-dn">← 하선</div>
-                <div class="track-up"></div>
-                <div class="track-down"></div>
-                <div class="stations-row" id="stationsRow4"></div>
-                <div class="train-container" id="trainMarkers4"></div>
-              </div>
-            </div>
+          <!-- 5구간: 봉은사 ~ 한성백제 (7개 역) -->
+          <div class="section-block" id="sec5">
+            <div class="section-title">5구간: 봉은사 ── 한성백제</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow5"></div>
+            <div class="train-container" id="trainMarkers5"></div>
+          </div>
+
+          <!-- 6구간: 올림픽공원 ~ 중앙보훈병원 (3개 역) -->
+          <div class="section-block" id="sec6">
+            <div class="section-title">6구간: 올림픽공원 ── 중앙보훈병원</div>
+            <div class="track-lbl-up">상선 →</div>
+            <div class="track-lbl-dn">← 하선</div>
+            <div class="track-up"></div>
+            <div class="track-down"></div>
+            <div class="stations-row" id="stationsRow6"></div>
+            <div class="train-container" id="trainMarkers6"></div>
           </div>
         </div>
 
@@ -1661,48 +1587,11 @@
       { n: '둔촌오륜', c: '9037', e: false }, { n: '중앙보훈병원', c: '9038', e: true }
     ];
 
-    /* 4단 분할 인덱스 정의 */
-    const CUT1_IDX = 14;
-    const CUT2_IDX = 24;
-    const CUT3_IDX = 32;
-
-    /* 슬라이더 위치 제어 변수 */
-    let currentSlide = 0;
-    const TOTAL_SLIDES = 4;
-
     let MY_TRAIN_ID = null;
     let MY_TRAIN_MANUAL = localStorage.getItem('myTrainNo') || '';
     let simTrains = [];
     let simTimer = null;
     const N = STATIONS.length;
-
-    /* 노선도 슬라이드 제어 함수 */
-    function goToSlide(idx) {
-      if (idx < 0 || idx >= TOTAL_SLIDES) return;
-      currentSlide = idx;
-
-      const track = document.getElementById('mapSliderTrack');
-      if (track) {
-        track.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }
-
-      const tabs = document.querySelectorAll('.sec-tab');
-      tabs.forEach((tab, i) => {
-        if (i === currentSlide) tab.classList.add('active');
-        else tab.classList.remove('active');
-      });
-
-      const prevBtn = document.getElementById('prevSecBtn');
-      const nextBtn = document.getElementById('nextSecBtn');
-      if (prevBtn) prevBtn.disabled = (currentSlide === 0);
-      if (nextBtn) nextBtn.disabled = (currentSlide === TOTAL_SLIDES - 1);
-
-      renderMap();
-    }
-
-    function moveSlide(dir) {
-      goToSlide(currentSlide + dir);
-    }
 
     function promptTrainNo() {
       const v = window.prompt('지금 몰고 있는 열차번호를 입력하세요 (예: 9116)', MY_TRAIN_MANUAL);
@@ -1775,20 +1664,25 @@
       <div class="stn-name-down ${s.e ? 'express' : ''}">${s.n}</div>
     </div>`;
 
-      document.getElementById('stationsRow1').innerHTML = STATIONS.slice(0, CUT1_IDX + 1).map((s, i) => makeHtml(s, i)).join('');
-      document.getElementById('stationsRow2').innerHTML = STATIONS.slice(CUT1_IDX + 1, CUT2_IDX + 1).map((s, i) => makeHtml(s, i + CUT1_IDX + 1)).join('');
-      document.getElementById('stationsRow3').innerHTML = STATIONS.slice(CUT2_IDX + 1, CUT3_IDX + 1).map((s, i) => makeHtml(s, i + CUT2_IDX + 1)).join('');
-      document.getElementById('stationsRow4').innerHTML = STATIONS.slice(CUT3_IDX + 1).map((s, i) => makeHtml(s, i + CUT3_IDX + 1)).join('');
+      document.getElementById('stationsRow1').innerHTML = STATIONS.slice(0, 7).map((s, i) => makeHtml(s, i)).join('');
+      document.getElementById('stationsRow2').innerHTML = STATIONS.slice(7, 14).map((s, i) => makeHtml(s, i + 7)).join('');
+      document.getElementById('stationsRow3').innerHTML = STATIONS.slice(14, 21).map((s, i) => makeHtml(s, i + 14)).join('');
+      document.getElementById('stationsRow4').innerHTML = STATIONS.slice(21, 28).map((s, i) => makeHtml(s, i + 21)).join('');
+      document.getElementById('stationsRow5').innerHTML = STATIONS.slice(28, 35).map((s, i) => makeHtml(s, i + 28)).join('');
+      document.getElementById('stationsRow6').innerHTML = STATIONS.slice(35).map((s, i) => makeHtml(s, i + 35)).join('');
     }
 
     function getStationX(secIdx, stnIdx) {
       const sec = document.getElementById('sec' + secIdx);
+      if (!sec) return 0;
       const nodes = sec.querySelectorAll('.stn');
 
       let baseIdx = 0;
-      if (secIdx === 2) baseIdx = CUT1_IDX + 1;
-      else if (secIdx === 3) baseIdx = CUT2_IDX + 1;
-      else if (secIdx === 4) baseIdx = CUT3_IDX + 1;
+      if (secIdx === 2) baseIdx = 7;
+      else if (secIdx === 3) baseIdx = 14;
+      else if (secIdx === 4) baseIdx = 21;
+      else if (secIdx === 5) baseIdx = 28;
+      else if (secIdx === 6) baseIdx = 35;
 
       const relIdx = stnIdx - baseIdx;
       if (!nodes[relIdx]) return 0;
@@ -1798,24 +1692,31 @@
     }
 
     function renderMap() {
-      const m1 = document.getElementById('trainMarkers1');
-      const m2 = document.getElementById('trainMarkers2');
-      const m3 = document.getElementById('trainMarkers3');
-      const m4 = document.getElementById('trainMarkers4');
-      m1.innerHTML = ''; m2.innerHTML = ''; m3.innerHTML = ''; m4.innerHTML = '';
+      const markers = [
+        document.getElementById('trainMarkers1'),
+        document.getElementById('trainMarkers2'),
+        document.getElementById('trainMarkers3'),
+        document.getElementById('trainMarkers4'),
+        document.getElementById('trainMarkers5'),
+        document.getElementById('trainMarkers6')
+      ];
+      markers.forEach(m => { if (m) m.innerHTML = ''; });
 
       simTrains.forEach(t => {
         const idxF = Math.floor(t.pos);
         const idxC = Math.min(idxF + 1, N - 1);
 
         let secIdx = 1;
-        if (idxF > CUT3_IDX) secIdx = 4;
-        else if (idxF > CUT2_IDX) secIdx = 3;
-        else if (idxF > CUT1_IDX) secIdx = 2;
+        let cutMax = 6;
 
-        if (secIdx === 1 && idxC > CUT1_IDX) return;
-        if (secIdx === 2 && idxC > CUT2_IDX) return;
-        if (secIdx === 3 && idxC > CUT3_IDX) return;
+        if (idxF >= 35) { secIdx = 6; cutMax = 37; }
+        else if (idxF >= 28) { secIdx = 5; cutMax = 34; }
+        else if (idxF >= 21) { secIdx = 4; cutMax = 27; }
+        else if (idxF >= 14) { secIdx = 3; cutMax = 20; }
+        else if (idxF >= 7) { secIdx = 2; cutMax = 13; }
+        else { secIdx = 1; cutMax = 6; }
+
+        if (idxC > cutMax) return;
 
         const frac = t.pos - idxF;
         const x = getStationX(secIdx, idxF) + (getStationX(secIdx, idxC) - getStationX(secIdx, idxF)) * frac;
@@ -1834,10 +1735,7 @@
       </div>
       <div class="train-num ${isMy ? 'my' : ''}">${isMy ? '🚇' + t.num : t.num}</div>`;
 
-        if (secIdx === 1) m1.appendChild(div);
-        else if (secIdx === 2) m2.appendChild(div);
-        else if (secIdx === 3) m3.appendChild(div);
-        else if (secIdx === 4) m4.appendChild(div);
+        if (markers[secIdx - 1]) markers[secIdx - 1].appendChild(div);
       });
     }
 
